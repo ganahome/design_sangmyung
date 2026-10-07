@@ -1,0 +1,1232 @@
+<!DOCTYPE html>
+
+<html lang="ko"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>상명건설 - SANG MYUNG CORP.</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script>
+tailwind.config = {
+  theme: {
+    extend: {
+      colors: {
+        brand: {
+          DEFAULT: '#0175b1',
+          dark: '#0b2239',
+          light: '#e8f4fc',
+          accent: '#0284c7'
+        }
+      }
+    }
+  }
+}
+</script>
+<link href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css" rel="stylesheet"/>
+<style>
+  body {
+    font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, system-ui, Roboto, sans-serif;
+    color: #1e293b;
+    scroll-behavior: smooth;
+  }
+  .custom-scroll::-webkit-scrollbar { width: 6px; height: 6px; }
+  .custom-scroll::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 4px; }
+</style>
+</head>
+<body class="bg-gray-50 flex flex-col min-h-screen text-slate-800 antialiased selection:bg-[#0175b1] selection:text-white">
+<!-- BEGIN: PublicSiteWrapper -->
+<div class="w-full flex-grow flex flex-col" id="public-site">
+<!-- Top Header -->
+<header class="sticky top-0 z-40 bg-white/95 backdrop-blur-md border-b border-gray-100 shadow-sm">
+<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
+<!-- Logo -->
+<a class="flex items-center space-x-2 cursor-pointer" onclick="scrollToSec('hero')">
+<div class="flex flex-col">
+<div class="flex items-center space-x-1.5">
+<span class="text-2xl font-black tracking-tighter text-[#0175b1]">SM</span>
+<span class="text-xl font-extrabold tracking-tight text-slate-800 hover:text-[#0175b1] transition-colors">상명건설</span>
+</div>
+<span class="text-[9px] font-semibold tracking-wider text-slate-400 -mt-1">SANG MYUNG CORP.</span>
+</div>
+</a>
+<!-- Desktop Nav -->
+<nav class="hidden md:flex items-center space-x-8 text-[15px] font-semibold text-slate-600">
+<a class="hover:text-[#0175b1] transition-colors cursor-pointer" onclick="scrollToSec('company-overview')">회사소개</a>
+<a class="hover:text-[#0175b1] transition-colors cursor-pointer" onclick="scrollToSec('services-portfolio')">서비스</a>
+<a class="hover:text-[#0175b1] transition-colors cursor-pointer" onclick="scrollToSec('inquiry-engine')">문의하기</a>
+<a class="hover:text-[#0175b1] transition-colors cursor-pointer" onclick="scrollToSec('news')">NEWS</a>
+<a class="hover:text-[#0175b1] transition-colors cursor-pointer" onclick="scrollToSec('faq')">Q&amp;A</a>
+</nav>
+<!-- Right Action & Hamburger -->
+<div class="flex items-center space-x-3">
+<button class="hidden md:inline-flex items-center gap-1.5 text-xs font-bold text-slate-600 hover:text-[#0175b1] bg-slate-100 hover:bg-slate-200 px-3.5 py-2 rounded-lg transition border border-slate-200" onclick="openAdminModal()">
+<svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" stroke-width="2" viewbox="0 0 24 24"><path d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+          ADMIN
+        </button>
+<button aria-label="메뉴 열기" class="p-2 text-slate-700 hover:text-[#0175b1] hover:bg-slate-100 rounded-lg transition focus:outline-none" onclick="toggleMenu()">
+<svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="2" viewbox="0 0 24 24"><path d="M4 6h16M4 12h16M4 18h16" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+</button>
+</div>
+</div>
+<!-- Mega Slide-Down Menu (MAIN_PC_TOP.jpg) -->
+<div class="hidden bg-white border-t border-b border-gray-200 shadow-xl" id="slide-menu">
+<div class="max-w-7xl mx-auto px-6 pt-7 pb-6">
+<div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-y-7 gap-x-8 text-sm">
+<div>
+<h4 class="font-bold text-slate-900 text-base mb-2">1. 회사소개</h4>
+<div class="text-slate-500 space-x-2 text-xs">
+<a class="hover:text-[#0175b1] cursor-pointer" onclick="goCompany('ceo')">CEO인사말</a>
+<span>·</span>
+<a class="hover:text-[#0175b1] cursor-pointer" onclick="goCompany('history')">연혁</a>
+<span>·</span>
+<a class="hover:text-[#0175b1] cursor-pointer" onclick="goCompany('org')">조직도</a>
+<span>·</span>
+<a class="hover:text-[#0175b1] cursor-pointer" onclick="goCompany('cert')">인증서</a>
+</div>
+</div>
+<div>
+<h4 class="font-bold text-slate-900 text-base mb-2">2. 서비스</h4>
+<div class="text-slate-500 space-x-2 text-xs">
+<a class="hover:text-[#0175b1] cursor-pointer" onclick="goService('res')">주택건설</a>
+<span>·</span>
+<a class="hover:text-[#0175b1] cursor-pointer" onclick="goService('com')">상업건축</a>
+<span>·</span>
+<a class="hover:text-[#0175b1] cursor-pointer" onclick="goService('dir')">직영건축</a>
+</div>
+</div>
+<div>
+<h4 class="font-bold text-slate-900 text-base mb-2">3. 문의하기</h4>
+<div class="text-slate-500 space-x-2 text-xs">
+<a class="hover:text-[#0175b1] cursor-pointer" onclick="goQuote('free')">견적문의</a>
+<span>·</span>
+<a class="hover:text-[#0175b1] cursor-pointer" onclick="goQuote('paid')">유료견적문의</a>
+<span>·</span>
+<a class="hover:text-[#0175b1] cursor-pointer" onclick="goQuote('consult')">상담신청</a>
+</div>
+</div>
+<div>
+<h4 class="font-bold text-slate-900 text-base mb-1">4. NEWS</h4>
+<p class="text-slate-400 text-xs">
+<a class="hover:text-[#0175b1] cursor-pointer" onclick="scrollToSec('news'); closeMenu();">최신 착공 및 준공 보도자료</a>
+</p>
+</div>
+<div>
+<h4 class="font-bold text-slate-900 text-base mb-1">5. Q&amp;A</h4>
+<p class="text-slate-400 text-xs">
+<a class="hover:text-[#0175b1] cursor-pointer" onclick="scrollToSec('faq'); closeMenu();">자주 묻는 질문 및 1:1 비밀상담</a>
+</p>
+</div>
+<div class="flex flex-col">
+<button class="font-bold text-base text-slate-900 hover:text-[#0175b1] flex items-center gap-1.5 text-left w-fit" onclick="closeMenu(); openAdminModal();">
+<span>6. ADMIN (/admin)</span>
+<span class="text-[11px] bg-slate-100 text-slate-600 px-2 py-0.5 rounded font-normal border border-slate-200">관리자</span>
+</button>
+<p class="text-slate-400 text-xs mt-1">상명건설 종합 백오피스 통합 관제</p>
+</div>
+</div>
+<div class="mt-6 pt-4 border-t border-gray-100 flex justify-center">
+<button class="text-slate-400 hover:text-slate-700 p-1 flex items-center gap-1 text-xs" onclick="closeMenu()">
+<svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewbox="0 0 24 24"><path d="M6 18L18 6M6 6l12 12" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+<span>닫기</span>
+</button>
+</div>
+</div>
+</div>
+</header>
+<main>
+<!-- Hero Section -->
+<section class="relative bg-[#0b2239] text-white py-24 md:py-32 overflow-hidden" id="hero">
+<!--<div class="absolute inset-0 bg-cover bg-center opacity-100 mix-blend-luminosity" 
+style="background-image: url('https://lh3.googleusercontent.com/aida/AEtjO1WXAJq1O6K_BTA_MHDQMtxvE3Oa1bV93M1qhkUXSFrIH4AHSbpN9NpyiWKfflREW83DOgYuAn2wIgrs9JTR6PiyCO-GPkRvOBVT73D3sdbqkOfmaZnFp-edCsmQc0oa9yOrAJNV1Rt_mwctHoLPq8wyGxjzw0-ueSdm8I1VsH4Z8BmPbCrVuJVUwmsKSNyiFxbuXpej5kbIKPkBQ--AqhKnpRaeM50ZZyKyqt0ERN9EwRuto64MPM24z4YC');"></div>-->
+<div class="absolute inset-0 bg-cover bg-center opacity-150 mix-blend-luminosity" 
+style="background-image: url('https://www.rsupport.com/wp-content/uploads/2026/05/2026%EB%85%84-%EA%B1%B4%EC%84%A4%ED%98%84%EC%9E%A5-%EB%AC%B4%EC%9D%B8%ED%99%94%C2%B7%EC%9B%90%EA%B2%A9%EC%A0%9C%EC%96%B4-%EA%B8%B0%EC%88%A0-%EB%8F%84%EC%9E%85-%EB%8F%99%ED%96%A52_%EC%95%8C%EC%84%9C%ED%8F%AC%ED%8A%B8Rsupport-1.png');"></div>
+<div class="absolute inset-0 bg-gradient-to-r from-[#0b2239] via-[#0b2239]/90 to-[#0b2239]/70"></div>
+<div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+<div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/10 backdrop-blur-sm border border-white/20 text-xs font-semibold tracking-wider uppercase text-sky-300 mb-6">
+<span class="w-1.5 h-1.5 rounded-full bg-sky-400 animate-pulse"></span>
+          Architectural Engineering
+        </div>
+<h1 class="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-extrabold tracking-tight leading-tight">
+          26년의 믿을 수 있는 기업<br/>
+<span class="text-white">상명건설</span>
+</h1>
+<p class="mt-6 text-sm sm:text-base md:text-lg text-slate-300 max-w-2xl leading-relaxed font-light">
+          정직한 건축, 검증된 기술력으로 사람과 공간의 가치를 높입니다. 최고 수준의 현장 엔지니어링과 투명한 공정 관리를 약속합니다.
+        </p>
+<div class="mt-8 flex flex-wrap gap-3">
+<button class="inline-flex items-center gap-2 px-6 py-3.5 bg-white text-[#0175b1] font-bold rounded-lg shadow-md hover:bg-slate-100 transition" onclick="goQuote('free')">
+            견적문의
+          </button>
+<button class="inline-flex items-center gap-2 px-6 py-3.5 bg-[#091b2c] border border-slate-700 text-white font-bold rounded-lg hover:bg-slate-800 transition" onclick="goQuote('consult')">
+            상담신청
+          </button>
+</div>
+<div class="mt-16 pt-10 border-t border-white/10 grid grid-cols-1 sm:grid-cols-3 gap-8" >
+<div class="text-center sm:text-left">
+<div class="text-3xl sm:text-4xl font-extrabold" style="color:#54bcf0;">26년</div>
+<div class="text-xs sm:text-sm text-slate-400 mt-1">건설 업력</div>
+</div>
+<div class="text-center sm:text-left">
+<div class="text-3xl sm:text-4xl font-extrabold text-white" >420+건</div>
+<div class="text-xs sm:text-sm text-slate-400 mt-1">누적 완공</div>
+</div>
+<div class="text-center sm:text-left">
+<div class="text-3xl sm:text-4xl font-extrabold" style="color:#54bcf0;">3832일</div>
+<div class="text-xs sm:text-sm text-slate-400 mt-1">무사고</div>
+</div>
+</div>
+</div>
+</section>
+<!-- About Section -->
+<section class="py-20 bg-white" id="company-overview">
+<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+<div class="mb-10">
+<span class="text-[#0175b1] font-bold text-xs uppercase tracking-wider block mb-1">ABOUT US</span>
+<h2 class="text-2xl sm:text-3xl font-bold text-slate-900">회사소개</h2>
+<p class="text-sm text-slate-500 mt-1">정직한 기술로 세상을 연결하는 100년 지속가능 종합건설 파트너</p>
+</div>
+<!-- Tabs -->
+<div class="border border-gray-200 rounded-lg bg-gray-50 p-1 flex flex-wrap sm:flex-nowrap gap-1 mb-8 text-center text-sm font-semibold text-slate-600">
+<button class="co-tab-btn flex-1 py-2.5 rounded-md transition-all text-slate-600 hover:text-slate-900" id="btn-co-ceo" onclick="switchCompany('ceo')">CEO인사말</button>
+<button class="co-tab-btn flex-1 py-2.5 rounded-md transition-all text-slate-600 hover:text-slate-900" id="btn-co-history" onclick="switchCompany('history')">연혁</button>
+<button class="co-tab-btn flex-1 py-2.5 rounded-md transition-all text-slate-600 hover:text-slate-900" id="btn-co-org" onclick="switchCompany('org')">조직도</button>
+<button class="co-tab-btn flex-1 py-2.5 rounded-md transition-all bg-white text-[#0175b1] shadow-sm font-bold" id="btn-co-cert" onclick="switchCompany('cert')">인증서</button>
+</div>
+<!-- Panels -->
+<!-- CEO Panel -->
+<div class="co-panel hidden bg-white border border-gray-200 rounded-xl p-8 shadow-sm" id="co-panel-ceo">
+<div class="grid grid-cols-1 md:grid-cols-12 gap-8 items-center">
+<div class="md:col-span-4 flex justify-center">
+<div class="relative w-full max-w-[280px] aspect-[4/5] rounded-xl overflow-hidden shadow-md border border-slate-200 bg-slate-100">
+<img alt="상명건설 대표이사 김상명" class="w-full h-full object-cover object-top" src="https://lh3.googleusercontent.com/aida-public/AB6AXuD55l6Fk3iPMP7YN4xHlNrrC2AJm6TBywE9Ff2VawTnH4sfuSnHsW8dRgeYzhCR5JALQk0SaIUor_dRdnxoy1LIl4zKhEcr-JPIKn3bxWy_ZNezGzfTneohnLz8bA8jr-JNtwE2VyN-1WGmARakrS8rir2-RHv0Npp3zyWbpPGErntDSNQuSlY7UY2f3pTvxijFtvERKqvHlrWNNm9KmhqxREwKCFRFIMgV7YH0njUr8EbuIAK7P5YT0g"/>
+<div class="absolute bottom-0 inset-x-0 bg-gradient-to-t from-slate-950/80 via-slate-950/30 to-transparent p-4 text-white">
+<div class="text-xs text-sky-300 font-medium">대표이사 / 건설공학박사</div>
+<div class="text-base font-bold">김 상 명</div>
+</div>
+</div>
+</div>
+<div class="md:col-span-8">
+<span class="text-[#0175b1] text-xs font-bold uppercase tracking-wider">CEO MESSAGE</span>
+<h3 class="text-2xl font-bold text-slate-900 mt-2 mb-4 leading-snug">“신뢰와 정직을 짓는 100년 종합건설의 동반자”</h3>
+<p class="text-sm text-slate-600 leading-relaxed mb-4">안녕하십니까, 상명건설 대표이사 김상명입니다. 지난 26년간 상명건설은 원칙과 안전을 최우선 가치로 여기며 수많은 주거 및 상업 랜드마크 프로젝트를 완공해 왔습니다.</p>
+<p class="text-sm text-slate-600 leading-relaxed mb-4">건축은 단순히 건물을 올리는 행위를 넘어, 고객의 평생 자산과 삶의 터전을 빚어내는 숭고한 약속입니다. 투명한 공정 관리와 실명 직영 시공, 체계화된 CM/PM 관리 시스템을 통해 건축주가 믿고 의지할 수 있는 평생의 파트너가 될 것을 약속드립니다.</p>
+<div class="mt-6 pt-4 border-t border-gray-100 flex items-center justify-between">
+<span class="text-xs text-slate-400">상명건설(주) 대표이사</span>
+<span class="font-bold text-base text-slate-800">김 상 명 배상</span>
+</div>
+</div>
+</div>
+</div>
+<!-- History Panel -->
+<div class="co-panel hidden bg-white border border-gray-200 rounded-xl p-8 shadow-sm" id="co-panel-history">
+<h3 class="text-lg font-bold text-slate-900 mb-6">상명건설 연혁</h3>
+<div class="space-y-6 border-l-2 border-[#0175b1]/30 pl-6 ml-2">
+<div class="relative">
+<span class="w-3 h-3 rounded-full bg-[#0175b1] absolute -left-[31px] top-1 border-2 border-white"></span>
+<span class="text-xs font-bold text-[#0175b1] font-mono">2025</span>
+<h4 class="text-sm font-bold text-slate-800 mt-0.5">내진 구조 특허 취득 및 누적 완공 420건 달성</h4>
+<p class="text-xs text-slate-500 mt-1">고효율 복합 단열 및 내진 댐퍼 특허 기술 등록</p>
+</div>
+<div class="relative">
+<span class="w-3 h-3 rounded-full bg-[#0175b1] absolute -left-[31px] top-1 border-2 border-white"></span>
+<span class="text-xs font-bold text-[#0175b1] font-mono">2020</span>
+<h4 class="text-sm font-bold text-slate-800 mt-0.5">직영건축 투명 PM 솔루션 출시 및 스마트 현장관제 도입</h4>
+<p class="text-xs text-slate-500 mt-1">건축주 직납 공정 시스템 구축</p>
+</div>
+<div class="relative">
+<span class="w-3 h-3 rounded-full bg-[#0175b1] absolute -left-[31px] top-1 border-2 border-white"></span>
+<span class="text-xs font-bold text-[#0175b1] font-mono">2015</span>
+<h4 class="text-sm font-bold text-slate-800 mt-0.5">종합건설업 면허 등록 및 ISO 9001 인증 획득</h4>
+<p class="text-xs text-slate-500 mt-1">품질경영시스템 인증 및 법인 전환</p>
+</div>
+<div class="relative">
+<span class="w-3 h-3 rounded-full bg-[#0175b1] absolute -left-[31px] top-1 border-2 border-white"></span>
+<span class="text-xs font-bold text-[#0175b1] font-mono">1999</span>
+<h4 class="text-sm font-bold text-slate-800 mt-0.5">상명건설 창립</h4>
+<p class="text-xs text-slate-500 mt-1">건축 엔지니어링 및 주택 시공 개시</p>
+</div>
+</div>
+</div>
+<!-- Org Panel -->
+<div class="co-panel hidden bg-white border border-gray-200 rounded-xl p-8 shadow-sm" id="co-panel-org">
+<h3 class="text-lg font-bold text-slate-900 mb-6">상명건설 조직도</h3>
+<div class="grid grid-cols-1 md:grid-cols-4 gap-4 text-center">
+<div class="border border-gray-200 rounded-lg p-4 bg-slate-50">
+<div class="text-xs font-bold text-[#0175b1] mb-1">대표이사</div>
+<div class="text-sm font-bold text-slate-800">경영기획 총괄</div>
+<p class="text-xs text-slate-500 mt-2">전략수립 / 기술고문</p>
+</div>
+<div class="border border-gray-200 rounded-lg p-4 bg-slate-50">
+<div class="text-xs font-bold text-[#0175b1] mb-1">건축사업본부</div>
+<div class="text-sm font-bold text-slate-800">현장 PM / 직영팀</div>
+<p class="text-xs text-slate-500 mt-2">공정 관리 / 현장 소장단</p>
+</div>
+<div class="border border-gray-200 rounded-lg p-4 bg-slate-50">
+<div class="text-xs font-bold text-[#0175b1] mb-1">설계/엔지니어링</div>
+<div class="text-sm font-bold text-slate-800">3D 설계 및 구조검토</div>
+<p class="text-xs text-slate-500 mt-2">스케치업 렌더링 / 물량적산</p>
+</div>
+<div class="border border-gray-200 rounded-lg p-4 bg-slate-50">
+<div class="text-xs font-bold text-[#0175b1] mb-1">고객지원/안전감리</div>
+<div class="text-sm font-bold text-slate-800">품질안전 &amp; A/S센터</div>
+<p class="text-xs text-slate-500 mt-2">2개년 무상 A/S / 안전점검</p>
+</div>
+</div>
+</div>
+<!-- Certificate Panel -->
+<div class="co-panel grid grid-cols-1 md:grid-cols-3 gap-6" id="co-panel-cert">
+<div class="border border-gray-200 rounded-xl p-5 bg-white shadow-sm hover:shadow-md transition">
+<div class="flex items-center justify-between pb-3 border-b border-gray-100 mb-4">
+<span class="text-xs font-bold text-slate-700">건설업등록증</span>
+<span class="text-[11px] bg-slate-100 text-slate-500 px-2 py-0.5 rounded">국토교통부</span>
+</div>
+<div class="bg-gray-50 border border-gray-100 rounded-lg p-2 flex items-center justify-center min-h-[300px]">
+<img alt="건설업등록증" class="w-full max-h-[340px] object-contain hover:scale-105 transition duration-300" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCittR4aFOh3o0NvU3OtJ5RxTQaoKlKAKvNEusSfHMA6NdX4569ZiW3QGFdmcF7Xqi6ZUYyhHHULhi2hpU8CVqjCQjh60vut2HE_AHSbSkbgaaGKn3E5udMtcq6j1Q-9Nc7-rnm-FnsZNClaUgCFeOSuenlMQLmowV1gXlhPjh7GFrSZ0E4ESgeTdA1MIgAZjYRsEK0va0L9jvVe4YhAxqGRY0H00h-V5R_Q5jYk3oKWle6P19-gNcA7c6PrnU-M5FTIAA"/>
+</div>
+<p class="text-center text-xs font-semibold text-slate-600 mt-4">건설업등록증 (건축공사업 정식 면허)</p>
+</div>
+<div class="border border-gray-200 rounded-xl p-5 bg-white shadow-sm hover:shadow-md transition">
+<div class="flex items-center justify-between pb-3 border-b border-gray-100 mb-4">
+<span class="text-xs font-bold text-slate-700">사업자등록증</span>
+<span class="text-[11px] bg-slate-100 text-slate-500 px-2 py-0.5 rounded">국세청</span>
+</div>
+<div class="bg-gray-50 border border-gray-100 rounded-lg p-2 flex items-center justify-center min-h-[300px]">
+<img alt="사업자등록증" class="w-full max-h-[340px] object-contain hover:scale-105 transition duration-300" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCaDMLFcq-mqKHJlYCoPiLiOXqBNO4zpy6toQbDcBwEFDBigztsyitRy6nCHgdFBOuqmkPK2CuZ8RDcDT0ybhS7AE9E_A2Qb8rC4hanXLFrSB1Neqg_L8s_vQs5jgW2BZHgWrRSvWYRPUWMCDuFJy-Op6IXZ0iIcvj0Y87e1e5crPjZjLGTGj8NwMg_T91_IMfoj542kzssH2O787jZ7WpsnzIM1AxdOgmmdNYo8HMe15JQWyLnuPrPnSlYbcrymy7GYFs"/>
+</div>
+<p class="text-center text-xs font-semibold text-slate-600 mt-4">사업자등록증 (법인사업자 정식 등록)</p>
+</div>
+<div class="border border-gray-200 rounded-xl p-5 bg-white shadow-sm hover:shadow-md transition">
+<div class="flex items-center justify-between pb-3 border-b border-gray-100 mb-4">
+<span class="text-xs font-bold text-slate-700">품질경영시스템인증서</span>
+<span class="text-[11px] bg-slate-100 text-slate-500 px-2 py-0.5 rounded">ICR</span>
+</div>
+<div class="bg-gray-50 border border-gray-100 rounded-lg p-2 flex items-center justify-center min-h-[300px]">
+<img alt="품질경영시스템인증서" class="w-full max-h-[340px] object-contain hover:scale-105 transition duration-300" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDrDGBHyUI3Dcn8J5KjOe2hNGgyAGbZzmvVJDBpztMmAmDqPwjlwcyzu3Bmn2odLRFBNY5BvATPXT1DAMz9Th2hqxk_dz8RfaA0zmbgl1ybCg4vxZ5ZgQ0BHrbi-hR5CjMEIPv0LUx28JEtXwoYj4K3TNHbTx169pBu9JLDQs9_USlZAfWt3wL7bdpVuQnznGIGICsyVNBSU_kE7umYfZRjBpdBl_1wEWgL5OlkmQmdEVy__tYOu4WEZ9zX6KqpuhQCSWc"/>
+</div>
+<p class="text-center text-xs font-semibold text-slate-600 mt-4">ISO 9001:2015 ICR 품질경영인증서</p>
+</div>
+</div>
+</div>
+</section>
+<!-- Services Section -->
+<section class="py-20 bg-slate-50 border-t border-gray-200" id="services-portfolio">
+<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
+<div class="mb-10">
+<span class="text-[#0175b1] font-bold text-xs uppercase tracking-wider block mb-1">SERVICES</span>
+<h2 class="text-2xl sm:text-3xl font-bold text-slate-900">서비스</h2>
+<p class="text-sm text-slate-500 mt-1">상명건설의 전문 시공 라인업 및 책임 프로젝트</p>
+</div>
+<!-- 3개 탭 1/3씩 100% 폭 분할 -->
+<div class="w-full grid grid-cols-3 gap-2 mb-6 text-center font-bold text-sm">
+<button class="svc-tab-btn py-3 rounded-lg bg-white border border-gray-200 text-slate-600 hover:border-[#0175b1] hover:text-[#0175b1] transition w-full" id="btn-svc-res" onclick="switchService('res')">주택건설</button>
+<button class="svc-tab-btn py-3 rounded-lg bg-white border border-gray-200 text-slate-600 hover:border-[#0175b1] hover:text-[#0175b1] transition w-full" id="btn-svc-com" onclick="switchService('com')">상업건축</button>
+<button class="svc-tab-btn py-3 rounded-lg bg-[#0175b1] text-white shadow-sm w-full font-bold" id="btn-svc-dir" onclick="switchService('dir')">직영건축</button>
+</div>
+<!-- 주택건설 패널 -->
+<div class="svc-panel hidden w-full mb-8" id="svc-panel-res">
+<div class="bg-white rounded-xl border border-gray-200 p-6 sm:p-8 shadow-sm mb-6">
+<h3 class="text-lg font-bold text-slate-900 mb-2">프리미엄 친환경 단독주택 및 타운하우스</h3>
+<p class="text-sm text-slate-600 leading-relaxed mb-6">상명건설의 독자적인 고기밀·고단열 하이퍼-슬래브 공법과 내진설계 댐퍼 기술을 적용하여 100년 가는 명품 주택을 시공합니다. RC구조, 친환경 목구조 등 고객 맞춤형 공간을 구현합니다.</p>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-4 text-xs">
+<div class="p-4 rounded-lg bg-slate-50 border border-slate-200">
+<div class="font-bold text-slate-800">고기밀 단열 시공</div>
+<p class="text-slate-500 mt-1">패시브하우스급 열관류율 충족</p>
+</div>
+<div class="p-4 rounded-lg bg-slate-50 border border-slate-200">
+<div class="font-bold text-slate-800">내진 구조 안전 인증</div>
+<p class="text-slate-500 mt-1">구조기술사 직인 날인 검증</p>
+</div>
+<div class="p-4 rounded-lg bg-slate-50 border border-slate-200">
+<div class="font-bold text-slate-800">건축주 맞춤 3D 설계</div>
+<p class="text-slate-500 mt-1">스케치업 렌더링 실시간 시각화</p>
+</div>
+</div>
+</div>
+<!-- 주택 프로젝트 갤러리 -->
+<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
+<div class="group bg-white rounded-xl border border-gray-200 overflow-hidden shadow-sm hover:shadow-md transition">
+<div class="aspect-[4/3] overflow-hidden bg-slate-100">
+<img alt="모던 미니멀 콘크리트 빌라" class="w-full h-full object-cover group-hover:scale-105 transition duration-500" src="https://lh3.googleusercontent.com/aida-public/AB6AXuD9ev5b9CC2J641xrtbSjCE6BE4bDx5dQtXRo5JflFpMFYsKjjKHuPDi4pP3hIJRzpyJ8u05wiZrAQBUwkfPzrm67wKmzsbGCig-3oWmadNpfU41XsddEYF2byGFSBGOa9YDTM2n86gSLzLgaS3dxbVDtIar_NbuEaHiJbTt1xtdFooYCNQo_N8nFSbBhIk2RhCpNPuZr_g8VLu7Pxz5841qM2BFa1hRWVL4v_XTZZ1PDOObSkqXYn2Gw"/>
+</div>
+<div class="p-4">
+<span class="text-[10px] font-bold text-[#0175b1] bg-sky-50 px-2 py-0.5 rounded">RC 구조</span>
+<h4 class="text-sm font-bold text-slate-900 mt-2">모던 미니멀 콘크리트 빌라</h4>
+<p class="text-xs text-slate-500 mt-1">경기 양평 ｜ 연면적 248㎡ ｜ 2024 준공</p>
+</div>
+</div>
+<div class="group bg-white rounded-xl border border-gray-200 overflow-hidden shadow-sm hover:shadow-md transition">
+<div class="aspect-[4/3] overflow-hidden bg-slate-100">
+<img alt="프라이빗 중정형 단독주택" class="w-full h-full object-cover group-hover:scale-105 transition duration-500" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAYT61OH10bdqerPm7_ntX0GAmuKEaOtl3xIZN-oVC0rViesU4267XEg9RZ3GxQ3UPj_wS1UhS9vkjJwmomnyQUbF7H30856GjUPKtcb8VH9BwjoTPGuM-3-4DyoumOImhqI__MZlk4PQ5t1FHujf0lYdCoNbg0abpEonLSvXbSDKbXrVZjafm9NpYC18Vrj7hFkvYGS_wBSqh6yjboHt59NV6KE-TqHQ9hFpsJ0LUkeexa7jMJG30-5w"/>
+</div>
+<div class="p-4">
+<span class="text-[10px] font-bold text-[#0175b1] bg-sky-50 px-2 py-0.5 rounded">중정설계</span>
+<h4 class="text-sm font-bold text-slate-900 mt-2">프라이빗 중정형 단독주택</h4>
+<p class="text-xs text-slate-500 mt-1">용인 수지 ｜ 연면적 215㎡ ｜ 2024 준공</p>
+</div>
+</div>
+<div class="group bg-white rounded-xl border border-gray-200 overflow-hidden shadow-sm hover:shadow-md transition">
+<div class="aspect-[4/3] overflow-hidden bg-slate-100">
+<img alt="친환경 목구조 글래스하우스" class="w-full h-full object-cover group-hover:scale-105 transition duration-500" src="https://lh3.googleusercontent.com/aida-public/AB6AXuB3IggRUh9cXuUITsMQNq4Rtmj37m9ocFvnLyvXIi9H8v8LFNEIAVs6RDhZA4qdJDRnDyFmuFMQzLaQWPnRiiicNzw_LNFuOL47XXI1XWyvc0ZtKVYjbc5c3C4I8SzYRWIgiQz8dOzk8osxRESN7IIi7obNBmMSDUMaVoVlEXQRGDkvSvwVLOhhL_bg2J5EpAdTI5ukc7L0DbFlk4_MDckmhOa6A_H_iliHy90r8NQ_FkN4HjNY7vAZBw"/>
+</div>
+<div class="p-4">
+<span class="text-[10px] font-bold text-[#0175b1] bg-sky-50 px-2 py-0.5 rounded">친환경 목구조</span>
+<h4 class="text-sm font-bold text-slate-900 mt-2">친환경 목구조 글래스하우스</h4>
+<p class="text-xs text-slate-500 mt-1">강원 홍천 ｜ 연면적 185㎡ ｜ 2023 준공</p>
+</div>
+</div>
+<div class="group bg-white rounded-xl border border-gray-200 overflow-hidden shadow-sm hover:shadow-md transition">
+<div class="aspect-[4/3] overflow-hidden bg-slate-100">
+<img alt="파노라마 힐사이드 테라스빌" class="w-full h-full object-cover group-hover:scale-105 transition duration-500" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBmxCu0sLcft4WEGFpnNk6d9Q0-Tu-3wGfpK5P_XZi5nvu8whEU2pXybwzmeEkxdYW6f95BxX_DoXqfq6WDbj3NTr7PdlcZU2xu-V0u74HTWToTshUqCg5duqZwVDgLNXt_j-eISTxQgPtTUlQPN0gmgAAsOWQi9wDgAbUYLBrswvUU3jM3RiQgOcvOxg6kuJd6RaEZ41UiUY-Td_uMue9oYmPUPFabcc7EsfDGbofJk4-58dkwGlBOWA"/>
+</div>
+<div class="p-4">
+<span class="text-[10px] font-bold text-[#0175b1] bg-sky-50 px-2 py-0.5 rounded">테라스하우스</span>
+<h4 class="text-sm font-bold text-slate-900 mt-2">파노라마 힐사이드 테라스빌</h4>
+<p class="text-xs text-slate-500 mt-1">세종 보람동 ｜ 연면적 310㎡ ｜ 2024 준공</p>
+</div>
+</div>
+</div>
+</div>
+<!-- 상업건축 패널 -->
+<div class="svc-panel hidden w-full mb-8" id="svc-panel-com">
+<div class="bg-white rounded-xl border border-gray-200 p-6 sm:p-8 shadow-sm mb-6">
+<h3 class="text-lg font-bold text-slate-900 mb-2">근린생활시설 · 사옥 · 복합 상업건축</h3>
+<p class="text-sm text-slate-600 leading-relaxed mb-6">수익성과 동선 최적화를 극대화하는 상업용 건축물 시공입니다. 인허가 단계부터 용적률 최대화, 임대 효율 및 철골/RC 복합 공정의 정확한 공기 단축을 실현합니다.</p>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-4 text-xs">
+<div class="p-4 rounded-lg bg-slate-50 border border-slate-200">
+<div class="font-bold text-slate-800">임대 수익형 평면 설계</div>
+<p class="text-slate-500 mt-1">공간 활용도 및 채광 극대화</p>
+</div>
+<div class="p-4 rounded-lg bg-slate-50 border border-slate-200">
+<div class="font-bold text-slate-800">정확한 공기 관리</div>
+<p class="text-slate-500 mt-1">일정 지연 없는 PM 공정 통제</p>
+</div>
+<div class="p-4 rounded-lg bg-slate-50 border border-slate-200">
+<div class="font-bold text-slate-800">내구성 외장 마감</div>
+<p class="text-slate-500 mt-1">석재/알루미늄 복합 패널 시공</p>
+</div>
+</div>
+</div>
+<!-- 상업건축 프로젝트 갤러리 -->
+<div class="grid grid-cols-1 sm:grid-cols-3 gap-6">
+<div class="group bg-white rounded-xl border border-gray-200 overflow-hidden shadow-sm hover:shadow-md transition">
+<div class="aspect-[16/10] overflow-hidden bg-slate-100">
+<img alt="판교 테크밸리 스마트 사옥" class="w-full h-full object-cover group-hover:scale-105 transition duration-500" src="https://lh3.googleusercontent.com/aida-public/AB6AXuA9R-UTYykhoZXipEgHiNM-D9V9tyFrZZhROknpn6Tn4aDBXFigNf2rN62tFGvV3eQTwo0enWlF9Etzl1eGqrGwBCA5v_dFYgbmTCG-gbwpsy0y_n9ReC983myxk8ESQ9piZvruyLoGlMeGWAySgdXIE1q9oPKTRMgMYA_XpyuBHabiNdgitHsNDfMPycI6ibhfiYKQNU3nLOLlj0CRG6wfyziE7HMYWzZF_OIQMGQuvsSkLvvlDhAdgg"/>
+</div>
+<div class="p-5">
+<span class="text-[10px] font-bold text-[#0175b1] bg-sky-50 px-2 py-0.5 rounded">오피스 사옥</span>
+<h4 class="text-sm font-bold text-slate-900 mt-2">판교 테크밸리 스마트 지식산업 사옥</h4>
+<p class="text-xs text-slate-500 mt-1">지하 2층 / 지상 7층 ｜ 연면적 3,840㎡ ｜ 2024 준공</p>
+</div>
+</div>
+<div class="group bg-white rounded-xl border border-gray-200 overflow-hidden shadow-sm hover:shadow-md transition">
+<div class="aspect-[16/10] overflow-hidden bg-slate-100">
+<img alt="강남 메디컬 복합 타워" class="w-full h-full object-cover group-hover:scale-105 transition duration-500" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDfO3kbU8_zwfNCYn7nhq-FOvCVUKnN_1zayvTVqIdFF8QJ9BTurJ1W-zqGJ4NbOye0LuIsNnSk3creYE79VJsT7lB14NtDG0ZhWJ_80XjA-KGT5VimHI4PcNWoGa7t5uRTVSOyWDMobLUepkHuqNo4Dd-vWTpXb8ajF0VFAy_-VfDxymsQbewO_6PZ4hLJdz-g0HM0SWFXlPqFj48CsNYlVxijJdKJjAN8mOPDGZjbZ-noUtAsDkc88Q"/>
+</div>
+<div class="p-5">
+<span class="text-[10px] font-bold text-[#0175b1] bg-sky-50 px-2 py-0.5 rounded">메디컬 근생</span>
+<h4 class="text-sm font-bold text-slate-900 mt-2">도심형 메디컬 복합케어 타워</h4>
+<p class="text-xs text-slate-500 mt-1">지하 1층 / 지상 5층 ｜ 연면적 1,980㎡ ｜ 2024 준공</p>
+</div>
+</div>
+<div class="group bg-white rounded-xl border border-gray-200 overflow-hidden shadow-sm hover:shadow-md transition">
+<div class="aspect-[16/10] overflow-hidden bg-slate-100">
+<img alt="성수 복합문화 플래그십" class="w-full h-full object-cover group-hover:scale-105 transition duration-500" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAXub-o2XyzBzJTAEGrackVi35bJNVv4Xgc7Q08NKjnxyEDUQp-n29DNjiSJZ4SQ-VrthRpmy74Py18fKgnM6Ix3m8UPd1vS0cBMak7epMqAKKa1Hk4-gfXAQkG5RR_82ak6iZU_YpbIQPxMFiT-DhqHL8Fn3NAcq8YEUaSHhc_abbdKqpFoa2ba8FgutDMQSDUZbfwAclpJUoqwJtFS9mi78UK67ZfjY_3vbfmUT3F71w-RtN2gMIJ3Q"/>
+</div>
+<div class="p-5">
+<span class="text-[10px] font-bold text-[#0175b1] bg-sky-50 px-2 py-0.5 rounded">상업 플래그십</span>
+<h4 class="text-sm font-bold text-slate-900 mt-2">하이엔드 플래그십 복합 스토어</h4>
+<p class="text-xs text-slate-500 mt-1">지상 4층 근린생활시설 ｜ 연면적 1,420㎡ ｜ 2023 준공</p>
+</div>
+</div>
+</div>
+</div>
+<!-- 직영건축 패널 (기본 활성) -->
+<div class="svc-panel w-full" id="svc-panel-dir">
+<div class="bg-[#0b2239] text-white rounded-xl p-6 sm:p-8 mb-8 shadow-sm w-full">
+<div class="flex items-center gap-2.5 mb-3 text-sky-400 font-bold text-sm sm:text-base">
+<span>★ 가장 저렴하고 투명한 건축 진행 방식</span>
+</div>
+<p class="text-xs sm:text-sm text-slate-300 leading-relaxed font-light">"직영건축은 건축주가 설계부터 준공까지를 공정마다 직접 인부를 구인해서 공정을 진행하는 방법이지만 매우 힘든 일이기 때문에 저희 회사에서는 건설 현장관리자(PM)가 처음부터 준공까지를 건축주와 함께 의사소통하며 공정별로 건축주가 직접 결제를 하게 하고 회사 입장에서는 PM의 인건비와 소정의 성공 수수료(3%)를 수주하는 방식의 가장 저렴한 건축 진행 방식입니다."</p>
+</div>
+<div class="bg-white rounded-xl border border-gray-200 shadow-sm overflow-hidden mb-8 w-full">
+<div class="overflow-x-auto">
+<table class="w-full text-left text-xs sm:text-sm border-collapse">
+<thead>
+<tr class="bg-slate-100 text-slate-700 font-bold border-b border-gray-200">
+<th class="py-3.5 px-4 sm:px-6 w-1/4">구분 항목</th>
+<th class="py-3.5 px-4 sm:px-6 w-3/8 text-slate-600">일반 도급 시공</th>
+<th class="py-3.5 px-4 sm:px-6 w-3/8 text-[#0175b1]">상명 직영건축 (PM방식)</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-gray-100">
+<tr>
+<td class="py-4 px-4 sm:px-6 font-semibold text-slate-800 bg-slate-50/50">시공 비용 구조</td>
+<td class="py-4 px-4 sm:px-6 text-slate-600">원도급사 마진 + 재하도급 마진 (약 130~140%)</td>
+<td class="py-4 px-4 sm:px-6 font-semibold text-[#0175b1]">순수 실행원가 + PM 인건비 + 수수료 3% (20~30% 절감)</td>
+</tr>
+<tr>
+<td class="py-4 px-4 sm:px-6 font-semibold text-slate-800 bg-slate-50/50">공사비 결제 방식</td>
+<td class="py-4 px-4 sm:px-6 text-slate-600">시공사 통장으로 일괄 선지급 (불투명성)</td>
+<td class="py-4 px-4 sm:px-6 font-semibold text-[#0175b1]">자재상 및 공종별 팀장에게 건축주 직접 이체</td>
+</tr>
+<tr>
+<td class="py-4 px-4 sm:px-6 font-semibold text-slate-800 bg-slate-50/50">품질 관리 및 감리</td>
+<td class="py-4 px-4 sm:px-6 text-slate-600">현장 대리인의 소극적 감리</td>
+<td class="py-4 px-4 sm:px-6 font-semibold text-[#0175b1]">베테랑 전담 PM 상주, 건축주 입장에서 철저 감리</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+<div class="text-center">
+<button class="inline-flex items-center gap-2 bg-[#0175b1] hover:bg-sky-700 text-white font-bold py-3.5 px-8 rounded-lg shadow-md transition text-sm" onclick="goQuote('consult')">
+            직영건축 전담 PM 1:1 상담 신청하기
+          </button>
+</div>
+</div>
+</section>
+<!-- Consultation Section -->
+<section class="py-20 bg-white" id="inquiry-engine">
+<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
+<div class="mb-8">
+<span class="text-[#0175b1] font-bold text-xs uppercase tracking-wider block mb-1">CONSULTATION</span>
+<h2 class="text-2xl sm:text-3xl font-bold text-slate-900">견적문의</h2>
+<p class="text-sm text-slate-500 mt-1">정확한 구조 분석과 신속한 현장 확인을 통해 투명한 산출 내역을 전달해 드립니다.</p>
+</div>
+<!-- Tabs -->
+<div class="border border-gray-200 rounded-lg bg-gray-50 p-1 flex gap-1 mb-6 text-center text-sm font-semibold w-full">
+<button class="qt-tab-btn flex-1 py-2.5 rounded-md text-slate-600 hover:text-slate-900 transition" id="tab-qt-free" onclick="switchQuote('free')">견적문의</button>
+<button class="qt-tab-btn flex-1 py-2.5 rounded-md bg-[#0175b1] text-white shadow-sm font-bold" id="tab-qt-paid" onclick="switchQuote('paid')">★ 유료견적문의</button>
+<button class="qt-tab-btn flex-1 py-2.5 rounded-md text-slate-600 hover:text-slate-900 transition" id="tab-qt-consult" onclick="switchQuote('consult')">상담신청</button>
+</div>
+<!-- 50만원 유료 견적 안내 배너 -->
+<div class="bg-[#0b2239] text-white rounded-xl p-5 sm:p-6 mb-8 flex flex-col sm:flex-row items-center justify-between gap-4 shadow-sm w-full" id="paid-banner">
+<div class="flex items-start gap-3">
+<div>
+<h4 class="font-bold text-sm sm:text-base text-amber-300">★ 50만원 (1차 상담 → 2차 3D 스케치업 디자인 및 3D 렌더링 이미지, 건축 상세견적서 제출)</h4>
+<p class="text-xs text-slate-300 mt-1">공사 계약 체결 시 전액 공사비에서 100% 공제환급 해드립니다.</p>
+</div>
+</div>
+<div class="bg-white text-slate-900 rounded-lg p-3 text-right flex-shrink-0 min-w-[210px] border border-slate-200">
+<div class="text-[10px] text-slate-500">입금 계좌번호</div>
+<div class="text-xs font-extrabold text-blue-900 mt-0.5">기업은행 100-223561-454</div>
+<div class="text-[10px] font-semibold text-slate-600 mt-0.5">예금주: (주)상명건설</div>
+</div>
+</div>
+<!-- Form -->
+<form class="border border-gray-200 rounded-xl p-6 sm:p-8 bg-white shadow-sm space-y-6 w-full" onsubmit="event.preventDefault(); alert('견적 및 상담 신청이 정상 접수되었습니다.'); this.reset();">
+<div>
+<label class="block text-xs font-bold text-slate-800 mb-3">1. 희망 건축 구조 타입 <span class="text-red-500">*</span></label>
+<div class="grid grid-cols-2 sm:grid-cols-4 gap-3 border border-gray-200 rounded-lg">
+<label class="flex items-center gap-2 p-3 cursor-pointer text-xs font-medium text-slate-700 bg-slate-50/50">
+<input checked="" class="text-[#0175b1]" name="structure" type="radio" value="RC"/>
+<span>RC(철근/CON)</span>
+</label>
+<label class="flex items-center gap-2 p-3 cursor-pointer text-xs font-medium text-slate-700 bg-slate-50/50">
+<input class="text-[#0175b1]" name="structure" type="radio" value="Wood"/>
+<span>친환경 목구조</span>
+</label>
+<label class="flex items-center gap-2 p-3 cursor-pointer text-xs font-medium text-slate-700 bg-slate-50/50">
+<input class="text-[#0175b1]" name="structure" type="radio" value="LightSteel"/>
+<span>경량철골구조</span>
+</label>
+<label class="flex items-center gap-2 p-3 cursor-pointer text-xs font-medium text-slate-700 bg-slate-50/50">
+<input class="text-[#0175b1]" name="structure" type="radio" value="HBeam"/>
+<span>철골구조</span>
+</label>
+</div>
+</div>
+<div>
+<label class="block text-xs font-bold text-slate-800 mb-3">2. 현재 건축 진행 단계 <span class="text-red-500">*</span></label>
+<div class="grid grid-cols-1 sm:grid-cols-3 gap-3 border border-gray-200 rounded-lg">
+<label class="flex items-center gap-2 p-3 cursor-pointer text-xs font-medium text-slate-700 bg-slate-50/50">
+<input checked="" class="text-[#0175b1]" name="stage" type="radio" value="prep"/>
+<span>건축준비중</span>
+</label>
+<label class="flex items-center gap-2 p-3 cursor-pointer text-xs font-medium text-slate-700 bg-slate-50/50">
+<input class="text-[#0175b1]" name="stage" type="radio" value="land"/>
+<span>토지매입완료</span>
+</label>
+<label class="flex items-center gap-2 p-3 cursor-pointer text-xs font-medium text-slate-700 bg-slate-50/50">
+<input class="text-[#0175b1]" name="stage" type="radio" value="permitted"/>
+<span>건축허가취득</span>
+</label>
+</div>
+</div>
+<div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+<div>
+<label class="block text-xs font-bold text-slate-700 mb-1.5">신청자명 (건축주) <span class="text-red-500">*</span></label>
+<input class="w-full text-xs rounded-lg border-gray-300 py-2.5 px-3" placeholder="홍길동" required="" type="text"/>
+</div>
+<div>
+<label class="block text-xs font-bold text-slate-700 mb-1.5">연락처 (HP) <span class="text-red-500">*</span></label>
+<input class="w-full text-xs rounded-lg border-gray-300 py-2.5 px-3" placeholder="010-0000-0000" required="" type="tel"/>
+</div>
+</div>
+<div>
+<label class="block text-xs font-bold text-slate-700 mb-1.5">조회 비밀번호 (5자리 이상) <span class="text-red-500">*</span></label>
+<input class="w-full text-xs rounded-lg border-gray-300 py-2.5 px-3" placeholder="신청 내역 조회용 비밀번호 입력" required="" type="password"/>
+</div>
+<div>
+<label class="block text-xs font-bold text-slate-700 mb-1.5">문의 내용 상세 작성 <span class="text-red-500">*</span></label>
+<textarea class="w-full text-xs rounded-lg border-gray-300 p-3" placeholder="대지 위치(지역), 희망 평수, 착공 희망 시기 및 기타 요청사항을 작성해 주세요." required="" rows="4"></textarea>
+</div>
+<button class="w-full py-3.5 bg-[#0175b1] hover:bg-sky-700 text-white font-bold rounded-lg shadow transition flex items-center justify-center gap-2 text-sm" type="submit">
+            견적/상담 등록하기
+          </button>
+</form>
+</div>
+</section>
+<!-- News Section -->
+<section class="py-20 bg-slate-50 border-t border-gray-200" id="news">
+<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+<div class="flex items-center justify-between mb-8">
+<div>
+<span class="text-[#0175b1] font-bold text-xs uppercase tracking-wider block mb-1">PRESS &amp; REPORT</span>
+<h2 class="text-2xl sm:text-3xl font-bold text-slate-900">NEWS</h2>
+</div>
+<button class="text-xs font-bold text-slate-500 bg-white border border-gray-300 px-3 py-1.5 rounded hover:bg-slate-100 transition" onclick="openAdminModal()">
+            ADMIN ONLY
+          </button>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+<article class="bg-white rounded-xl border border-gray-200 overflow-hidden shadow-sm flex flex-col group hover:shadow-md transition">
+<div class="aspect-[16/10] overflow-hidden bg-slate-100">
+<img alt="신기술 특허 취득 현장" class="w-full h-full object-cover group-hover:scale-105 transition duration-500" src="https://lh3.googleusercontent.com/aida-public/AB6AXuC42UAaultfGQ1FgDKimOEULZbstkrAoLuZfogkoIxSF-SkZ7e960OLRdyCqhNkr1CKA6CK9NlaWbnUVEfUXnm4WvNvTAsrNg5AQLwO1zTnm7lzw9QdjA6ynXoR5UouMHUpTw9jDodL1opdDKxSkQJYj1M6VFNA-khRxfvcPu8tfG-Bo_9PvBv96lgFqZqFcDynamwsV1d63sPZitvjaKoHEbFxg0ShymCoCBcSiQOlASKQqPkkpUt9Iw"/>
+</div>
+<div class="p-5 flex flex-col flex-grow">
+<div class="flex items-center justify-between text-[11px] text-slate-400 mb-2">
+<span class="text-[#0175b1] font-semibold">보도자료</span>
+<time>2025.02.20</time>
+</div>
+<h3 class="font-bold text-sm text-slate-800 mb-2 group-hover:text-[#0175b1] transition-colors">상명건설 2025 상반기 신기술 특허 취득</h3>
+<p class="text-xs text-slate-500 line-clamp-2 leading-relaxed">내진설계 보강 댐퍼 공법 특허 등록으로 도심지 내진 건축 신뢰도를 대폭 향상시켰습니다.</p>
+</div>
+</article>
+<article class="bg-white rounded-xl border border-gray-200 overflow-hidden shadow-sm flex flex-col group hover:shadow-md transition">
+<div class="aspect-[16/10] overflow-hidden bg-slate-100">
+<img alt="세종 테라스하우스 우수시공 현장 리포트" class="w-full h-full object-cover group-hover:scale-105 transition duration-500" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBuWXLHKKCnZ4gByddFA3DDyhipBod8qMwDBzTSLAA5ViPc10h9wPH2IskPK6A-HmnO4Li-DZagLY6aNxyCwojTZO_L_ungdtXwXBcRM7_b5sfK97L_UnLaaGpHeTpTr3ZpAs6CR8BMshq_YN4Tcl0aAj50sfDn1eUa8b-2ORYHxKHZjlJlDcd2WneD9XGrcIyqrLzVP52KgFZuawsEKapYI-A_LtefsEDJolXzaXPt2CjUoXRG4d06Gw"/>
+</div>
+<div class="p-5 flex flex-col flex-grow">
+<div class="flex items-center justify-between text-[11px] text-slate-400 mb-2">
+<span class="text-[#0175b1] font-semibold">현장 리포트</span>
+<time>2025.02.10</time>
+</div>
+<h3 class="font-bold text-sm text-slate-800 mb-2 group-hover:text-[#0175b1] transition-colors">세종 테라스하우스 우수시공 현장 리포트</h3>
+<p class="text-xs text-slate-500 line-clamp-2 leading-relaxed">단지 준공 완료 후 입주자 사전점검에서 무결점 품질 평가를 달성했습니다.</p>
+</div>
+</article>
+<article class="bg-white rounded-xl border border-gray-200 overflow-hidden shadow-sm flex flex-col group hover:shadow-md transition">
+<div class="aspect-[16/10] overflow-hidden bg-slate-100">
+<img alt="친환경 저탄소 건축자재 솔루션 도입 협약" class="w-full h-full object-cover group-hover:scale-105 transition duration-500" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCBAWUZgzKVogtVeHF_ipKolj3bEmsC_4TIDVTy3KEuzNVJvz-TzK3ipep6nrOg3c3Yx9mfEp_ZMSplfCqxkSnIE1gshi1n1ykdiJSgK-_CaAcbeqkZw4a6auvzn7gaVH-1tDl5SvZ8VooTcJBcSvyL5WA_wr8bXnmLvuFBsnMZMHFqO23WrWOL3JetnFbqRVOrysd1HUnmy5eOQZcFpfGUXOXQfj50YHxxXrU0yd3xsEzXl3BFHYQbcQ"/>
+</div>
+<div class="p-5 flex flex-col flex-grow">
+<div class="flex items-center justify-between text-[11px] text-slate-400 mb-2">
+<span class="text-[#0175b1] font-semibold">MOU 체결</span>
+<time>2025.01.28</time>
+</div>
+<h3 class="font-bold text-sm text-slate-800 mb-2 group-hover:text-[#0175b1] transition-colors">친환경 저탄소 건축자재 솔루션 도입 협약</h3>
+<p class="text-xs text-slate-500 line-clamp-2 leading-relaxed">ESG 기반 친환경 복합 단열재 생산 전문 기업과 자재 직납 공급 협약을 체결했습니다.</p>
+</div>
+</article>
+</div>
+</div>
+</section>
+<!-- FAQ Section -->
+<section class="py-20 bg-white" id="faq">
+<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
+<div class="flex items-center justify-between mb-8 w-full">
+<div>
+<span class="text-[#0175b1] font-bold text-xs uppercase tracking-wider block mb-1">CUSTOMER FAQ &amp; INQUIRY</span>
+<h2 class="text-2xl sm:text-3xl font-bold text-slate-900">Q&amp;A</h2>
+</div>
+<button class="bg-[#0175b1] hover:bg-sky-700 text-white font-bold text-xs px-4 py-2 rounded-lg transition shadow-sm" onclick="openQnaModal()">
+            질문하기
+          </button>
+</div>
+<div class="space-y-3 w-full">
+<div class="border border-gray-200 rounded-xl overflow-hidden w-full">
+<button class="w-full text-left p-4.5 px-5 flex items-center justify-between bg-white hover:bg-slate-50 transition" onclick="toggleFaq(this)">
+<div class="flex items-center gap-3">
+<span class="w-6 h-6 rounded bg-[#0175b1] text-white text-xs font-bold flex items-center justify-center flex-shrink-0">Q</span>
+<span class="text-xs sm:text-sm font-bold text-slate-800">직영건축 진행 시 하자보수(A/S) 책임은 어떻게 보장되나요?</span>
+</div>
+<span class="text-slate-400">▼</span>
+</button>
+<div class="hidden p-5 pt-0 text-xs sm:text-sm text-slate-600 border-t border-gray-100 bg-slate-50/50 leading-relaxed">
+              상명건설은 직영건축 공정별로 참여하는 전문 면허 시공팀과의 하자이행보증증권 발급 및 상명건설 직영 PM팀의 2개년 무상 A/S 전담 관리를 기본 계약으로 보증합니다.
+            </div>
+</div>
+<div class="border border-gray-200 rounded-xl overflow-hidden w-full">
+<button class="w-full text-left p-4.5 px-5 flex items-center justify-between bg-white hover:bg-slate-50 transition" onclick="toggleFaq(this)">
+<div class="flex items-center gap-3">
+<span class="w-6 h-6 rounded bg-[#0175b1] text-white text-xs font-bold flex items-center justify-center flex-shrink-0">Q</span>
+<span class="text-xs sm:text-sm font-bold text-slate-800">유료 50만원 견적의 구체적인 제공 범위는 어떻게 되나요?</span>
+</div>
+<span class="text-slate-400">▼</span>
+</button>
+<div class="hidden p-5 pt-0 text-xs sm:text-sm text-slate-600 border-t border-gray-100 bg-slate-50/50 leading-relaxed">
+              단순 평당 가견적이 아닌, 토지 지적도 및 현장 분석, 3D 스케치업 모델링 및 조감도, 공종별 세부 자재 물량 내역서가 책자 및 PDF 형태로 제공되며, 계약 체결 시 계약금에서 전액 공제 처리됩니다.
+            </div>
+</div>
+<div class="border border-gray-200 rounded-xl overflow-hidden w-full">
+<button class="w-full text-left p-4.5 px-5 flex items-center justify-between bg-white hover:bg-slate-50 transition" onclick="toggleFaq(this)">
+<div class="flex items-center gap-3">
+<span class="w-6 h-6 rounded bg-[#0175b1] text-white text-xs font-bold flex items-center justify-center flex-shrink-0">Q</span>
+<span class="text-xs sm:text-sm font-bold text-slate-800">토지 매입 전인데도 건축 가능 여부와 인허가 검토가 가능한가요?</span>
+</div>
+<span class="text-slate-400">▼</span>
+</button>
+<div class="hidden p-5 pt-0 text-xs sm:text-sm text-slate-600 border-t border-gray-100 bg-slate-50/50 leading-relaxed">
+              네, 가능합니다. 지번 정보를 제공해 주시면 토지이용계획확인원 및 지구단위계획 분석을 통해 용적률, 건폐율, 도로 접면 조건 및 정화조/상하수도 인입 여부를 사전 검토해 드립니다.
+            </div>
+</div>
+</div>
+</div>
+</section>
+</main>
+<!-- Footer -->
+<footer class="bg-white border-t border-gray-200 py-12 text-xs text-slate-500">
+<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+<div class="flex flex-col md:flex-row justify-between items-start md:items-end gap-6">
+<div>
+<div class="flex items-center space-x-1 mb-3">
+<span class="text-lg font-black tracking-tighter text-[#0175b1]">SM</span>
+<span class="text-base font-extrabold tracking-tight text-slate-800">상명건설</span>
+<span class="text-[9px] font-semibold text-slate-400 ml-1">SANG MYUNG CORP.</span>
+</div>
+<p class="leading-relaxed text-slate-600">
+            대표이사: 김상명 ｜ 사업자등록번호: 214-88-09182<br/>
+            서울특별시 서초구 반포대로 142 상명빌딩 5-7층<br/>
+            대표전화: 02-581-2244 ｜ 팩스: 02-581-2248<br/>
+            이메일: contact@sangmyung.co.kr
+          </p>
+</div>
+<div class="flex flex-col md:items-end space-y-2">
+<div class="flex space-x-4 text-slate-500 font-medium">
+<a class="hover:text-slate-800" href="#">개인정보처리방침</a>
+<span>｜</span>
+<a class="hover:text-slate-800" href="#">이용약관</a>
+<span>｜</span>
+<span class="text-slate-400">Cloud Infrastructure Secured</span>
+</div>
+<p class="text-slate-400">© SANG MYUNG CONSTRUCTION CORP. ALL RIGHTS RESERVED.</p>
+</div>
+</div>
+</div>
+</footer>
+</div>
+<!-- END: PublicSiteWrapper -->
+<!-- Q&A 질문하기 모달 -->
+<div class="fixed inset-0 z-50 hidden bg-slate-900/60 backdrop-blur-sm flex items-center justify-center p-4" id="qnaModal">
+<div class="bg-white rounded-2xl max-w-lg w-full p-6 sm:p-8 shadow-2xl relative border border-slate-100">
+<button class="absolute top-5 right-5 text-slate-400 hover:text-slate-700" onclick="closeQnaModal()">
+<svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewbox="0 0 24 24"><path d="M6 18L18 6M6 6l12 12" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+</button>
+<div class="mb-5">
+<h3 class="text-lg font-bold text-slate-900">건축 질문 등록하기</h3>
+<p class="text-xs text-slate-500 mt-1">궁금하신 건축 공법, 인허가, 견적 사항을 남겨주시면 엔지니어가 답변드립니다.</p>
+</div>
+<form class="space-y-4" onsubmit="event.preventDefault(); alert('질문이 등록되었습니다. 빠른 시일 내에 답변드리겠습니다.'); closeQnaModal(); this.reset();">
+<div>
+<label class="block text-xs font-semibold text-slate-700 mb-1">제목</label>
+<input class="w-full text-xs rounded-lg border-gray-300 py-2.5 px-3" placeholder="질문 제목을 입력해 주세요" required="" type="text"/>
+</div>
+<div class="grid grid-cols-2 gap-3">
+<div>
+<label class="block text-xs font-semibold text-slate-700 mb-1">작성자명</label>
+<input class="w-full text-xs rounded-lg border-gray-300 py-2.5 px-3" placeholder="성함" required="" type="text"/>
+</div>
+<div>
+<label class="block text-xs font-semibold text-slate-700 mb-1">연락처 (답변 알림용)</label>
+<input class="w-full text-xs rounded-lg border-gray-300 py-2.5 px-3" placeholder="010-0000-0000" required="" type="tel"/>
+</div>
+</div>
+<div>
+<label class="block text-xs font-semibold text-slate-700 mb-1">질문 내용</label>
+<textarea class="w-full text-xs rounded-lg border-gray-300 p-3" placeholder="상세 문의 내용을 작성해 주세요." required="" rows="4"></textarea>
+</div>
+<div class="flex items-center gap-2">
+<input class="rounded text-[#0175b1]" id="secret-check" type="checkbox"/>
+<label class="text-xs text-slate-600 font-medium" for="secret-check">비밀글로 문의하기 (관리자와 작성자만 열람)</label>
+</div>
+<button class="w-full py-3 bg-[#0175b1] hover:bg-sky-700 text-white font-bold rounded-lg shadow transition text-xs mt-2" type="submit">
+        질문 등록 완료
+      </button>
+</form>
+</div>
+</div>
+<!-- Admin Login Modal (LOGIN.jpg) -->
+<div class="fixed inset-0 z-50 hidden bg-slate-900/60 backdrop-blur-sm flex items-center justify-center p-4" id="adminModal">
+<div class="bg-white rounded-2xl max-w-md w-full p-8 shadow-2xl relative border border-slate-100">
+<button class="absolute top-5 right-5 text-slate-400 hover:text-slate-700" onclick="closeAdminModal()">
+<svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewbox="0 0 24 24"><path d="M6 18L18 6M6 6l12 12" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+</button>
+<div class="text-center mb-6">
+<div class="w-12 h-12 bg-sky-50 text-[#0175b1] rounded-full mx-auto flex items-center justify-center mb-3">
+<svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="2" viewbox="0 0 24 24"><path d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+</div>
+<h3 class="text-xl font-bold text-slate-900">상명건설 관리자 로그인</h3>
+<p class="text-xs text-slate-500 mt-1">시스템 관리를 위해 인증 정보를 입력해 주세요.</p>
+</div>
+<form class="space-y-4" onsubmit="handleLogin(event)">
+<div>
+<label class="block text-xs font-semibold text-slate-700 mb-1.5">관리자 아이디</label>
+<input class="w-full text-xs rounded-lg border-gray-300 py-2.5 px-3 bg-slate-50" id="adm-id" required="" type="text" value="admin"/>
+</div>
+<div>
+<label class="block text-xs font-semibold text-slate-700 mb-1.5">비밀번호</label>
+<input class="w-full text-xs rounded-lg border-gray-300 py-2.5 px-3 bg-slate-50" id="adm-pw" required="" type="password" value="1234"/>
+</div>
+<div class="bg-sky-50/70 border border-sky-100 text-sky-700 text-[11px] p-2.5 rounded-lg">
+        • 기본 테스트 계정: <span class="font-bold">admin</span> / <span class="font-bold">1234</span>
+</div>
+<button class="w-full py-3 bg-[#0175b1] hover:bg-sky-700 text-white font-bold rounded-lg shadow transition text-sm" type="submit">
+        로그인
+      </button>
+</form>
+</div>
+</div>
+<!-- Admin Portal Overlay (LOGIN_AFTER.jpg 1~3) -->
+<div class="hidden min-h-screen bg-slate-100 flex-col" id="adminPortal">
+<header class="bg-white border-b border-gray-200">
+<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3 flex items-center justify-between">
+<button class="flex items-center gap-1.5 text-xs font-bold text-slate-600 hover:text-[#0175b1]" onclick="exitAdmin()">
+        &lt; Admin Portal
+      </button>
+<button class="text-slate-400 hover:text-slate-700" onclick="exitAdmin()">
+<svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewbox="0 0 24 24"><path d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+</button>
+</div>
+<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-4 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+<div class="flex items-center space-x-3">
+<div class="w-10 h-10 rounded-lg bg-[#0b2239] text-white flex items-center justify-center font-bold">
+          SM
+        </div>
+<div>
+<div class="flex items-center space-x-2">
+<h1 class="text-lg font-bold text-slate-900">상명건설 관리자 시스템</h1>
+<span class="text-[10px] bg-slate-200 text-slate-700 px-2 py-0.5 rounded font-semibold font-mono">Console v2.4</span>
+</div>
+<p class="text-xs text-slate-500">실시간 프로젝트 및 고객 접수 통합 관제 체계</p>
+</div>
+</div>
+<div class="flex items-center space-x-4">
+<div class="flex items-center space-x-1.5 text-xs text-slate-700 font-semibold bg-slate-50 border border-slate-200 px-3 py-1.5 rounded-full">
+<span class="w-2 h-2 rounded-full bg-[#0175b1]"></span>
+<span>최고관리자 (admin)</span>
+</div>
+<button class="text-xs font-bold text-red-600 hover:text-red-700 bg-red-50 border border-red-200 px-3 py-1.5 rounded-md transition" onclick="logoutAdmin()">
+          로그아웃
+        </button>
+</div>
+</div>
+<!-- 4 Tabs -->
+<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 border-t border-gray-100">
+<nav class="flex space-x-2 overflow-x-auto py-2">
+<button class="adm-nav-btn px-4 py-2 text-xs font-bold rounded-lg bg-[#0b2239] text-white" id="adm-btn-inquiries" onclick="switchAdmTab('inquiries')">
+          문의접수 통합관리
+        </button>
+<button class="adm-nav-btn px-4 py-2 text-xs font-bold rounded-lg text-slate-600 hover:bg-slate-100" id="adm-btn-news" onclick="switchAdmTab('news')">
+          NEWS 관리
+        </button>
+<button class="adm-nav-btn px-4 py-2 text-xs font-bold rounded-lg text-slate-600 hover:bg-slate-100" id="adm-btn-qna" onclick="switchAdmTab('qna')">
+          Q&amp;A 고객상담 관리
+        </button>
+<button class="adm-nav-btn px-4 py-2 text-xs font-bold rounded-lg text-slate-600 hover:bg-slate-100" id="adm-btn-settings" onclick="switchAdmTab('settings')">
+          관리자 정보 수정
+        </button>
+</nav>
+</div>
+</header>
+<main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 w-full flex-grow">
+<!-- Tab 1: 문의접수 통합관리 (LOGIN_AFTER.jpg) -->
+<section class="adm-panel space-y-4" id="adm-panel-inquiries">
+<div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+<div class="flex flex-wrap gap-2 text-xs font-bold">
+<button class="bg-[#0b2239] text-white px-3 py-1.5 rounded-md">전체 (48)</button>
+<button class="bg-white border border-gray-300 text-slate-700 px-3 py-1.5 rounded-md">견적문의 (14건)</button>
+<button class="bg-white border border-gray-300 text-slate-700 px-3 py-1.5 rounded-md">★ 유료견적문의 50만원 (6건)</button>
+<button class="bg-white border border-gray-300 text-slate-700 px-3 py-1.5 rounded-md">직영건축/상담 (28건)</button>
+</div>
+<div class="text-xs text-slate-500">최근 동기화: 실시간 작동 중</div>
+</div>
+<div class="bg-white rounded-xl border border-gray-200 shadow-sm overflow-hidden">
+<div class="overflow-x-auto">
+<table class="w-full text-left text-xs border-collapse">
+<thead>
+<tr class="bg-slate-50 text-slate-600 font-bold border-b border-gray-200">
+<th class="py-3 px-4">접수번호</th>
+<th class="py-3 px-4">고객명/연락처</th>
+<th class="py-3 px-4">분류</th>
+<th class="py-3 px-4">희망구조</th>
+<th class="py-3 px-4">토지현황</th>
+<th class="py-3 px-4">입금상태</th>
+<th class="py-3 px-4">처리현황</th>
+<th class="py-3 px-4 text-center">관리</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-gray-100 text-slate-700">
+<tr class="hover:bg-slate-50">
+<td class="py-3.5 px-4 font-mono text-[#0175b1] font-bold">SM-2025-089</td>
+<td class="py-3.5 px-4">
+<div class="font-bold text-slate-900">김태환 대표</div>
+<div class="text-[11px] text-slate-400">010-8842-1920</div>
+</td>
+<td class="py-3.5 px-4"><span class="bg-[#0b2239] text-white text-[11px] px-2 py-0.5 rounded">유료 3D견적</span></td>
+<td class="py-3.5 px-4">RC 철근콘크리트 (75평)</td>
+<td class="py-3.5 px-4">경기 양평 (매입완료)</td>
+<td class="py-3.5 px-4"><span class="text-rose-600 font-bold bg-rose-50 px-2 py-0.5 rounded text-[11px]">500,000원 입금대기</span></td>
+<td class="py-3.5 px-4"><span class="text-slate-500 bg-slate-100 px-2 py-0.5 rounded text-[11px]">미답변</span></td>
+<td class="py-3.5 px-4 text-center"><button class="bg-[#0175b1] text-white px-2.5 py-1 rounded text-[11px] font-bold" onclick="alert('[김태환 대표] 견적 답변 창을 엽니다.')">답변작성</button></td>
+</tr>
+<tr class="hover:bg-slate-50">
+<td class="py-3.5 px-4 font-mono text-[#0175b1] font-bold">SM-2025-088</td>
+<td class="py-3.5 px-4">
+<div class="font-bold text-slate-900">박선우 이사</div>
+<div class="text-[11px] text-slate-400">010-3301-9924</div>
+</td>
+<td class="py-3.5 px-4"><span class="bg-[#0b2239] text-white text-[11px] px-2 py-0.5 rounded">유료 3D견적</span></td>
+<td class="py-3.5 px-4">중목구조 프리미엄 (60평)</td>
+<td class="py-3.5 px-4">강원 원주 (인허가중)</td>
+<td class="py-3.5 px-4"><span class="text-[#0175b1] font-bold bg-sky-50 px-2 py-0.5 rounded text-[11px]">입금완료 (50만)</span></td>
+<td class="py-3.5 px-4"><span class="bg-[#0175b1] text-white font-bold px-2 py-0.5 rounded text-[11px]">3D도면제작중</span></td>
+<td class="py-3.5 px-4 text-center"><button class="bg-slate-100 text-slate-700 border border-slate-300 px-2.5 py-1 rounded text-[11px] font-bold" onclick="alert('[박선우 이사] 상세 산출 내역을 확인합니다.')">내역확인</button></td>
+</tr>
+<tr class="hover:bg-slate-50">
+<td class="py-3.5 px-4 font-mono text-[#0175b1] font-bold">SM-2025-087</td>
+<td class="py-3.5 px-4">
+<div class="font-bold text-slate-900">이정민 건축주</div>
+<div class="text-[11px] text-slate-400">010-4491-0982</div>
+</td>
+<td class="py-3.5 px-4"><span class="bg-slate-100 text-slate-700 text-[11px] px-2 py-0.5 rounded">일반 견적</span></td>
+<td class="py-3.5 px-4">철골조 근생 상가 (120평)</td>
+<td class="py-3.5 px-4">인천 서구 (토지보유)</td>
+<td class="py-3.5 px-4 text-slate-400">-</td>
+<td class="py-3.5 px-4"><span class="text-slate-500 bg-slate-100 px-2 py-0.5 rounded text-[11px]">미답변</span></td>
+<td class="py-3.5 px-4 text-center"><button class="bg-[#0175b1] text-white px-2.5 py-1 rounded text-[11px] font-bold" onclick="alert('[이정민 건축주] 답변 작성 창을 엽니다.')">답변작성</button></td>
+</tr>
+<tr class="hover:bg-slate-50">
+<td class="py-3.5 px-4 font-mono text-[#0175b1] font-bold">SM-2025-086</td>
+<td class="py-3.5 px-4">
+<div class="font-bold text-slate-900">최승원 소장</div>
+<div class="text-[11px] text-slate-400">010-5519-7711</div>
+</td>
+<td class="py-3.5 px-4"><span class="bg-slate-100 text-slate-700 text-[11px] px-2 py-0.5 rounded">직영 공사감리</span></td>
+<td class="py-3.5 px-4">골조 및 외장 직영 (45평)</td>
+<td class="py-3.5 px-4">충남 천안 (기초공사중)</td>
+<td class="py-3.5 px-4 text-slate-400">-</td>
+<td class="py-3.5 px-4"><span class="bg-[#0b2239] text-white font-bold px-2 py-0.5 rounded text-[11px]">유선상담완료</span></td>
+<td class="py-3.5 px-4 text-center"><button class="bg-slate-100 text-slate-700 border border-slate-300 px-2.5 py-1 rounded text-[11px] font-bold" onclick="alert('[최승원 소장] 상담 기록을 수정합니다.')">기록수정</button></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="px-4 py-3 bg-slate-50 border-t border-gray-200 flex items-center justify-between text-xs text-slate-500">
+<div>표시 항목: 4 / 총 48건</div>
+<div class="flex items-center space-x-1">
+<button class="p-1 rounded border border-gray-300">&lt;</button>
+<button class="px-2 py-1 rounded bg-[#0175b1] text-white font-bold">1</button>
+<button class="p-1 rounded border border-gray-300">&gt;</button>
+</div>
+</div>
+</div>
+</section>
+<!-- Tab 2: NEWS 관리 (LOGIN_AFTER1.jpg) -->
+<section class="adm-panel hidden space-y-8" id="adm-panel-news">
+<div class="bg-white rounded-xl border border-gray-200 p-6 sm:p-8 shadow-sm">
+<h2 class="text-base font-bold text-slate-900 pb-4 border-b border-gray-100 mb-6">새 공사소식 / NEWS 등록</h2>
+<form class="space-y-4" onsubmit="event.preventDefault(); alert('뉴스 보도자료가 성공적으로 등록 및 발행되었습니다.'); this.reset();">
+<div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+<div class="md:col-span-2">
+<label class="block text-xs font-bold text-slate-700 mb-1">뉴스 보도 제목</label>
+<input class="w-full text-xs rounded-lg border-gray-300 py-2.5 px-3" placeholder="예: [준공] 판교 대장동 모던 미니멀 하우스 구조안전 인증 획득" required="" type="text"/>
+</div>
+<div>
+<label class="block text-xs font-bold text-slate-700 mb-1">분류 카테고리</label>
+<select class="w-full text-xs rounded-lg border-gray-300 py-2.5 px-3">
+<option>현장소식 (Construction Site)</option>
+<option>보도자료 (Press Release)</option>
+<option>신기술인증 (New Technology)</option>
+<option>MOU 협약 (Partnership)</option>
+</select>
+</div>
+</div>
+<div>
+<label class="block text-xs font-bold text-slate-700 mb-1">대표 이미지 및 도면 첨부</label>
+<div class="border-2 border-dashed border-gray-300 rounded-xl p-8 text-center cursor-pointer bg-slate-50/50">
+<div class="text-xs font-bold text-slate-700">클릭하거나 이미지를 여기로 드래그하세요</div>
+<div class="text-[10px] text-slate-400 mt-1">JPG, PNG, WEBP (최대 15MB)</div>
+</div>
+</div>
+<div>
+<label class="block text-xs font-bold text-slate-700 mb-1">본문 상세 내용 작성 (WYSIWYG 서식)</label>
+<textarea class="w-full text-xs rounded-lg border-gray-300 p-3" placeholder="프로젝트 착공, 골조 완료, 단열 시공 특기사항 등 건축 공학적 디테일을 기재하십시오..." rows="4"></textarea>
+</div>
+<div class="flex justify-end gap-2 pt-2">
+<button class="px-5 py-2.5 rounded-lg border border-gray-300 text-xs font-bold" type="button">작성 취소</button>
+<button class="px-6 py-2.5 rounded-lg bg-[#0b2239] text-white text-xs font-bold shadow" type="submit">뉴스 즉시 등록 및 발행</button>
+</div>
+</form>
+</div>
+<div>
+<h3 class="text-base font-bold text-slate-900 mb-4">현재 게시된 뉴스 목록</h3>
+<div class="space-y-2">
+<div class="bg-white border border-gray-200 rounded-xl p-4 flex items-center justify-between">
+<div>
+<span class="bg-[#0b2239] text-white text-[10px] px-1.5 py-0.5 rounded font-bold">현장소식</span>
+<span class="text-[11px] text-slate-400 ml-2">2025.02.14</span>
+<h4 class="text-xs font-bold text-slate-800 mt-1">양평 옥천면 RC 단독주택 내진 구조 프레임 타설 완료</h4>
+</div>
+<div class="flex gap-2">
+<button class="px-2.5 py-1 text-xs border border-gray-300 rounded">수정</button>
+<button class="px-2.5 py-1 text-xs border border-rose-200 text-rose-600 bg-rose-50 rounded">삭제</button>
+</div>
+</div>
+<div class="bg-white border border-gray-200 rounded-xl p-4 flex items-center justify-between">
+<div>
+<span class="bg-[#0175b1] text-white text-[10px] px-1.5 py-0.5 rounded font-bold">신기술인증</span>
+<span class="text-[11px] text-slate-400 ml-2">2025.01.28</span>
+<h4 class="text-xs font-bold text-slate-800 mt-1">상명건설 하이퍼-슬래브 기밀 단열 공법 특허 등록 완료</h4>
+</div>
+<div class="flex gap-2">
+<button class="px-2.5 py-1 text-xs border border-gray-300 rounded">수정</button>
+<button class="px-2.5 py-1 text-xs border border-rose-200 text-rose-600 bg-rose-50 rounded">삭제</button>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Tab 3: Q&A 고객상담 관리 (LOGIN_AFTER2.jpg) -->
+<section class="adm-panel hidden space-y-8" id="adm-panel-qna">
+<div class="bg-white rounded-xl border border-gray-200 p-6 sm:p-8 shadow-sm">
+<h2 class="text-base font-bold text-slate-900 pb-4 border-b border-gray-100 mb-6">고객 1:1 질의응답 및 비밀글 처리</h2>
+<div class="border border-sky-100 rounded-xl bg-sky-50/20 p-5 mb-6">
+<div class="flex items-center justify-between text-xs text-slate-500 pb-2 border-b border-slate-100">
+<span class="font-bold text-slate-900 text-sm">도면 검토 및 단열 보강 공사 견적 질문입니다.</span>
+<span class="text-[11px] text-slate-400">성북동 건축주 ｜ 2025.02.15 14:22</span>
+</div>
+<p class="text-xs text-slate-600 mt-3 leading-relaxed">안녕하세요. 기존 지상 2층 철근콘크리트 주택의 지붕 및 외벽 단열 성능을 상향하려 합니다. 상명건설의 외단열 미장공법 적용 시 평당 시공 견적과 대략적인 공사 일정이 궁금하여 비공개로 문의드립니다.</p>
+<div class="mt-4 pt-4 border-t border-slate-200">
+<textarea class="w-full text-xs rounded-lg border-gray-300 p-3" placeholder="고객에게 안내할 전문적인 공학 솔루션 및 견적 방향을 입력하세요..." rows="3"></textarea>
+<div class="flex justify-end mt-2">
+<button class="bg-[#0175b1] text-white font-bold text-xs px-4 py-2 rounded-lg" onclick="alert('답변 및 SMS 알림이 발송되었습니다.')">답변 게시하기</button>
+</div>
+</div>
+</div>
+</div>
+<div>
+<h3 class="text-base font-bold text-slate-900 mb-4">Q&amp;A 고객상담리스트</h3>
+<div class="space-y-2">
+<div class="bg-white border border-gray-200 rounded-xl p-4 flex items-center justify-between">
+<span class="text-xs text-slate-800 font-medium">20260904 12:11 고객 1:1 글 질의응답 비밀글처리내용을 알려주세요</span>
+<div class="flex gap-2 items-center">
+<span class="text-[11px] text-rose-500 font-bold bg-rose-50 px-2 py-0.5 rounded">답변대기</span>
+<button class="px-2 py-1 text-xs border border-gray-300 rounded">수정</button>
+<button class="px-2 py-1 text-xs border border-rose-200 text-rose-600 bg-rose-50 rounded">삭제</button>
+</div>
+</div>
+<div class="bg-white border border-gray-200 rounded-xl p-4 flex items-center justify-between">
+<span class="text-xs text-slate-800 font-medium">20260904 12:18 고객 1:1 글 질의응답 비밀글처리내용을 알려주세요1</span>
+<div class="flex gap-2 items-center">
+<span class="text-[11px] text-[#0175b1] font-bold bg-sky-50 px-2 py-0.5 rounded">답변완료</span>
+<button class="px-2 py-1 text-xs border border-gray-300 rounded">수정</button>
+<button class="px-2 py-1 text-xs border border-rose-200 text-rose-600 bg-rose-50 rounded">삭제</button>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Tab 4: 관리자 정보 수정 (LOGIN_AFTER3.jpg) -->
+<section class="adm-panel hidden max-w-2xl mx-auto" id="adm-panel-settings">
+<div class="bg-white rounded-xl border border-gray-200 p-6 sm:p-8 shadow-sm">
+<h2 class="text-base font-bold text-slate-900 pb-2">관리자 보안 계정 설정</h2>
+<p class="text-xs text-slate-500 pb-4 border-b border-gray-100 mb-6">시스템 관리자 인증 정보 및 비밀번호를 안전하게 갱신하십시오.</p>
+<form class="space-y-4" onsubmit="event.preventDefault(); alert('보안 계정 정보가 성공적으로 저장 및 적용되었습니다.');">
+<div>
+<label class="block text-xs font-bold text-slate-700 mb-1">현재 관리자 아이디</label>
+<input class="w-full text-xs rounded-lg border-gray-300 bg-slate-50 py-2.5 px-3" disabled="" type="text" value="admin (최고관리자 - SUPER_ROOT)"/>
+</div>
+<div>
+<label class="block text-xs font-bold text-slate-700 mb-1">새 비밀번호 입력</label>
+<input class="w-full text-xs rounded-lg border-gray-300 py-2.5 px-3" placeholder="영문, 숫자 포함 8자리 이상" required="" type="password"/>
+</div>
+<div>
+<label class="block text-xs font-bold text-slate-700 mb-1">새 비밀번호 재확인</label>
+<input class="w-full text-xs rounded-lg border-gray-300 py-2.5 px-3" placeholder="동일한 비밀번호 재입력" required="" type="password"/>
+</div>
+<div>
+<label class="block text-xs font-bold text-slate-700 mb-1">관리자 대표 비상 연락망 (SMS 수신용)</label>
+<input class="w-full text-xs rounded-lg border-gray-300 py-2.5 px-3" required="" type="tel" value="010-9081-3001"/>
+</div>
+<button class="w-full py-3 bg-[#0b2239] text-white font-bold rounded-lg shadow text-xs mt-2" type="submit">
+            보안 계정 정보 저장 및 적용
+          </button>
+</form>
+</div>
+</section>
+</main>
+</div>
+<script>
+// Scroll
+function scrollToSec(id) {
+  const el = document.getElementById(id);
+  if (el) {
+    const yOffset = -70;
+    const y = el.getBoundingClientRect().top + window.pageYOffset + yOffset;
+    window.scrollTo({ top: y, behavior: 'smooth' });
+  }
+}
+
+// Slide Menu
+function toggleMenu() {
+  const m = document.getElementById('slide-menu');
+  m.classList.toggle('hidden');
+}
+function closeMenu() {
+  document.getElementById('slide-menu').classList.add('hidden');
+}
+
+// Company Tabs
+function switchCompany(tab) {
+  const tabs = ['ceo', 'history', 'org', 'cert'];
+  tabs.forEach(t => {
+    const p = document.getElementById('co-panel-' + t);
+    const b = document.getElementById('btn-co-' + t);
+    if (t === tab) {
+      p.classList.remove('hidden');
+      if (t === 'cert') p.classList.add('grid');
+      b.classList.add('bg-white', 'text-[#0175b1]', 'shadow-sm', 'font-bold');
+      b.classList.remove('text-slate-600');
+    } else {
+      p.classList.add('hidden');
+      p.classList.remove('grid');
+      b.classList.remove('bg-white', 'text-[#0175b1]', 'shadow-sm', 'font-bold');
+      b.classList.add('text-slate-600');
+    }
+  });
+}
+function goCompany(tab) {
+  closeMenu();
+  switchCompany(tab);
+  scrollToSec('company-overview');
+}
+
+// Service Tabs
+function switchService(tab) {
+  const tabs = ['res', 'com', 'dir'];
+  tabs.forEach(t => {
+    const p = document.getElementById('svc-panel-' + t);
+    const b = document.getElementById('btn-svc-' + t);
+    if (t === tab) {
+      p.classList.remove('hidden');
+      b.classList.add('bg-[#0175b1]', 'text-white', 'shadow-sm', 'font-bold');
+      b.classList.remove('bg-white', 'text-slate-600');
+    } else {
+      p.classList.add('hidden');
+      b.classList.remove('bg-[#0175b1]', 'text-white', 'shadow-sm', 'font-bold');
+      b.classList.add('bg-white', 'text-slate-600');
+    }
+  });
+}
+function goService(tab) {
+  closeMenu();
+  switchService(tab);
+  scrollToSec('services-portfolio');
+}
+
+// Quote Tabs
+function switchQuote(tab) {
+  const freeBtn = document.getElementById('tab-qt-free');
+  const paidBtn = document.getElementById('tab-qt-paid');
+  const consultBtn = document.getElementById('tab-qt-consult');
+  const banner = document.getElementById('paid-banner');
+
+  [freeBtn, paidBtn, consultBtn].forEach(b => {
+    b.classList.remove('bg-[#0175b1]', 'text-white', 'shadow-sm', 'font-bold');
+    b.classList.add('text-slate-600');
+  });
+
+  if (tab === 'paid') {
+    paidBtn.classList.add('bg-[#0175b1]', 'text-white', 'shadow-sm', 'font-bold');
+    paidBtn.classList.remove('text-slate-600');
+    banner.classList.remove('hidden');
+  } else if (tab === 'free') {
+    freeBtn.classList.add('bg-[#0175b1]', 'text-white', 'shadow-sm', 'font-bold');
+    freeBtn.classList.remove('text-slate-600');
+    banner.classList.add('hidden');
+  } else {
+    consultBtn.classList.add('bg-[#0175b1]', 'text-white', 'shadow-sm', 'font-bold');
+    consultBtn.classList.remove('text-slate-600');
+    banner.classList.add('hidden');
+  }
+}
+function goQuote(tab) {
+  closeMenu();
+  switchQuote(tab);
+  scrollToSec('inquiry-engine');
+}
+
+// FAQ Accordion
+function toggleFaq(btn) {
+  const content = btn.nextElementSibling;
+  content.classList.toggle('hidden');
+}
+
+// Q&A Question Modal
+function openQnaModal() {
+  document.getElementById('qnaModal').classList.remove('hidden');
+}
+function closeQnaModal() {
+  document.getElementById('qnaModal').classList.add('hidden');
+}
+
+// Admin Modal & Portal
+function openAdminModal() {
+  document.getElementById('adminModal').classList.remove('hidden');
+}
+function closeAdminModal() {
+  document.getElementById('adminModal').classList.add('hidden');
+}
+function handleLogin(e) {
+  e.preventDefault();
+  const id = document.getElementById('adm-id').value;
+  const pw = document.getElementById('adm-pw').value;
+  if (id === 'admin' && pw === '1234') {
+    closeAdminModal();
+    document.getElementById('public-site').classList.add('hidden');
+    const portal = document.getElementById('adminPortal');
+    portal.classList.remove('hidden');
+    portal.classList.add('flex');
+    window.scrollTo({ top: 0, behavior: 'instant' });
+  } else {
+    alert('아이디 또는 비밀번호가 일치하지 않습니다. (admin / 1234)');
+  }
+}
+function exitAdmin() {
+  document.getElementById('adminPortal').classList.add('hidden');
+  document.getElementById('adminPortal').classList.remove('flex');
+  document.getElementById('public-site').classList.remove('hidden');
+}
+function logoutAdmin() {
+  exitAdmin();
+  openAdminModal();
+}
+function switchAdmTab(tab) {
+  const tabs = ['inquiries', 'news', 'qna', 'settings'];
+  tabs.forEach(t => {
+    const p = document.getElementById('adm-panel-' + t);
+    const b = document.getElementById('adm-btn-' + t);
+    if (t === tab) {
+      p.classList.remove('hidden');
+      b.classList.add('bg-[#0b2239]', 'text-white');
+      b.classList.remove('text-slate-600');
+    } else {
+      p.classList.add('hidden');
+      b.classList.remove('bg-[#0b2239]', 'text-white');
+      b.classList.add('text-slate-600');
+    }
+  });
+}
+</script>
+</body></html>

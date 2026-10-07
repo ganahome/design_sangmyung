@@ -1,0 +1,768 @@
+<!DOCTYPE html>
+
+<html lang="ko"><head><meta charset="utf-8"/><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" name="viewport"/><meta content="mobile_stack" name="shell-type"/><title>상명건설 시스템</title><link href="https://fonts.googleapis.com" rel="preconnect"/><link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/><link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@600;700&amp;family=Inter:wght@400;500;600&amp;family=JetBrains+Mono:wght@500;600&amp;display=swap" rel="stylesheet"/><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/><script src="https://cdn.tailwindcss.com"></script><script id="tailwind-config">tailwind.config = { darkMode: "class", theme: { extend: { colors: { "outline-variant": "#c4c6d1", "surface-tint": "#415e94", "primary-fixed-dim": "#acc7ff", "on-secondary": "#ffffff", "primary": "#002555", "surface-bright": "#fcf9f8", "on-secondary-container": "#fefcff", "on-primary-fixed-variant": "#28467b", "text-muted": "#68707B", "on-primary-container": "#8aa7e1", "surface-canvas": "#FFFFFF", "accent-safety": "#D9383A", "tertiary-container": "#4b3918", "surface-dim": "#dcd9d9", "on-surface-variant": "#43474f", "on-secondary-fixed-variant": "#004491", "error-container": "#ffdad6", "surface-container-low": "#f6f3f2", "surface-container-highest": "#e5e2e1", "tertiary-fixed-dim": "#dec397", "tertiary-fixed": "#fcdfb1", "background": "#fcf9f8", "surface-concrete": "#EDEDED", "surface": "#fcf9f8", "primary-container": "#1b3b6f", "inverse-primary": "#acc7ff", "inverse-on-surface": "#f3f0ef", "secondary": "#0059b9", "on-background": "#1c1b1b", "secondary-fixed": "#d7e2ff", "on-primary-fixed": "#001a41", "on-tertiary-container": "#bca379", "outline": "#747780", "inverse-surface": "#313030", "on-surface": "#1c1b1b", "on-tertiary": "#ffffff", "on-error-container": "#93000a", "surface-container-lowest": "#ffffff", "surface-subtle": "#F8F8F8", "on-tertiary-fixed": "#271900", "on-secondary-fixed": "#001a40", "on-error": "#ffffff", "tertiary": "#332405", "border-structural": "#E2E4E8", "primary-fixed": "#d8e2ff", "secondary-fixed-dim": "#acc7ff", "surface-variant": "#e5e2e1", "border-strong": "#171717", "error": "#ba1a1a", "surface-container-high": "#eae7e7", "on-primary": "#ffffff", "surface-container": "#f0eded", "on-tertiary-fixed-variant": "#574422", "secondary-container": "#1071e5" }, borderRadius: { "DEFAULT": "0.125rem", "lg": "0.25rem", "xl": "0.5rem", "full": "0.75rem" }, spacing: { "gutter-mobile": "1rem", "margin-desktop": "3rem", "space-md": "1rem", "space-lg": "1.5rem", "space-sm": "0.5rem", "space-xl": "2.5rem", "gutter-desktop": "2rem", "gutter": "1.5rem", "space-xs": "0.25rem", "margin-mobile": "1.25rem", "margin": "1.5rem" }, fontFamily: { "label-blueprint": ["JetBrains Mono"], "display-hero": ["Hanken Grotesk"], "label-metric": ["JetBrains Mono"], "title-md": ["Hanken Grotesk"], "body-sm": ["Inter"], "body-md": ["Inter"], "headline-sm": ["Hanken Grotesk"], "display-hero-mobile": ["Hanken Grotesk"], "headline-md": ["Hanken Grotesk"], "headline-lg": ["Hanken Grotesk"], "body-lg": ["Inter"], "headline-lg-mobile": ["Hanken Grotesk"] }, fontSize: { "label-blueprint": ["11px", { lineHeight: "14px", letterSpacing: "0.08em", fontWeight: "500" }], "display-hero": ["56px", { lineHeight: "68px", letterSpacing: "-0.025em", fontWeight: "700" }], "label-metric": ["14px", { lineHeight: "18px", letterSpacing: "0.02em", fontWeight: "600" }], "title-md": ["18px", { lineHeight: "24px", letterSpacing: "-0.005em", fontWeight: "600" }], "body-sm": ["13px", { lineHeight: "20px", letterSpacing: "0em", fontWeight: "400" }], "body-md": ["15px", { lineHeight: "24px", letterSpacing: "-0.005em", fontWeight: "400" }], "headline-sm": ["22px", { lineHeight: "30px", letterSpacing: "-0.01em", fontWeight: "600" }], "display-hero-mobile": ["36px", { lineHeight: "44px", letterSpacing: "-0.02em", fontWeight: "700" }], "headline-md": ["28px", { lineHeight: "36px", letterSpacing: "-0.015em", fontWeight: "600" }], "headline-lg": ["40px", { lineHeight: "48px", letterSpacing: "-0.02em", fontWeight: "600" }], "body-lg": ["17px", { lineHeight: "28px", letterSpacing: "-0.01em", fontWeight: "400" }], "headline-lg-mobile": ["28px", { lineHeight: "36px", letterSpacing: "-0.015em", fontWeight: "600" }] } } } };</script><style>@layer base{html,body{width:100%;margin:0;padding:0;}body{overscroll-behavior-y:none;}.pb-safe{padding-bottom:env(safe-area-inset-bottom,0px);}.pt-safe{padding-top:env(safe-area-inset-top,0px);}main>:first-child{margin-top:0!important;}main>:last-child{margin-bottom:0!important;}}::-webkit-scrollbar{display:none;}</style></head><body class="bg-surface font-body-md text-on-surface flex flex-col min-h-screen antialiased"><header class="fixed top-0 inset-x-0 z-50 bg-surface-canvas/90 backdrop-blur-xl shadow-[0_1px_8px_rgba(0,0,0,0.04)] pt-safe"><div class="h-16 px-gutter-mobile flex items-center justify-between"><div class="flex items-center gap-space-xs"><button aria-label="뒤로 가기" class="w-11 h-11 flex items-center justify-center text-on-surface hover:text-primary transition-colors" onclick="history.back()"><span class="material-symbols-outlined text-[22px]">arrow_back_ios_new</span></button><h1 class="font-title-md text-title-md font-bold tracking-tight text-primary-container truncate">Admin Portal</h1></div><div class="flex items-center gap-space-xs"><a class="w-11 h-11 flex items-center justify-center text-on-surface-variant hover:text-primary transition-colors" data-path="corporate-home" href="#"><span class="material-symbols-outlined text-[22px]">home</span></a>
+  </div></div></header><main class="flex flex-col relative w-full pt-16 bg-surface min-h-screen"><div class="flex flex-col w-full">
+<!-- Toast Feedback Component -->
+<div class="fixed top-20 right-4 z-50 transform translate-y-[-20px] opacity-0 pointer-events-none transition-all duration-300 flex items-center gap-space-sm px-space-md py-space-sm bg-primary text-on-primary rounded-xl shadow-xl" id="admin-toast">
+<span class="material-symbols-outlined text-[20px] text-primary-fixed">verified</span>
+<span class="font-body-sm text-body-sm font-medium" id="admin-toast-text">작업이 정상적으로 완료되었습니다.</span>
+</div>
+<!-- AUTHENTICATION STATE (UNAUTHENTICATED) -->
+<section class="w-full flex flex-col items-center justify-center py-space-xl px-gutter-mobile" id="auth-screen">
+<div class="w-full max-w-md bg-surface-canvas rounded-xl shadow-xl p-space-lg flex flex-col gap-space-lg">
+<!-- Blueprint Branding Header -->
+<div class="flex flex-col gap-space-xs text-center items-center">
+<div class="w-12 h-12 bg-primary-container text-on-primary rounded-xl flex items-center justify-center mb-space-xs shadow-sm">
+<span class="material-symbols-outlined text-[26px]">admin_panel_settings</span>
+</div>
+<span class="font-label-blueprint text-label-blueprint text-secondary tracking-widest uppercase">Sang Myung Construction Corp.</span>
+<h2 class="font-headline-sm text-headline-sm text-primary tracking-tight">통합 백오피스 관리자 인증</h2>
+<p class="font-body-sm text-body-sm text-text-muted">상명건설 시스템 보안 콘솔 v2.4 접근을 위해 자격을 증명하십시오.</p>
+</div>
+<!-- Test Credentials Notice Box -->
+<div class="bg-surface-subtle p-space-md rounded-lg flex flex-col gap-space-xs shadow-sm">
+<div class="flex items-center gap-space-xs text-primary font-semibold">
+<span class="material-symbols-outlined text-[18px]">key</span>
+<span class="font-label-metric text-label-metric">검수용 기본 인증 계정 안내</span>
+</div>
+<div class="flex items-center justify-between text-on-surface-variant font-label-blueprint text-label-blueprint pt-space-xs">
+<span>아이디: <strong class="text-primary font-semibold">admin</strong></span>
+<span>비밀번호: <strong class="text-primary font-semibold">1234</strong></span>
+</div>
+</div>
+<!-- Login Form Form-factor -->
+<form class="flex flex-col gap-space-md" id="login-form" onsubmit="handleLogin(event)">
+<div class="flex flex-col gap-space-xs">
+<label class="font-body-sm text-body-sm font-medium text-on-surface" for="login-id">관리자 식별 아이디</label>
+<div class="flex items-center bg-surface-container-low rounded-lg px-space-md py-space-sm gap-space-sm focus-within:bg-surface-canvas focus-within:shadow-sm transition-all">
+<span class="material-symbols-outlined text-text-muted text-[20px]">person</span>
+<input class="w-full bg-transparent font-body-md text-body-md text-on-surface outline-none placeholder:text-text-muted" id="login-id" placeholder="아이디 입력" required="" type="text" value="admin"/>
+</div>
+</div>
+<div class="flex flex-col gap-space-xs">
+<label class="font-body-sm text-body-sm font-medium text-on-surface" for="login-pw">보안 비밀번호</label>
+<div class="flex items-center bg-surface-container-low rounded-lg px-space-md py-space-sm gap-space-sm focus-within:bg-surface-canvas focus-within:shadow-sm transition-all">
+<span class="material-symbols-outlined text-text-muted text-[20px]">lock</span>
+<input class="w-full bg-transparent font-body-md text-body-md text-on-surface outline-none placeholder:text-text-muted" id="login-pw" placeholder="••••••••" required="" type="password" value="1234"/>
+</div>
+</div>
+<div class="hidden text-accent-safety font-body-sm text-body-sm flex items-center gap-space-xs" id="login-error-msg">
+<span class="material-symbols-outlined text-[16px]">error</span>
+<span>아이디 또는 비밀번호가 일치하지 않습니다. (admin / 1234)</span>
+</div>
+<!-- Action Button Matrix -->
+<div class="flex flex-col gap-space-sm pt-space-xs">
+<button class="w-full py-3 bg-primary-container hover:bg-primary text-on-primary rounded-lg font-title-md text-title-md font-semibold shadow-md flex items-center justify-center gap-space-xs transition-colors" type="submit">
+<span class="material-symbols-outlined text-[20px]">login</span>
+<span>보안 로그인</span>
+</button>
+<div class="grid grid-cols-2 gap-space-sm">
+<button class="py-2.5 bg-surface-container hover:bg-surface-container-high text-on-surface rounded-lg font-body-sm text-body-sm font-medium transition-colors text-center" onclick="clearLoginForm()" type="button">
+              입력 초기화
+            </button>
+<a class="py-2.5 bg-surface-subtle hover:bg-surface-container text-text-muted rounded-lg font-body-sm text-body-sm font-medium text-center transition-colors" data-path="corporate-home" href="#">
+              공식 홈 이동
+            </a>
+</div>
+</div>
+</form>
+</div>
+</section>
+<!-- AUTHENTICATED ADMIN CONSOLE STATE -->
+<section class="hidden w-full flex flex-col gap-space-md pb-space-xl" id="dashboard-screen">
+<!-- Top Admin Header Console Bar -->
+<div class="w-full bg-surface-canvas shadow-sm px-gutter-mobile py-space-md flex flex-col sm:flex-row sm:items-center justify-between gap-space-md">
+<div class="flex items-center gap-space-md">
+<div class="w-10 h-10 bg-primary-container text-on-primary rounded-lg flex items-center justify-center shadow-sm">
+<span class="material-symbols-outlined text-[22px]">domain_verification</span>
+</div>
+<div class="flex flex-col">
+<div class="flex items-center gap-space-sm">
+<h2 class="font-title-md text-title-md font-bold text-primary">상명건설 관리자 시스템</h2>
+<span class="px-2 py-0.5 bg-surface-container text-primary font-label-blueprint text-label-blueprint rounded">Console v2.4</span>
+</div>
+<span class="font-body-sm text-body-sm text-text-muted">실시간 프로젝트 및 고객 접수 통합 관제 체계</span>
+</div>
+</div>
+<div class="flex items-center gap-space-sm self-end sm:self-auto">
+<div class="flex items-center gap-space-xs bg-surface-container-low px-space-md py-1.5 rounded-full">
+<span class="w-2.5 h-2.5 rounded-full bg-secondary"></span>
+<span class="font-label-metric text-label-metric text-on-surface">최고관리자 (admin)</span>
+</div>
+<button class="px-space-md py-1.5 bg-accent-safety/10 hover:bg-accent-safety text-accent-safety hover:text-on-primary font-body-sm text-body-sm font-medium rounded-lg transition-colors flex items-center gap-space-xs" onclick="handleLogout()">
+<span class="material-symbols-outlined text-[18px]">logout</span>
+<span>로그아웃</span>
+</button>
+</div>
+</div>
+<!-- Infrastructure & Hosting Advice Banner -->
+<!--<div class="mx-gutter-mobile bg-primary-container text-on-primary rounded-xl p-space-md shadow-md flex flex-col md:flex-row items-start md:items-center justify-between gap-space-md">
+<div class="flex items-start gap-space-sm">
+<div class="p-2 bg-on-primary/10 rounded-lg shrink-0">
+<span class="material-symbols-outlined text-[22px] text-primary-fixed">cloud_sync</span>
+</div>
+<div class="flex flex-col">
+<div class="flex items-center gap-space-xs">
+<span class="font-label-blueprint text-label-blueprint text-primary-fixed uppercase tracking-wider">DevOps Recommendation</span>
+<span class="px-1.5 py-0.2 bg-secondary text-on-secondary rounded text-[10px] font-mono">가성비 아키텍처</span>
+</div>
+<p class="font-body-sm text-body-sm text-surface-bright mt-0.5">
+<strong>Vercel / Cloudflare Pages</strong>(프론트 무료 배포) + <strong>Supabase/Render</strong>(PostgreSQL 무상 티어) 또는 국내 <strong>Cafe24 Node·PHP</strong>(월 500원~5,000원대) 결합 시 월 유지비 0원~극소비용으로 완전 운영 가능합니다.
+          </p>
+</div>
+</div>
+<div class="shrink-0 flex items-center gap-space-xs bg-on-primary/15 px-space-md py-1.5 rounded-lg">
+<span class="material-symbols-outlined text-[16px] text-primary-fixed">speed</span>
+<span class="font-label-metric text-label-metric text-surface-bright">전국 반응형 최적화 완료</span>
+</div>
+</div>-->
+<!-- Top Management Navigation Horizontal Tabs -->
+<div class="mx-gutter-mobile bg-surface-canvas rounded-xl shadow-sm p-1.5 flex flex-wrap gap-1">
+<button class="admin-nav-tab flex-1 min-w-[140px] py-2.5 px-space-md rounded-lg font-body-sm text-body-sm font-semibold flex items-center justify-center gap-space-xs bg-primary text-on-primary shadow-sm transition-all" id="btn-tab-inquiries" onclick="switchAdminTab('tab-inquiries')">
+<span class="material-symbols-outlined text-[18px]">contact_support</span>
+<span>문의접수 통합관리</span>
+</button>
+<button class="admin-nav-tab flex-1 min-w-[140px] py-2.5 px-space-md rounded-lg font-body-sm text-body-sm font-semibold flex items-center justify-center gap-space-xs bg-transparent text-text-muted hover:bg-surface-subtle transition-all" id="btn-tab-news" onclick="switchAdminTab('tab-news')">
+<span class="material-symbols-outlined text-[18px]">newspaper</span>
+<span>NEWS 관리</span>
+</button>
+<button class="admin-nav-tab flex-1 min-w-[140px] py-2.5 px-space-md rounded-lg font-body-sm text-body-sm font-semibold flex items-center justify-center gap-space-xs bg-transparent text-text-muted hover:bg-surface-subtle transition-all" id="btn-tab-qa" onclick="switchAdminTab('tab-qa')">
+<span class="material-symbols-outlined text-[18px]">forum</span>
+<span>Q&amp;A 고객상담 관리</span>
+</button>
+<button class="admin-nav-tab flex-1 min-w-[140px] py-2.5 px-space-md rounded-lg font-body-sm text-body-sm font-semibold flex items-center justify-center gap-space-xs bg-transparent text-text-muted hover:bg-surface-subtle transition-all" id="btn-tab-account" onclick="switchAdminTab('tab-account')">
+<span class="material-symbols-outlined text-[18px]">manage_accounts</span>
+<span>관리자 정보 수정</span>
+</button>
+</div>
+<!-- MAIN MODULE WORKSPACES -->
+<div class="mx-gutter-mobile flex flex-col gap-space-lg">
+<!-- MODULE 1: 문의접수 통합 관리 (Default View) -->
+<div class="admin-module flex flex-col gap-space-md" id="module-inquiries">
+<!-- Sub-filter Pills -->
+<div class="flex flex-col sm:flex-row sm:items-center justify-between gap-space-sm bg-surface-canvas p-space-md rounded-xl shadow-sm">
+<div class="flex flex-wrap items-center gap-space-xs">
+<button class="inquiry-subtab px-3 py-1.5 rounded-lg font-body-sm text-body-sm font-medium bg-primary-container text-on-primary transition-all" onclick="filterInquiries('all', this)">
+              전체 (48)
+            </button>
+<button class="inquiry-subtab px-3 py-1.5 rounded-lg font-body-sm text-body-sm font-medium bg-surface-container hover:bg-surface-container-high text-on-surface transition-all" onclick="filterInquiries('standard', this)">
+              견적문의 (14건)
+            </button>
+<button class="inquiry-subtab px-3 py-1.5 rounded-lg font-body-sm text-body-sm font-medium bg-surface-container hover:bg-surface-container-high text-on-surface transition-all flex items-center gap-1" onclick="filterInquiries('paid', this)">
+<span class="material-symbols-outlined text-secondary text-[16px]">stars</span>
+<span>유료견적문의 50만원 (6건)</span>
+</button>
+<button class="inquiry-subtab px-3 py-1.5 rounded-lg font-body-sm text-body-sm font-medium bg-surface-container hover:bg-surface-container-high text-on-surface transition-all" onclick="filterInquiries('direct', this)">
+              직영건축/상담 (28건)
+            </button>
+</div>
+<div class="flex items-center gap-space-xs text-text-muted font-label-blueprint text-label-blueprint">
+<span class="w-2 h-2 rounded-full bg-secondary"></span>
+<span>최근 동기화: 실시간 작동 중</span>
+</div>
+</div>
+<!-- Inquiries Data Presentation Table -->
+<div class="bg-surface-canvas rounded-xl shadow-sm overflow-hidden flex flex-col">
+<div class="overflow-x-auto">
+<table class="w-full text-left border-collapse">
+<thead>
+<tr class="bg-surface-subtle text-text-muted font-label-blueprint text-label-blueprint tracking-wider">
+<th class="py-3 px-space-md">접수번호</th>
+<th class="py-3 px-space-md">고객명/연락처</th>
+<th class="py-3 px-space-md">분류</th>
+<th class="py-3 px-space-md">희망구조</th>
+<th class="py-3 px-space-md">토지현황</th>
+<th class="py-3 px-space-md">입금상태</th>
+<th class="py-3 px-space-md">처리현황</th>
+<th class="py-3 px-space-md text-right">관리</th>
+</tr>
+</thead>
+<tbody class="font-body-sm text-body-sm" id="inquiry-tbody">
+<!-- Row 1: 유료 견적 입금 대기 -->
+<tr class="inquiry-row row-paid hover:bg-surface-subtle transition-colors">
+<td class="py-3.5 px-space-md font-label-blueprint text-label-blueprint text-secondary font-semibold">SM-2025-089</td>
+<td class="py-3.5 px-space-md">
+<div class="font-semibold text-on-surface">김태환 대표</div>
+<div class="font-label-blueprint text-text-muted text-[12px]">010-8842-1920</div>
+</td>
+<td class="py-3.5 px-space-md">
+<span class="inline-flex items-center gap-0.5 px-2 py-0.5 bg-primary-container text-on-primary rounded text-[12px] font-medium">유료 3D견적</span>
+</td>
+<td class="py-3.5 px-space-md text-on-surface">RC 철근콘크리트 (75평)</td>
+<td class="py-3.5 px-space-md text-on-surface">경기 양평 (매입완료)</td>
+<td class="py-3.5 px-space-md">
+<span class="px-2 py-0.5 bg-accent-safety/10 text-accent-safety rounded font-semibold text-[12px]">500,000원 입금대기</span>
+</td>
+<td class="py-3.5 px-space-md">
+<span class="px-2 py-0.5 bg-surface-container text-text-muted rounded text-[12px]">미답변</span>
+</td>
+<td class="py-3.5 px-space-md text-right">
+<div class="flex items-center justify-end gap-space-xs">
+<button class="px-2.5 py-1 bg-secondary text-on-secondary rounded text-[12px] font-medium hover:bg-primary transition-colors" onclick="openReplyModal('김태환 대표', 'SM-2025-089', '양평 단독주택 RC조 75평 입체 견적 의뢰')">답변작성</button>
+<button class="p-1 text-text-muted hover:text-accent-safety transition-colors" onclick="deleteInquiryRow(this)" title="삭제"><span class="material-symbols-outlined text-[18px]">delete</span></button>
+</div>
+</td>
+</tr>
+<!-- Row 2: 유료 견적 입금 완료 -->
+<tr class="inquiry-row row-paid hover:bg-surface-subtle transition-colors bg-surface-subtle/50">
+<td class="py-3.5 px-space-md font-label-blueprint text-label-blueprint text-secondary font-semibold">SM-2025-088</td>
+<td class="py-3.5 px-space-md">
+<div class="font-semibold text-on-surface">박선우 이사</div>
+<div class="font-label-blueprint text-text-muted text-[12px]">010-3301-9924</div>
+</td>
+<td class="py-3.5 px-space-md">
+<span class="inline-flex items-center gap-0.5 px-2 py-0.5 bg-primary-container text-on-primary rounded text-[12px] font-medium">유료 3D견적</span>
+</td>
+<td class="py-3.5 px-space-md text-on-surface">중목구조 프리미엄 (60평)</td>
+<td class="py-3.5 px-space-md text-on-surface">강원 원주 (인허가중)</td>
+<td class="py-3.5 px-space-md">
+<span class="px-2 py-0.5 bg-secondary/10 text-secondary rounded font-semibold text-[12px]">입금완료 (50만)</span>
+</td>
+<td class="py-3.5 px-space-md">
+<span class="px-2 py-0.5 bg-secondary text-on-secondary rounded text-[12px]">3D도면제작중</span>
+</td>
+<td class="py-3.5 px-space-md text-right">
+<div class="flex items-center justify-end gap-space-xs">
+<button class="px-2.5 py-1 bg-surface-container-high hover:bg-surface-container text-on-surface rounded text-[12px] font-medium transition-colors" onclick="openReplyModal('박선우 이사', 'SM-2025-088', '원주 60평 목구조 3D 랜더링 및 산출내역서 송부 건')">내역확인</button>
+<button class="p-1 text-text-muted hover:text-accent-safety transition-colors" onclick="deleteInquiryRow(this)" title="삭제"><span class="material-symbols-outlined text-[18px]">delete</span></button>
+</div>
+</td>
+</tr>
+<!-- Row 3: 일반 견적 문의 -->
+<tr class="inquiry-row row-standard hover:bg-surface-subtle transition-colors">
+<td class="py-3.5 px-space-md font-label-blueprint text-label-blueprint text-secondary font-semibold">SM-2025-087</td>
+<td class="py-3.5 px-space-md">
+<div class="font-semibold text-on-surface">이정민 건축주</div>
+<div class="font-label-blueprint text-text-muted text-[12px]">010-4491-0982</div>
+</td>
+<td class="py-3.5 px-space-md">
+<span class="px-2 py-0.5 bg-surface-container text-on-surface rounded text-[12px]">일반 견적</span>
+</td>
+<td class="py-3.5 px-space-md text-on-surface">철골조 근생 상가 (120평)</td>
+<td class="py-3.5 px-space-md text-on-surface">인천 서구 (토지보유)</td>
+<td class="py-3.5 px-space-md text-text-muted font-label-blueprint text-[12px]">-</td>
+<td class="py-3.5 px-space-md">
+<span class="px-2 py-0.5 bg-surface-container text-text-muted rounded text-[12px]">미답변</span>
+</td>
+<td class="py-3.5 px-space-md text-right">
+<div class="flex items-center justify-end gap-space-xs">
+<button class="px-2.5 py-1 bg-secondary text-on-secondary rounded text-[12px] font-medium hover:bg-primary transition-colors" onclick="openReplyModal('이정민 건축주', 'SM-2025-087', '인천 서구 상가건물 개략공사비 산정 요청')">답변작성</button>
+<button class="p-1 text-text-muted hover:text-accent-safety transition-colors" onclick="deleteInquiryRow(this)" title="삭제"><span class="material-symbols-outlined text-[18px]">delete</span></button>
+</div>
+</td>
+</tr>
+<!-- Row 4: 직영건축 상담 -->
+<tr class="inquiry-row row-direct hover:bg-surface-subtle transition-colors">
+<td class="py-3.5 px-space-md font-label-blueprint text-label-blueprint text-secondary font-semibold">SM-2025-086</td>
+<td class="py-3.5 px-space-md">
+<div class="font-semibold text-on-surface">최승원 소장</div>
+<div class="font-label-blueprint text-text-muted text-[12px]">010-5519-7711</div>
+</td>
+<td class="py-3.5 px-space-md">
+<span class="px-2 py-0.5 bg-surface-container text-on-surface rounded text-[12px]">직영 공사감리</span>
+</td>
+<td class="py-3.5 px-space-md text-on-surface">골조 및 외장 직영 (45평)</td>
+<td class="py-3.5 px-space-md text-on-surface">충남 천안 (기초공사중)</td>
+<td class="py-3.5 px-space-md text-text-muted font-label-blueprint text-[12px]">-</td>
+<td class="py-3.5 px-space-md">
+<span class="px-2 py-0.5 bg-primary text-on-primary rounded text-[12px]">유선상담완료</span>
+</td>
+<td class="py-3.5 px-space-md text-right">
+<div class="flex items-center justify-end gap-space-xs">
+<button class="px-2.5 py-1 bg-surface-container-high hover:bg-surface-container text-on-surface rounded text-[12px] font-medium transition-colors" onclick="openReplyModal('최승원 소장', 'SM-2025-086', '직영 현장 기술지도 및 철근 배근 감리 지원')">기록수정</button>
+<button class="p-1 text-text-muted hover:text-accent-safety transition-colors" onclick="deleteInquiryRow(this)" title="삭제"><span class="material-symbols-outlined text-[18px]">delete</span></button>
+</div>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<!-- Pagination helper footer -->
+<div class="p-space-md bg-surface-subtle flex items-center justify-between font-label-blueprint text-label-blueprint text-text-muted">
+<span>표시 항목: 4 / 총 48건</span>
+<div class="flex items-center gap-space-xs">
+<button class="px-2 py-1 bg-surface-canvas rounded hover:bg-surface-container shadow-sm">&lt;</button>
+<span class="px-2 font-bold text-primary">1</span>
+<button class="px-2 py-1 bg-surface-canvas rounded hover:bg-surface-container shadow-sm">&gt;</button>
+</div>
+</div>
+</div>
+</div>
+<!-- MODULE 2: NEWS 등록 및 관리 -->
+<div class="admin-module hidden flex-col gap-space-md" id="module-news">
+<!-- Registration Form Card -->
+<div class="bg-surface-canvas rounded-xl shadow-sm p-space-lg flex flex-col gap-space-md">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-space-xs">
+<span class="material-symbols-outlined text-primary text-[22px]">post_add</span>
+<h3 class="font-headline-sm text-headline-sm text-primary">새 공사소식 / NEWS 등록</h3>
+</div>
+<span class="font-label-blueprint text-label-blueprint text-secondary">ARCHITECTURAL JOURNAL POST</span>
+</div>
+<form class="flex flex-col gap-space-md" onsubmit="handleNewsSubmit(event)">
+<div class="grid grid-cols-1 md:grid-cols-3 gap-space-md">
+<div class="md:col-span-2 flex flex-col gap-space-xs">
+<label class="font-body-sm text-body-sm font-medium text-on-surface">뉴스 보도 제목</label>
+<input class="bg-surface-container-low px-space-md py-2.5 rounded-lg font-body-md text-body-md text-on-surface outline-none focus:bg-surface-canvas focus:shadow-sm" id="news-title-input" placeholder="예: [준공] 판교 대장동 모던 미니멀 하우스 구조안전 인증 획득" required="" type="text"/>
+</div>
+<div class="flex flex-col gap-space-xs">
+<label class="font-body-sm text-body-sm font-medium text-on-surface">분류 카테고리</label>
+<select class="bg-surface-container-low px-space-md py-2.5 rounded-lg font-body-md text-body-md text-on-surface outline-none" id="news-cat-input">
+<option value="현장소식">현장소식 (Construction Site)</option>
+<option value="공지사항">공지사항 (Official Notice)</option>
+<option value="언론보도">언론보도 (Press Release)</option>
+<option value="신기술인증">신기술/인증 (Tech Accreditation)</option>
+</select>
+</div>
+</div>
+<!-- Drag & Drop Visual Area -->
+<div class="flex flex-col gap-space-xs">
+<label class="font-body-sm text-body-sm font-medium text-on-surface">대표 이미지 및 도면 첨부</label>
+<div class="cursor-pointer bg-surface-subtle hover:bg-surface-container-low p-space-lg rounded-xl flex flex-col items-center justify-center gap-space-xs text-center transition-colors" id="drop-area" onclick="triggerFileInput()">
+<input accept="image/*" class="hidden" id="news-file-elem" onchange="handleFileSelected(this)" type="file"/>
+<div class="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center text-primary mb-1">
+<span class="material-symbols-outlined text-[26px]">cloud_upload</span>
+</div>
+<div class="font-body-md text-body-md font-semibold text-primary" id="drop-text-primary">클릭하거나 이미지를 여기로 드래그하세요</div>
+<div class="font-label-blueprint text-label-blueprint text-text-muted" id="drop-text-sub">JPG, PNG, WEBP (최대 15MB) - 고해상도 건축 현장 사진 권장</div>
+</div>
+</div>
+<!-- Visual Content Editor Layout -->
+<div class="flex flex-col gap-space-xs">
+<label class="font-body-sm text-body-sm font-medium text-on-surface">본문 상세 내용 작성 (WYSIWYG 서식)</label>
+<!-- Editor Toolbar Mock -->
+<div class="flex items-center gap-1 bg-surface-container p-1 rounded-t-lg">
+<button class="p-1.5 hover:bg-surface-canvas rounded text-on-surface-variant" type="button"><span class="material-symbols-outlined text-[18px]">format_bold</span></button>
+<button class="p-1.5 hover:bg-surface-canvas rounded text-on-surface-variant" type="button"><span class="material-symbols-outlined text-[18px]">format_italic</span></button>
+<button class="p-1.5 hover:bg-surface-canvas rounded text-on-surface-variant" type="button"><span class="material-symbols-outlined text-[18px]">format_list_bulleted</span></button>
+<button class="p-1.5 hover:bg-surface-canvas rounded text-on-surface-variant" type="button"><span class="material-symbols-outlined text-[18px]">link</span></button>
+<button class="p-1.5 hover:bg-surface-canvas rounded text-on-surface-variant" type="button"><span class="material-symbols-outlined text-[18px]">image</span></button>
+<div class="ml-auto font-label-blueprint text-[11px] text-text-muted px-2">STRUCTURAL SPEC VERIFIED</div>
+</div>
+<textarea class="bg-surface-container-low p-space-md rounded-b-lg font-body-md text-body-md text-on-surface outline-none focus:bg-surface-canvas focus:shadow-sm resize-none" id="news-body-input" placeholder="프로젝트 착공, 골조 완료, 단열 시공 특기사항 등 건축 공학적 디테일을 기재하십시오..." required="" rows="5"></textarea>
+</div>
+<div class="flex justify-end gap-space-sm pt-space-xs">
+<button class="px-space-lg py-2.5 bg-surface-container hover:bg-surface-container-high text-on-surface rounded-lg font-body-sm text-body-sm font-medium transition-colors" type="reset">
+                작성 취소
+              </button>
+<button class="px-space-xl py-2.5 bg-primary-container hover:bg-primary text-on-primary rounded-lg font-title-md text-title-md font-semibold shadow-md flex items-center gap-space-xs transition-colors" type="submit">
+<span class="material-symbols-outlined text-[20px]">send</span>
+<span>뉴스 즉시 등록 및 발행</span>
+</button>
+</div>
+</form>
+</div>
+<!-- Registered News Archive List -->
+<div class="bg-surface-canvas rounded-xl shadow-sm p-space-lg flex flex-col gap-space-md">
+<h3 class="font-headline-sm text-headline-sm text-primary">현재 게시된 뉴스 목록</h3>
+<div class="flex flex-col gap-space-sm" id="news-list-container">
+<!-- Item 1 -->
+<div class="p-space-md bg-surface-subtle hover:bg-surface-container-low rounded-lg flex flex-col sm:flex-row sm:items-center justify-between gap-space-md transition-colors">
+<div class="flex items-center gap-space-md">
+<div class="w-16 h-12 bg-surface-container rounded overflow-hidden shrink-0 flex items-center justify-center">
+<span class="material-symbols-outlined text-text-muted text-[24px]">apartment</span>
+</div>
+<div class="flex flex-col">
+<div class="flex items-center gap-space-xs">
+<span class="px-2 py-0.5 bg-primary-container text-on-primary rounded text-[11px] font-semibold">현장소식</span>
+<span class="font-label-blueprint text-label-blueprint text-text-muted">2025.02.14</span>
+</div>
+<h4 class="font-body-md text-body-md font-semibold text-on-surface mt-0.5">양평 옥천면 RC 단독주택 내진 구조 프레임 타설 완료</h4>
+</div>
+</div>
+<div class="flex items-center gap-space-xs self-end sm:self-auto">
+<button class="px-3 py-1.5 bg-surface-container text-on-surface hover:bg-surface-container-high rounded text-[12px] font-medium transition-colors" onclick="triggerToast('뉴스 수정 화면으로 이동합니다.')">수정</button>
+<button class="px-3 py-1.5 bg-accent-safety/10 text-accent-safety hover:bg-accent-safety hover:text-on-primary rounded text-[12px] font-medium transition-colors" onclick="deleteNewsCard(this)">삭제</button>
+</div>
+</div>
+<!-- Item 2 -->
+<div class="p-space-md bg-surface-subtle hover:bg-surface-container-low rounded-lg flex flex-col sm:flex-row sm:items-center justify-between gap-space-md transition-colors">
+<div class="flex items-center gap-space-md">
+<div class="w-16 h-12 bg-surface-container rounded overflow-hidden shrink-0 flex items-center justify-center">
+<span class="material-symbols-outlined text-text-muted text-[24px]">verified</span>
+</div>
+<div class="flex flex-col">
+<div class="flex items-center gap-space-xs">
+<span class="px-2 py-0.5 bg-secondary text-on-secondary rounded text-[11px] font-semibold">신기술인증</span>
+<span class="font-label-blueprint text-label-blueprint text-text-muted">2025.01.28</span>
+</div>
+<h4 class="font-body-md text-body-md font-semibold text-on-surface mt-0.5">상명건설 하이퍼-슬래브 기밀 단열 공법 특허 등록 완료</h4>
+</div>
+</div>
+<div class="flex items-center gap-space-xs self-end sm:self-auto">
+<button class="px-3 py-1.5 bg-surface-container text-on-surface hover:bg-surface-container-high rounded text-[12px] font-medium transition-colors" onclick="triggerToast('뉴스 수정 화면으로 이동합니다.')">수정</button>
+<button class="px-3 py-1.5 bg-accent-safety/10 text-accent-safety hover:bg-accent-safety hover:text-on-primary rounded text-[12px] font-medium transition-colors" onclick="deleteNewsCard(this)">삭제</button>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- MODULE 3: Q&A 고객상담 관리 -->
+<div class="admin-module hidden flex-col gap-space-md" id="module-qa">
+<div class="bg-surface-canvas rounded-xl shadow-sm p-space-lg flex flex-col gap-space-md">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-space-xs">
+<span class="material-symbols-outlined text-primary text-[22px]">forum</span>
+<h3 class="font-headline-sm text-headline-sm text-primary">고객 1:1 질의응답 및 비밀글 처리</h3>
+</div>
+<span class="font-label-blueprint text-label-blueprint text-secondary">ADMIN PRIVILEGED VIEW</span>
+</div>
+<!-- Q&A Question Feed -->
+<div class="flex flex-col gap-space-md">
+<!-- Question 1: 비밀글 처리 건 -->
+<div class="p-space-md bg-surface-subtle rounded-xl flex flex-col gap-space-md">
+<div class="flex flex-col sm:flex-row sm:items-center justify-between gap-space-xs">
+<div class="flex items-center gap-space-xs">
+<span class="px-2 py-0.5 bg-surface-container-high text-on-surface-variant rounded font-mono text-[12px] font-semibold flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px]">lock</span>
+<span>비밀글</span>
+</span>
+<span class="font-title-md text-title-md font-semibold text-primary">도면 검토 및 단열 보강 공사 견적 질문입니다.</span>
+</div>
+<div class="font-label-blueprint text-label-blueprint text-text-muted">
+                  작성자: 성북동 건축주 | 2025.02.15 14:22
+                </div>
+</div>
+<!-- Question Content (Visible to Admin) -->
+<p class="font-body-md text-body-md text-on-surface bg-surface-canvas p-space-md rounded-lg">
+                안녕하세요. 기존 지상 2층 철근콘크리트 주택의 지붕 및 외벽 단열 성능을 상향하려 합니다. 상명건설의 외단열 미장공법(EIFS) 적용 시 평당 시공 견적과 대략적인 공사 일정이 궁금하여 비공개로 문의드립니다.
+              </p>
+<!-- Administrator Reply Input Area -->
+<div class="flex flex-col gap-space-xs bg-surface-canvas p-space-md rounded-lg">
+<div class="flex items-center justify-between">
+<span class="font-label-metric text-label-metric text-primary flex items-center gap-1">
+<span class="material-symbols-outlined text-[18px]">support_agent</span>
+<span>상명건설 공식 회신 작성</span>
+</span>
+<label class="flex items-center gap-1 text-[12px] text-text-muted cursor-pointer">
+<input checked="" class="rounded" type="checkbox"/>
+<span>답변 등록 시 문자(SMS) 알림 자동 발송</span>
+</label>
+</div>
+<textarea class="w-full bg-surface-container-low p-space-sm rounded-lg font-body-sm text-body-sm text-on-surface outline-none focus:bg-surface-canvas focus:shadow-inner" placeholder="고객에게 안내할 전문적인 공학 솔루션 및 견적 방향을 입력하세요..." rows="3"></textarea>
+<div class="flex justify-end gap-space-xs pt-1">
+<button class="px-space-md py-1.5 bg-secondary hover:bg-primary text-on-secondary rounded-lg font-body-sm text-body-sm font-semibold transition-colors flex items-center gap-1" onclick="triggerToast('고객 Q&amp;A 공식 답변이 등록 및 발송되었습니다.')">
+<span class="material-symbols-outlined text-[16px]">reply</span>
+<span>답변 게시하기</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Question 2: 일반 공개글 (답변 완료) -->
+<div class="p-space-md bg-surface-subtle rounded-xl flex flex-col gap-space-sm">
+<div class="flex flex-col sm:flex-row sm:items-center justify-between gap-space-xs">
+<div class="flex items-center gap-space-xs">
+<span class="px-2 py-0.5 bg-secondary text-on-secondary rounded text-[12px] font-medium">답변완료</span>
+<span class="font-title-md text-title-md font-semibold text-primary">토지 매입 전 가설계 및 현장실사 동행 서비스가 가능한가요?</span>
+</div>
+<div class="font-label-blueprint text-label-blueprint text-text-muted">
+                  작성자: 용인 수지 예비건축주 | 2025.02.12
+                </div>
+</div>
+<div class="bg-surface-canvas p-space-md rounded-lg text-text-muted font-body-sm text-body-sm">
+<strong class="text-primary font-semibold">[상명건설 답변]:</strong> 네, 고객님. 유료 정밀 컨설팅 의뢰 시 구조기술사 및 현장 총괄소장이 직접 대동하여 진입도로 너비, 상하수도 인입, 일조 사선제한 등을 사전 검토해 드리고 있습니다.
+              </div>
+</div>
+</div>
+</div>
+</div>
+<!-- MODULE 4: 관리자 정보 수정 -->
+<div class="admin-module hidden flex-col gap-space-md" id="module-account">
+<div class="bg-surface-canvas rounded-xl shadow-sm p-space-lg max-w-2xl mx-auto w-full flex flex-col gap-space-lg">
+<div class="flex items-center gap-space-xs">
+<div class="p-2 bg-primary/10 rounded-lg text-primary">
+<span class="material-symbols-outlined text-[24px]">badge</span>
+</div>
+<div>
+<h3 class="font-headline-sm text-headline-sm text-primary">관리자 보안 계정 설정</h3>
+<p class="font-body-sm text-body-sm text-text-muted">시스템 관리자 인증 정보 및 비밀번호를 안전하게 갱신하십시오.</p>
+</div>
+</div>
+<form class="flex flex-col gap-space-md" onsubmit="handleAccountUpdate(event)">
+<div class="flex flex-col gap-space-xs">
+<label class="font-body-sm text-body-sm font-medium text-on-surface">현재 관리자 아이디</label>
+<div class="bg-surface-subtle px-space-md py-2.5 rounded-lg font-label-blueprint text-label-blueprint text-primary font-semibold flex items-center justify-between">
+<span>admin (최고관리자 - SUPER_ROOT)</span>
+<span class="material-symbols-outlined text-[18px] text-secondary">verified_user</span>
+</div>
+</div>
+<div class="flex flex-col gap-space-xs">
+<label class="font-body-sm text-body-sm font-medium text-on-surface" for="new-pw-input">새 비밀번호 입력</label>
+<input class="bg-surface-container-low px-space-md py-2.5 rounded-lg font-body-md text-body-md text-on-surface outline-none focus:bg-surface-canvas focus:shadow-sm" id="new-pw-input" placeholder="영문, 숫자 포함 8자리 이상" required="" type="password"/>
+</div>
+<div class="flex flex-col gap-space-xs">
+<label class="font-body-sm text-body-sm font-medium text-on-surface" for="confirm-pw-input">새 비밀번호 재확인</label>
+<input class="bg-surface-container-low px-space-md py-2.5 rounded-lg font-body-md text-body-md text-on-surface outline-none focus:bg-surface-canvas focus:shadow-sm" id="confirm-pw-input" placeholder="동일한 비밀번호 재입력" required="" type="password"/>
+</div>
+<div class="flex flex-col gap-space-xs">
+<label class="font-body-sm text-body-sm font-medium text-on-surface">관리자 대표 비상 연락망 (SMS 수신용)</label>
+<input class="bg-surface-container-low px-space-md py-2.5 rounded-lg font-body-md text-body-md text-on-surface outline-none focus:bg-surface-canvas focus:shadow-sm" type="text" value="010-9081-3001"/>
+</div>
+<div class="pt-space-sm">
+<button class="w-full py-3 bg-primary-container hover:bg-primary text-on-primary rounded-lg font-title-md text-title-md font-semibold shadow-md flex items-center justify-center gap-space-xs transition-colors" type="submit">
+<span class="material-symbols-outlined text-[20px]">save</span>
+<span>보안 계정 정보 저장 및 적용</span>
+</button>
+</div>
+</form>
+</div>
+</div>
+</div>
+</section>
+<!-- FLYOUT / MODAL FOR INQUIRY REPLY -->
+<div class="fixed inset-0 z-50 bg-on-surface/40 backdrop-blur-sm hidden items-center justify-center p-gutter-mobile" id="reply-modal">
+<div class="bg-surface-canvas rounded-xl shadow-xl max-w-lg w-full p-space-lg flex flex-col gap-space-md transform transition-transform">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-space-xs">
+<span class="material-symbols-outlined text-secondary text-[24px]">rate_review</span>
+<h3 class="font-title-md text-title-md font-bold text-primary">공식 견적 답변 및 안내 발송</h3>
+</div>
+<button class="w-8 h-8 flex items-center justify-center text-text-muted hover:text-on-surface rounded-full" onclick="closeReplyModal()">
+<span class="material-symbols-outlined text-[20px]">close</span>
+</button>
+</div>
+<div class="bg-surface-subtle p-space-sm rounded-lg flex flex-col gap-1">
+<div class="font-body-sm text-body-sm font-semibold text-primary" id="modal-client-name">고객명</div>
+<div class="font-label-blueprint text-[12px] text-text-muted" id="modal-inquiry-num">SM-2025-000</div>
+<div class="font-body-sm text-[13px] text-on-surface-variant mt-1" id="modal-inquiry-summary">의뢰 요약</div>
+</div>
+<div class="flex flex-col gap-space-xs">
+<label class="font-body-sm text-body-sm font-medium text-on-surface">관리자 답변 본문</label>
+<textarea class="bg-surface-container-low p-space-md rounded-lg font-body-sm text-body-sm text-on-surface outline-none focus:bg-surface-canvas focus:shadow-sm resize-none" id="modal-reply-content" placeholder="견적 산출 완료 안내 또는 3D 도면 검토 일정을 작성하십시오..." rows="4"></textarea>
+</div>
+<div class="flex flex-col gap-space-xs">
+<label class="flex items-center gap-space-xs cursor-pointer">
+<input checked="" class="rounded" type="checkbox"/>
+<span class="font-body-sm text-body-sm text-on-surface">고객 연락처로 알림톡/SMS 동시 전송</span>
+</label>
+<label class="flex items-center gap-space-xs cursor-pointer">
+<input checked="" class="rounded" type="checkbox"/>
+<span class="font-body-sm text-body-sm text-on-surface">견적 세부 산출서 PDF 자동 이메일 첨부</span>
+</label>
+</div>
+<div class="flex justify-end gap-space-sm pt-space-xs">
+<button class="px-space-md py-2 bg-surface-container hover:bg-surface-container-high text-on-surface rounded-lg font-body-sm text-body-sm font-medium transition-colors" onclick="closeReplyModal()">
+          닫기
+        </button>
+<button class="px-space-lg py-2 bg-primary-container hover:bg-primary text-on-primary rounded-lg font-body-sm text-body-sm font-semibold shadow-md flex items-center gap-1 transition-colors" onclick="sendReplySubmit()">
+<span class="material-symbols-outlined text-[18px]">send</span>
+<span>답변 발송 완료</span>
+</button>
+</div>
+</div>
+</div>
+<!-- SCRIPT ENGINE -->
+<script>
+    // State management
+    let isAuthenticated = false;
+
+    // Toast feedback utility
+    function triggerToast(message) {
+      const toast = document.getElementById('admin-toast');
+      const text = document.getElementById('admin-toast-text');
+      if (!toast || !text) return;
+      text.textContent = message;
+      toast.classList.remove('opacity-0', 'pointer-events-none', 'translate-y-[-20px]');
+      toast.classList.add('opacity-100', 'translate-y-0');
+      setTimeout(() => {
+        toast.classList.remove('opacity-100', 'translate-y-0');
+        toast.classList.add('opacity-0', 'pointer-events-none', 'translate-y-[-20px]');
+      }, 2800);
+    }
+
+    // Login validation
+    function handleLogin(event) {
+      event.preventDefault();
+      const idInput = document.getElementById('login-id');
+      const pwInput = document.getElementById('login-pw');
+      const errBox = document.getElementById('login-error-msg');
+
+      if (idInput.value.trim() === 'admin' && pwInput.value.trim() === '1234') {
+        errBox.classList.add('hidden');
+        isAuthenticated = true;
+        document.getElementById('auth-screen').classList.add('hidden');
+        document.getElementById('dashboard-screen').classList.remove('hidden');
+        triggerToast('상명건설 관리자 콘솔 v2.4에 접속하였습니다.');
+      } else {
+        errBox.classList.remove('hidden');
+      }
+    }
+
+    // Clear login input fields
+    function clearLoginForm() {
+      document.getElementById('login-id').value = '';
+      document.getElementById('login-pw').value = '';
+      document.getElementById('login-error-msg').classList.add('hidden');
+    }
+
+    // Logout with confirmed prompt
+    function handleLogout() {
+      const confirmLogout = window.confirm("로그아웃 하시겠습니까? 확인 시 메인 홈 화면으로 이동합니다.");
+      if (confirmLogout) {
+        isAuthenticated = false;
+        document.getElementById('dashboard-screen').classList.add('hidden');
+        document.getElementById('auth-screen').classList.remove('hidden');
+        clearLoginForm();
+        triggerToast('안전하게 로그아웃되었습니다.');
+      }
+    }
+
+    // Admin Tabs switcher
+    function switchAdminTab(targetTabId) {
+      // Toggle button styles
+      const buttons = document.querySelectorAll('.admin-nav-tab');
+      buttons.forEach(btn => {
+        btn.classList.remove('bg-primary', 'text-on-primary', 'shadow-sm');
+        btn.classList.add('bg-transparent', 'text-text-muted');
+      });
+      const activeBtn = document.getElementById('btn-' + targetTabId);
+      if (activeBtn) {
+        activeBtn.classList.add('bg-primary', 'text-on-primary', 'shadow-sm');
+        activeBtn.classList.remove('bg-transparent', 'text-text-muted');
+      }
+
+      // Hide all modules
+      const modules = document.querySelectorAll('.admin-module');
+      modules.forEach(m => {
+        m.classList.add('hidden');
+        m.classList.remove('flex');
+      });
+
+      // Show selected module
+      const targetModule = document.getElementById('module-' + targetTabId.replace('tab-', ''));
+      if (targetModule) {
+        targetModule.classList.remove('hidden');
+        targetModule.classList.add('flex');
+      }
+    }
+
+    // Subfilter inquiries
+    function filterInquiries(type, btn) {
+      const subtabs = document.querySelectorAll('.inquiry-subtab');
+      subtabs.forEach(t => {
+        t.classList.remove('bg-primary-container', 'text-on-primary');
+        t.classList.add('bg-surface-container', 'text-on-surface');
+      });
+      btn.classList.add('bg-primary-container', 'text-on-primary');
+      btn.classList.remove('bg-surface-container', 'text-on-surface');
+
+      const rows = document.querySelectorAll('.inquiry-row');
+      rows.forEach(row => {
+        if (type === 'all') {
+          row.style.display = '';
+        } else if (type === 'paid') {
+          row.style.display = row.classList.contains('row-paid') ? '' : 'none';
+        } else if (type === 'standard') {
+          row.style.display = row.classList.contains('row-standard') ? '' : 'none';
+        } else if (type === 'direct') {
+          row.style.display = row.classList.contains('row-direct') ? '' : 'none';
+        }
+      });
+    }
+
+    // Modal management
+    function openReplyModal(name, id, summary) {
+      document.getElementById('modal-client-name').textContent = name;
+      document.getElementById('modal-inquiry-num').textContent = id;
+      document.getElementById('modal-inquiry-summary').textContent = summary;
+      document.getElementById('modal-reply-content').value = '';
+      const modal = document.getElementById('reply-modal');
+      modal.classList.remove('hidden');
+      modal.classList.add('flex');
+    }
+
+    function closeReplyModal() {
+      const modal = document.getElementById('reply-modal');
+      modal.classList.remove('flex');
+      modal.classList.add('hidden');
+    }
+
+    function sendReplySubmit() {
+      const content = document.getElementById('modal-reply-content').value.trim();
+      if (!content) {
+        alert('답변 본문을 입력해 주십시오.');
+        return;
+      }
+      closeReplyModal();
+      triggerToast('고객에게 공식 답변 및 SMS가 발송되었습니다.');
+    }
+
+    function deleteInquiryRow(btn) {
+      if (confirm('해당 견적 문의 데이터를 영구 삭제하시겠습니까?')) {
+        const tr = btn.closest('tr');
+        if (tr) tr.remove();
+        triggerToast('접수 항목이 삭제되었습니다.');
+      }
+    }
+
+    // File upload mock interactions
+    function triggerFileInput() {
+      document.getElementById('news-file-elem').click();
+    }
+
+    function handleFileSelected(input) {
+      if (input.files && input.files[0]) {
+        document.getElementById('drop-text-primary').textContent = "첨부됨: " + input.files[0].name;
+        document.getElementById('drop-text-sub').textContent = "파일 용량: " + (input.files[0].size / 1024 / 1024).toFixed(2) + " MB (정상 첨부)";
+      }
+    }
+
+    // News registration handler
+    function handleNewsSubmit(event) {
+      event.preventDefault();
+      const title = document.getElementById('news-title-input').value;
+      const cat = document.getElementById('news-cat-input').value;
+
+      const container = document.getElementById('news-list-container');
+      const newItem = document.createElement('div');
+      newItem.className = "p-space-md bg-surface-subtle hover:bg-surface-container-low rounded-lg flex flex-col sm:flex-row sm:items-center justify-between gap-space-md transition-colors";
+      newItem.innerHTML = `
+        <div class="flex items-center gap-space-md">
+          <div class="w-16 h-12 bg-surface-container rounded overflow-hidden shrink-0 flex items-center justify-center">
+            <span class="material-symbols-outlined text-secondary text-[24px]">feed</span>
+          </div>
+          <div class="flex flex-col">
+            <div class="flex items-center gap-space-xs">
+              <span class="px-2 py-0.5 bg-primary-container text-on-primary rounded text-[11px] font-semibold">${cat}</span>
+              <span class="font-label-blueprint text-label-blueprint text-text-muted">방금 전</span>
+            </div>
+            <h4 class="font-body-md text-body-md font-semibold text-on-surface mt-0.5">${title}</h4>
+          </div>
+        </div>
+        <div class="flex items-center gap-space-xs self-end sm:self-auto">
+          <button onclick="triggerToast('뉴스 수정 화면으로 이동합니다.')" class="px-3 py-1.5 bg-surface-container text-on-surface hover:bg-surface-container-high rounded text-[12px] font-medium transition-colors">수정</button>
+          <button onclick="deleteNewsCard(this)" class="px-3 py-1.5 bg-accent-safety/10 text-accent-safety hover:bg-accent-safety hover:text-on-primary rounded text-[12px] font-medium transition-colors">삭제</button>
+        </div>
+      `;
+      container.prepend(newItem);
+      event.target.reset();
+      document.getElementById('drop-text-primary').textContent = "클릭하거나 이미지를 여기로 드래그하세요";
+      document.getElementById('drop-text-sub').textContent = "JPG, PNG, WEBP (최대 15MB) - 고해상도 건축 현장 사진 권장";
+      triggerToast('새 뉴스가 즉시 등록 및 반영되었습니다.');
+    }
+
+    function deleteNewsCard(btn) {
+      if (confirm('해당 뉴스를 목록에서 삭제하시겠습니까?')) {
+        const item = btn.closest('.p-space-md');
+        if (item) item.remove();
+        triggerToast('뉴스가 삭제되었습니다.');
+      }
+    }
+
+    // Account update handler
+    function handleAccountUpdate(event) {
+      event.preventDefault();
+      const pw1 = document.getElementById('new-pw-input').value;
+      const pw2 = document.getElementById('confirm-pw-input').value;
+
+      if (pw1 !== pw2) {
+        alert('비밀번호와 재입력 확인 값이 일치하지 않습니다.');
+        return;
+      }
+      triggerToast('관리자 계정 정보가 성공적으로 갱신되었습니다.');
+      document.getElementById('new-pw-input').value = '';
+      document.getElementById('confirm-pw-input').value = '';
+    }
+  </script>
+</div></main></body></html>
