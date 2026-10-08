@@ -976,42 +976,6 @@ style="background-image: url('https://www.rsupport.com/wp-content/uploads/2026/0
   </div>
 </div>
 
-<!-- 4-1. 서비스 상세 모달 (상단 우측에 닫기 버튼만 배치, 클릭 시 창 닫기) -->
-<div class="fixed inset-0 z-50 hidden bg-slate-900/70 backdrop-blur-sm flex items-center justify-center p-4" id="frontServiceModal">
-  <div class="bg-white rounded-2xl max-w-3xl w-full p-6 sm:p-8 shadow-2xl relative border border-slate-200 max-h-[90vh] overflow-y-auto">
-    <!-- 상단 우측 닫기 버튼 (닫기 버튼만 단독 배치) -->
-    <button class="absolute top-5 right-5 text-slate-400 hover:text-slate-700 bg-slate-100 hover:bg-slate-200 p-2 rounded-full transition" onclick="closeFrontServiceModal()" aria-label="닫기">
-      <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path d="M6 18L18 6M6 6l12 12" stroke-linecap="round" stroke-linejoin="round"></path></svg>
-    </button>
-    
-    <div class="flex flex-wrap items-center gap-2 mb-2 pr-10">
-      <span id="fsvc-modal-cat" class="px-2.5 py-1 rounded bg-sky-50 text-[#0175b1] text-xs font-bold">주택건설</span>
-      <span id="fsvc-modal-date" class="text-xs font-mono text-slate-400"></span>
-      <span class="text-slate-300">·</span>
-      <span id="fsvc-modal-id" class="text-xs font-mono text-slate-400">SVC-001</span>
-    </div>
-    
-    <!-- 소제목 (프론트에 작게 출력) -->
-    <div id="fsvc-modal-subtitle" class="text-xs font-bold text-[#0175b1] mt-1 mb-1">소제목</div>
-    <!-- 제목 (프론트에 볼드체로 출력되는 부분) -->
-    <h2 id="fsvc-modal-title" class="text-lg sm:text-2xl font-bold text-slate-900 mb-5 leading-snug">서비스 제목</h2>
-
-    <!-- 사진 출력 (업로드한 대표 사진) -->
-    <div id="fsvc-modal-img-box" class="w-full rounded-xl overflow-hidden mb-6 border border-slate-200 bg-slate-100 max-h-[440px] flex items-center justify-center">
-      <img id="fsvc-modal-img" src="" alt="서비스 대표 이미지" class="w-full h-auto max-h-[440px] object-cover"/>
-    </div>
-
-    <!-- 상단 소개 (HTML 코드로 작성된 소개 영역) -->
-    <div id="fsvc-modal-intro" class="bg-slate-50 p-4 sm:p-5 rounded-xl border border-slate-200 mb-5 text-xs sm:text-sm text-slate-700 leading-relaxed font-content"></div>
-
-    <!-- 내용 (상세 내용 본문) -->
-    <div>
-      <label class="block text-xs font-bold text-slate-500 mb-1">상세 안내</label>
-      <div id="fsvc-modal-content" class="text-xs sm:text-sm text-slate-800 leading-relaxed whitespace-pre-wrap font-content"></div>
-    </div>
-  </div>
-</div>
-
 <!-- 5. Q&A 비밀글 비밀번호 검증 모달 (새창/모달로 비번 입력) -->
 <div class="fixed inset-0 z-50 hidden bg-slate-900/60 backdrop-blur-sm flex items-center justify-center p-4" id="qnaSecretVerifyModal">
   <div class="bg-white rounded-2xl max-w-sm w-full p-6 shadow-2xl relative border border-slate-100 text-center">
@@ -2338,19 +2302,33 @@ function formatImgUrl(url, fallback = '/upimage/default_service.svg') {
 }
 
 function getSortedFrontCategories() {
-  // 최근입력된 구분값이 제일 나중에 추가되게 정렬 (오래된 구분이 앞, 최근 등록된 신규 구분이 맨 뒤에 순차 추가)
-  const categoryFirstTime = {};
+  // 기본 우선 순위 3대 구분 (먼저 입력된 기본 라인업 순서 정확히 유지)
+  const DEFAULT_ORDER = ['주택건설', '상업건설', '직영건축'];
+
+  // 각 카테고리가 최초로 등장한 서비스 번호(SVC-001 -> 1, SVC-015 -> 15 등) 또는 등록 순서 파악
+  const categoryMinIdNum = {};
   frontServicesList.forEach(s => {
     const cat = (s.category || '').trim();
     if (!cat) return;
-    const time = s.createdAt || s.id || '';
-    if (!categoryFirstTime[cat] || time < categoryFirstTime[cat]) {
-      categoryFirstTime[cat] = time;
+    const match = (s.id || '').match(/SVC-(\d+)/);
+    const num = match ? parseInt(match[1], 10) : 999999;
+    if (categoryMinIdNum[cat] === undefined || num < categoryMinIdNum[cat]) {
+      categoryMinIdNum[cat] = num;
     }
   });
 
-  return Object.keys(categoryFirstTime).sort((a, b) => {
-    return categoryFirstTime[a].localeCompare(categoryFirstTime[b]);
+  const allCats = Object.keys(categoryMinIdNum);
+
+  // 정렬 규칙:
+  // 1) 기본 3대 구분 ['주택건설', '상업건설', '직영건축']은 무조건 이 순서대로 앞에 배치
+  // 2) 새로 추가된 구분(예: '경량철골' 등)은 먼저 등록된 서비스 번호(최초 등록 순서) 오름차순으로 순차 뒤에 배치
+  return allCats.sort((a, b) => {
+    const idxA = DEFAULT_ORDER.indexOf(a);
+    const idxB = DEFAULT_ORDER.indexOf(b);
+    if (idxA !== -1 && idxB !== -1) return idxA - idxB;
+    if (idxA !== -1) return -1;
+    if (idxB !== -1) return 1;
+    return (categoryMinIdNum[a] || 999999) - (categoryMinIdNum[b] || 999999);
   });
 }
 
