@@ -1077,25 +1077,25 @@ style="background-image: url('https://www.rsupport.com/wp-content/uploads/2026/0
   </div>
 </div>
 
-<!-- Front Service Detail Modal (각 게시물 클릭 시 modal 새창 띄움, 닫기 버튼만 배치) -->
-<div class="fixed inset-0 z-50 hidden bg-slate-900/70 backdrop-blur-sm flex items-center justify-center p-3 sm:p-6" id="frontServiceModal" onclick="if(event.target === this) closeFrontServiceModal()">
-  <div class="bg-white rounded-2xl max-w-3xl w-full shadow-2xl border border-slate-200 max-h-[92vh] overflow-y-auto flex flex-col">
-    <!-- Top Bar: 닫기 버튼만 배치 -->
-    <div class="sticky top-0 z-20 bg-white/95 backdrop-blur-sm border-b border-slate-100 px-6 py-4 flex items-center justify-between">
+<!-- Front Service Detail Modal (각 게시물 클릭 시 modal 창 띄움, 창 안에 닫기 버튼으로 닫힘) -->
+<div class="fixed inset-0 z-50 hidden bg-slate-900/75 backdrop-blur-sm flex items-center justify-center p-3 sm:p-6" id="frontServiceModal" onclick="if(event.target === this) closeFrontServiceModal()">
+  <div class="bg-white rounded-2xl max-w-3xl w-full shadow-2xl border border-slate-200 max-h-[92vh] overflow-hidden flex flex-col transform transition-all">
+    <!-- Top Bar: 닫기 버튼 배치 (클릭 시 창을 닫는다) -->
+    <div class="sticky top-0 z-20 bg-white/95 backdrop-blur-sm border-b border-slate-200 px-5 sm:px-6 py-4 flex items-center justify-between">
       <div class="flex items-center gap-2">
         <span class="text-[#0175b1] font-black text-base">SM</span>
-        <span class="text-xs font-bold text-slate-800">서비스 상세정보</span>
+        <span class="text-xs sm:text-sm font-bold text-slate-800">서비스 상세정보</span>
         <span id="front-modal-svc-id" class="px-2 py-0.5 bg-slate-100 text-slate-600 font-mono text-[11px] rounded font-bold"></span>
       </div>
-      <!-- 상단 우측: 닫기 버튼만 달아 놓을것 -->
-      <button type="button" onclick="closeFrontServiceModal()" class="px-4 py-2 bg-slate-900 hover:bg-slate-800 text-white rounded-lg text-xs font-bold transition flex items-center gap-1.5 shadow-sm">
-        <span class="material-symbols-outlined text-[16px]">close</span>
+      <!-- 상단 닫기 버튼 (클릭 시 창 닫기) -->
+      <button type="button" onclick="closeFrontServiceModal()" class="px-3.5 py-1.5 bg-slate-100 hover:bg-slate-200 text-slate-700 hover:text-slate-900 rounded-lg text-xs font-bold transition flex items-center gap-1.5 shadow-xs border border-slate-200 cursor-pointer" title="창 닫기">
+        <svg class="w-4 h-4 text-slate-600" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path d="M6 18L18 6M6 6l12 12" stroke-linecap="round" stroke-linejoin="round"/></svg>
         <span>닫기</span>
       </button>
     </div>
 
-    <!-- Modal Body: 입력된 내용 전체 출력 -->
-    <div class="p-6 sm:p-8 space-y-6">
+    <!-- Modal Body: 입력된 내용 전체 출력 (스크롤 가능) -->
+    <div class="p-6 sm:p-8 space-y-6 overflow-y-auto custom-scroll flex-grow">
       <!-- 1. 구분 & 입력시간 -->
       <div class="flex flex-wrap items-center justify-between gap-3 pb-3 border-b border-slate-100 text-xs">
         <div class="flex items-center gap-2">
@@ -1134,13 +1134,13 @@ style="background-image: url('https://www.rsupport.com/wp-content/uploads/2026/0
           <span class="w-2 h-2 rounded-full bg-[#0175b1]"></span>
           <span>상세 시공 및 서비스 내용</span>
         </div>
-        <div id="front-modal-svc-content" class="text-sm sm:text-base text-slate-700 leading-relaxed whitespace-pre-wrap font-content p-5 sm:p-6 bg-slate-50/50 border border-slate-100 rounded-2xl"></div>
+        <div id="front-modal-svc-content" class="text-sm sm:text-base text-slate-700 leading-relaxed whitespace-pre-wrap font-content p-5 sm:p-6 bg-slate-50/50 border border-slate-200 rounded-2xl"></div>
       </div>
 
-      <!-- Footer: 닫기 버튼만 달아 놓을것 -->
+      <!-- Footer: 하단 닫기 버튼 삽입 (클릭 시 창을 닫는다) -->
       <div class="pt-6 border-t border-slate-100 flex justify-end">
-        <button type="button" onclick="closeFrontServiceModal()" class="px-6 py-2.5 bg-slate-900 hover:bg-slate-800 text-white rounded-lg text-xs font-bold transition flex items-center gap-1.5 shadow-sm">
-          <span class="material-symbols-outlined text-[16px]">close</span>
+        <button type="button" onclick="closeFrontServiceModal()" class="px-7 py-2.5 bg-slate-900 hover:bg-slate-800 text-white rounded-xl text-xs sm:text-sm font-bold transition flex items-center gap-2 shadow-md cursor-pointer">
+          <svg class="w-4 h-4 text-white" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path d="M6 18L18 6M6 6l12 12" stroke-linecap="round" stroke-linejoin="round"/></svg>
           <span>닫기</span>
         </button>
       </div>
@@ -2465,8 +2465,9 @@ function renderFrontSvcContent() {
           <p class="text-xs text-slate-500 truncate leading-relaxed flex-grow">${item.content || ''}</p>
           <div class="mt-4 pt-3 border-t border-slate-100 flex items-center justify-between text-[11px] text-slate-400">
             <span class="font-mono">${item.createdAt ? item.createdAt.slice(0, 10) : ''}</span>
-            <span class="text-[#0175b1] font-bold flex items-center gap-0.5 group-hover:translate-x-0.5 transition-transform">
-              상세보기 <span class="material-symbols-outlined text-[13px]">arrow_forward</span>
+            <span class="text-[#0175b1] font-bold flex items-center gap-1 group-hover:translate-x-0.5 transition-transform">
+              <span>상세보기</span>
+              <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path d="M9 5l7 7-7 7" stroke-linecap="round" stroke-linejoin="round"/></svg>
             </span>
           </div>
         </div>
@@ -2510,51 +2511,63 @@ function changeFrontSvcPage(page) {
   if (sec) sec.scrollIntoView({ behavior: 'smooth' });
 }
 
-// Front Service Detail Modal Window Controllers (각 게시물 클릭 시 modal 새창 띄움, 닫기 버튼만)
+// Front Service Detail Modal Window Controllers (각 게시물 클릭 시 modal 창 띄움, 닫기 버튼으로 닫힘)
 function handleServiceCardClick(id) {
-  // 모달 새창 띄우기 (팝업 새창 실행 및 차단 시 인페이지 모달 레이어로 매끄럽게 폴백)
-  const w = 840;
-  const h = 920;
-  const left = Math.max(0, Math.floor((window.screen.width - w) / 2));
-  const top = Math.max(0, Math.floor((window.screen.height - h) / 2));
-
-  let popup = null;
-  try {
-    popup = window.open(
-      `/service-detail.html?id=${encodeURIComponent(id)}`,
-      `service_modal_${id.replace(/[^a-zA-Z0-9]/g, '_')}`,
-      `width=${w},height=${h},top=${top},left=${left},scrollbars=yes,resizable=yes`
-    );
-  } catch (err) {
-    popup = null;
-  }
-
-  if (popup && !popup.closed && typeof popup.closed !== 'undefined') {
-    try { popup.focus(); } catch (e) {}
-  } else {
-    // 브라우저 팝업 차단 환경 또는 iframe 내에서는 인페이지 모달 새창 레이어로 즉시 오픈
-    openFrontServiceModal(id);
-  }
+  // 사용자의 요청대로 프론트 > 서비스 > 각 게시물 클릭 시 modal 창으로 입력한 데이터가 즉시 보여지고 닫기 버튼으로 닫힘
+  openFrontServiceModal(id);
 }
 
-function openFrontServiceModal(id) {
-  const item = frontServicesList.find(s => s.id === id);
-  if (!item) return;
+async function openFrontServiceModal(id) {
+  let item = frontServicesList.find(s => s.id === id);
+  if (!item) {
+    try {
+      const res = await fetch(`/api/services/${encodeURIComponent(id)}`);
+      if (res.ok) {
+        item = await res.json();
+      }
+    } catch (e) {
+      console.error(e);
+    }
+  }
 
-  document.getElementById('front-modal-svc-id').textContent = item.id;
+  if (!item) {
+    showToast('해당 서비스 게시물 정보를 불러올 수 없습니다.');
+    return;
+  }
+
+  // 1. 기본 식별 및 분류 정보
+  document.getElementById('front-modal-svc-id').textContent = item.id || '';
   document.getElementById('front-modal-svc-cat').textContent = item.category || '주택건설';
-  document.getElementById('front-modal-svc-date').textContent = item.createdAt || '-';
-  document.getElementById('front-modal-svc-subtitle').textContent = item.subTitle || item.subtitle || '';
-  document.getElementById('front-modal-svc-title').textContent = item.title || '';
-  document.getElementById('front-modal-svc-content').textContent = item.content || '';
+  document.getElementById('front-modal-svc-date').textContent = item.createdAt || item.date || '-';
 
+  // 2. 소제목 & 볼드체 제목
+  const subEl = document.getElementById('front-modal-svc-subtitle');
+  const subText = item.subTitle || item.subtitle || '';
+  if (subText) {
+    subEl.textContent = subText;
+    subEl.classList.remove('hidden');
+  } else {
+    subEl.textContent = '';
+    subEl.classList.add('hidden');
+  }
+  document.getElementById('front-modal-svc-title').textContent = item.title || '';
+
+  // 3. 내용
+  document.getElementById('front-modal-svc-content').textContent = item.content || '(등록된 상세 내용이 없습니다.)';
+
+  // 4. 대표 이미지
   const imgEl = document.getElementById('front-modal-svc-img');
   const imgBox = document.getElementById('front-modal-svc-img-box');
   const photoUrl = formatImgUrl(item.image, '/upimage/default_service.svg');
-  imgEl.src = photoUrl;
-  imgEl.onerror = () => { imgEl.src = '/upimage/default_service.svg'; };
-  imgBox.classList.remove('hidden');
+  if (photoUrl) {
+    imgEl.src = photoUrl;
+    imgEl.onerror = () => { imgEl.src = '/upimage/default_service.svg'; };
+    imgBox.classList.remove('hidden');
+  } else {
+    imgBox.classList.add('hidden');
+  }
 
+  // 5. 상단 소개 (HTML 코드로 등록된 내용)
   const introWrap = document.getElementById('front-modal-svc-intro-wrap');
   const introBox = document.getElementById('front-modal-svc-intro');
   if (item.introHtml && item.introHtml.trim()) {
@@ -2564,6 +2577,7 @@ function openFrontServiceModal(id) {
     if (introWrap) introWrap.classList.add('hidden');
   }
 
+  // 모달 창 표시 및 배경 스크롤 방지
   const modal = document.getElementById('frontServiceModal');
   modal.classList.remove('hidden');
   modal.classList.add('flex');

@@ -37,6 +37,15 @@ async function migrate() {
   try {
     const schemaSql = await fs.promises.readFile(SCHEMA_PATH, 'utf-8');
     await pool.query(schemaSql);
+    // 컬럼 제약조건 완화 (기존 생성된 테이블 호환)
+    await pool.query(`
+      ALTER TABLE IF EXISTS project_orders ALTER COLUMN date DROP NOT NULL;
+      ALTER TABLE IF EXISTS project_orders ALTER COLUMN structure DROP NOT NULL;
+      ALTER TABLE IF EXISTS project_orders ALTER COLUMN stage DROP NOT NULL;
+      ALTER TABLE IF EXISTS news_articles ALTER COLUMN date DROP NOT NULL;
+      ALTER TABLE IF EXISTS company_services ALTER COLUMN date DROP NOT NULL;
+      ALTER TABLE IF EXISTS qna_posts ALTER COLUMN date DROP NOT NULL;
+    `);
     console.log('✅ 1/4 테이블 스키마 검증 및 생성 완료');
   } catch (err) {
     console.error('❌ 스키마 생성 중 에러:', err.message);
@@ -52,6 +61,8 @@ async function migrate() {
     console.error('❌ db.json 읽기 실패:', err.message);
     process.exit(1);
   }
+
+  const todayStr = new Date().toISOString().slice(0, 10);
 
   // 3. Admin 계정 이전
   if (data.admin) {
@@ -74,7 +85,7 @@ async function migrate() {
       VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14)
       ON CONFLICT (id) DO NOTHING
     `, [
-      o.id, o.date, o.type, o.structure, o.stage,
+      o.id, o.date || todayStr, o.type, o.structure || '', o.stage || '',
       o.name, o.phone, o.email || '', o.content || '',
       o.reply || '', o.attachment || '', o.password || '',
       o.paymentStatus || 'NONE', o.status || '미답변'
@@ -90,7 +101,7 @@ async function migrate() {
       INSERT INTO news_articles (id, title, category, image, content, date)
       VALUES ($1, $2, $3, $4, $5, $6)
       ON CONFLICT (id) DO NOTHING
-    `, [n.id, n.title, n.category, n.image || '', n.content || '', n.date]);
+    `, [n.id, n.title, n.category, n.image || '', n.content || '', n.date || todayStr]);
     newsCount++;
   }
 
@@ -101,7 +112,7 @@ async function migrate() {
       INSERT INTO company_services (id, title, category, image, content, date)
       VALUES ($1, $2, $3, $4, $5, $6)
       ON CONFLICT (id) DO NOTHING
-    `, [s.id, s.title, s.category, s.image || '', s.content || '', s.date]);
+    `, [s.id, s.title, s.category, s.image || '', s.content || '', s.date || todayStr]);
     serviceCount++;
   }
 
@@ -115,7 +126,7 @@ async function migrate() {
     `, [
       q.id, q.title, q.author, q.phone || '',
       q.question, q.answer || '', q.password || '',
-      Boolean(q.isSecret), q.status || '미답변', q.date
+      Boolean(q.isSecret), q.status || '미답변', q.date || todayStr
     ]);
     qnaCount++;
   }

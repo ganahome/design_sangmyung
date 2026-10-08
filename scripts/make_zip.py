@@ -6,7 +6,7 @@ def create_backup():
     zip_path = os.path.join(base_dir, 'sang_myung_backup.zip')
     
     exclude_dirs = {'node_modules', '.git', '__pycache__', '.cache'}
-    exclude_files = {'sang_myung_backup.zip', '.DS_Store', 'bun.lock'}
+    exclude_files = {'sang_myung_backup.zip', '.DS_Store', 'bun.lock', '.env', '.env.local', '.env.production'}
     
     with zipfile.ZipFile(zip_path, 'w', zipfile.ZIP_DEFLATED) as zipf:
         for root, dirs, files in os.walk(base_dir):

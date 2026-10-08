@@ -69,11 +69,13 @@ export async function getDbData() {
 // Execute an upsert or write to PostgreSQL
 export async function syncPostgresOrder(order) {
   if (!isPostgresEnabled || !pool) return;
+  const todayStr = new Date().toISOString().slice(0, 10);
   try {
     await pool.query(`
       INSERT INTO project_orders (id, date, type, structure, stage, name, phone, email, content, reply, attachment, password, payment_status, status)
       VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14)
       ON CONFLICT (id) DO UPDATE SET
+        date = EXCLUDED.date,
         type = EXCLUDED.type,
         structure = EXCLUDED.structure,
         stage = EXCLUDED.stage,
@@ -87,7 +89,7 @@ export async function syncPostgresOrder(order) {
         payment_status = EXCLUDED.payment_status,
         status = EXCLUDED.status
     `, [
-      order.id, order.date, order.type, order.structure, order.stage,
+      order.id, order.date || todayStr, order.type, order.structure || '', order.stage || '',
       order.name, order.phone, order.email || '', order.content || '',
       order.reply || '', order.attachment || '', order.password || '',
       order.paymentStatus || 'NONE', order.status || '미답변'
@@ -108,6 +110,7 @@ export async function deletePostgresOrder(id) {
 
 export async function syncPostgresNews(news) {
   if (!isPostgresEnabled || !pool) return;
+  const todayStr = new Date().toISOString().slice(0, 10);
   try {
     await pool.query(`
       INSERT INTO news_articles (id, title, category, image, content, date)
@@ -118,7 +121,7 @@ export async function syncPostgresNews(news) {
         image = EXCLUDED.image,
         content = EXCLUDED.content,
         date = EXCLUDED.date
-    `, [news.id, news.title, news.category, news.image || '', news.content || '', news.date]);
+    `, [news.id, news.title, news.category, news.image || '', news.content || '', news.date || todayStr]);
   } catch (e) {
     console.error('[DB] Failed to sync news to PostgreSQL:', e.message);
   }
@@ -135,6 +138,7 @@ export async function deletePostgresNews(id) {
 
 export async function syncPostgresService(service) {
   if (!isPostgresEnabled || !pool) return;
+  const todayStr = new Date().toISOString().slice(0, 10);
   try {
     await pool.query(`
       INSERT INTO company_services (id, title, category, image, content, date)
@@ -145,7 +149,7 @@ export async function syncPostgresService(service) {
         image = EXCLUDED.image,
         content = EXCLUDED.content,
         date = EXCLUDED.date
-    `, [service.id, service.title, service.category, service.image || '', service.content || '', service.date]);
+    `, [service.id, service.title, service.category, service.image || '', service.content || '', service.date || todayStr]);
   } catch (e) {
     console.error('[DB] Failed to sync service to PostgreSQL:', e.message);
   }
@@ -162,6 +166,7 @@ export async function deletePostgresService(id) {
 
 export async function syncPostgresQna(qna) {
   if (!isPostgresEnabled || !pool) return;
+  const todayStr = new Date().toISOString().slice(0, 10);
   try {
     await pool.query(`
       INSERT INTO qna_posts (id, title, author, phone, question, answer, password, is_secret, status, date)
@@ -179,7 +184,7 @@ export async function syncPostgresQna(qna) {
     `, [
       qna.id, qna.title, qna.author, qna.phone || '',
       qna.question, qna.answer || '', qna.password || '',
-      Boolean(qna.isSecret), qna.status || '미답변', qna.date
+      Boolean(qna.isSecret), qna.status || '미답변', qna.date || todayStr
     ]);
   } catch (e) {
     console.error('[DB] Failed to sync qna to PostgreSQL:', e.message);

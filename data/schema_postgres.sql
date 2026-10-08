@@ -22,10 +22,10 @@ ON CONFLICT (id) DO NOTHING;
 -- 2. 견적 및 상담 접수 테이블
 CREATE TABLE IF NOT EXISTS project_orders (
     id VARCHAR(50) PRIMARY KEY,
-    date VARCHAR(20) NOT NULL,
+    date VARCHAR(50) DEFAULT TO_CHAR(NOW(), 'YYYY-MM-DD'),
     type VARCHAR(50) NOT NULL,
-    structure VARCHAR(100) NOT NULL,
-    stage VARCHAR(100) NOT NULL,
+    structure VARCHAR(100),
+    stage VARCHAR(100),
     name VARCHAR(100) NOT NULL,
     phone VARCHAR(50) NOT NULL,
     email VARCHAR(150),
@@ -45,7 +45,7 @@ CREATE TABLE IF NOT EXISTS news_articles (
     category VARCHAR(100) NOT NULL,
     image TEXT,
     content TEXT,
-    date VARCHAR(20) NOT NULL,
+    date VARCHAR(50) DEFAULT TO_CHAR(NOW(), 'YYYY-MM-DD'),
     created_at TIMESTAMPTZ DEFAULT NOW()
 );
 
@@ -56,7 +56,7 @@ CREATE TABLE IF NOT EXISTS company_services (
     category VARCHAR(100) NOT NULL,
     image TEXT,
     content TEXT,
-    date VARCHAR(20) NOT NULL,
+    date VARCHAR(50) DEFAULT TO_CHAR(NOW(), 'YYYY-MM-DD'),
     created_at TIMESTAMPTZ DEFAULT NOW()
 );
 
@@ -71,7 +71,7 @@ CREATE TABLE IF NOT EXISTS qna_posts (
     password VARCHAR(100),
     is_secret BOOLEAN DEFAULT FALSE,
     status VARCHAR(50) DEFAULT '미답변',
-    date VARCHAR(20) NOT NULL,
+    date VARCHAR(50) DEFAULT TO_CHAR(NOW(), 'YYYY-MM-DD'),
     created_at TIMESTAMPTZ DEFAULT NOW()
 );
 
