@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 500" width="800" height="500">
+  <rect width="800" height="500" fill="#0b2239"/>
+  <rect width="800" height="8" fill="#0175b1"/>
+  <circle cx="680" cy="120" r="140" fill="#0175b1" opacity="0.15"/>
+  <line x1="40" y1="200" x2="760" y2="200" stroke="#1e3a5a" stroke-width="2"/>
+  <text x="60" y="90" font-family="system-ui, sans-serif" font-size="20" font-weight="700" fill="#0175b1" letter-spacing="2">SANG MYUNG CONSTRUCTION</text>
+  <text x="60" y="150" font-family="system-ui, sans-serif" font-size="34" font-weight="800" fill="#ffffff">ARCHITECTURAL NEWS &amp; MEDIA</text>
+  <text x="60" y="250" font-family="system-ui, sans-serif" font-size="18" fill="#94a3b8">고품격 책임시공 · 첨단 엔지니어링 기술 뉴스</text>
+  <rect x="60" y="290" width="160" height="38" rx="6" fill="#0175b1"/>
+  <text x="140" y="315" font-family="system-ui, sans-serif" font-size="14" font-weight="700" fill="#ffffff" text-anchor="middle">보도자료</text>
+</svg>

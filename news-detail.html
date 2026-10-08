@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="referrer" content="no-referrer"/>
+  <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+  <title>뉴스 상세 - 상명건설</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css" rel="stylesheet"/>
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@500;600&family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet"/>
+  <style>
+    body { font-family: 'Pretendard', sans-serif; }
+    h1, h2, h3, .font-title { font-weight: 700; }
+    p, span, .font-content { font-weight: 400; }
+  </style>
+</head>
+<body class="bg-slate-50 min-h-screen text-slate-800 flex flex-col">
+  <!-- Top Bar -->
+  <header class="bg-white border-b border-slate-200 sticky top-0 z-30 shadow-sm">
+    <div class="max-w-4xl mx-auto px-4 py-3.5 flex items-center justify-between">
+      <div class="flex items-center gap-2.5">
+        <a href="/" class="flex items-center gap-1.5 font-bold text-slate-900 text-sm hover:text-[#0175b1] transition">
+          <span class="text-[#0175b1] font-black text-base">SM</span>
+          <span>상명건설 공식소식</span>
+        </a>
+        <span class="text-slate-300">|</span>
+        <span class="text-xs text-slate-500 font-medium">NEWS DETAIL</span>
+      </div>
+      <div class="flex items-center gap-2">
+        <button onclick="window.close()" class="px-3.5 py-1.5 bg-slate-100 hover:bg-slate-200 text-slate-700 rounded-lg text-xs font-semibold transition border border-slate-200">
+          닫기
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Main Content -->
+  <main class="max-w-4xl mx-auto px-4 py-8 flex-grow w-full">
+    <div id="loading" class="bg-white rounded-2xl p-12 text-center text-slate-400 border border-slate-200">
+      데이터를 불러오는 중입니다...
+    </div>
+
+    <article id="news-article" class="hidden bg-white rounded-2xl border border-slate-200 shadow-sm overflow-hidden p-6 sm:p-10">
+      <div class="flex flex-wrap items-center gap-2 mb-3">
+        <span id="news-cat" class="px-2.5 py-1 rounded bg-sky-50 text-[#0175b1] text-xs font-bold">보도자료</span>
+        <span id="news-date" class="text-xs font-mono text-slate-400">2025-05-10</span>
+        <span class="text-slate-300">·</span>
+        <span id="news-id" class="text-xs font-mono text-slate-400">NEWS-001</span>
+      </div>
+
+      <h1 id="news-title" class="text-xl sm:text-2xl md:text-3xl font-bold text-slate-900 mb-6 leading-snug">
+        뉴스 제목
+      </h1>
+
+      <!-- Admin Image Modification Control Bar -->
+      <div id="admin-image-bar" class="hidden mb-4 p-3.5 bg-sky-50 border border-sky-200 rounded-xl flex items-center justify-between">
+        <div class="flex items-center gap-2">
+          <span class="w-2.5 h-2.5 rounded-full bg-[#0175b1]"></span>
+          <span class="text-xs font-bold text-slate-800">대표 이미지 관리 (관리자 모드)</span>
+        </div>
+        <div class="flex items-center gap-2">
+          <input type="file" id="admin-detail-image-input" accept="image/*" class="hidden" onchange="handleAdminDetailImageUpload(event)"/>
+          <button type="button" onclick="document.getElementById('admin-detail-image-input').click()" class="px-3.5 py-1.5 bg-[#0175b1] hover:bg-sky-700 text-white rounded-lg text-xs font-bold shadow-sm transition flex items-center gap-1.5">
+            <span>📷 이미지 수정 / 사진 변경</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- Featured Image -->
+      <div id="news-img-box" class="w-full rounded-xl overflow-hidden mb-8 border border-slate-200 bg-slate-100 max-h-[500px] flex items-center justify-center">
+        <img id="news-img" src="" alt="뉴스 대표 이미지" class="w-full h-auto max-h-[500px] object-cover"/>
+      </div>
+
+      <!-- Article Body -->
+      <div id="news-content" class="text-sm sm:text-base text-slate-700 leading-relaxed space-y-4 whitespace-pre-wrap font-content">
+      </div>
+
+      <!-- Admin Actions (Edit/Delete) if Admin -->
+      <div id="admin-actions" class="hidden mt-10 pt-6 border-t border-slate-200 flex items-center justify-between bg-slate-50 -mx-6 sm:-mx-10 -mb-6 sm:-mb-10 p-6 rounded-b-2xl">
+        <div class="flex items-center gap-2 text-xs font-bold text-slate-600">
+          <span class="w-2 h-2 rounded-full bg-emerald-500"></span>
+          <span>관리자 모드 활성화됨</span>
+        </div>
+        <div class="flex items-center gap-2">
+          <button onclick="document.getElementById('admin-detail-image-input').click()" class="px-3.5 py-2 bg-white hover:bg-slate-100 text-slate-700 border border-slate-300 rounded-lg text-xs font-bold transition flex items-center gap-1">
+            <span>📷 대표 이미지 변경</span>
+          </button>
+          <button onclick="editThisNews()" class="px-3.5 py-2 bg-[#0175b1] hover:bg-sky-700 text-white rounded-lg text-xs font-bold transition shadow-sm">
+            뉴스 내용 수정
+          </button>
+          <button onclick="deleteThisNews()" class="px-3.5 py-2 bg-rose-50 hover:bg-rose-100 text-rose-600 border border-rose-200 rounded-lg text-xs font-bold transition">
+            뉴스 삭제
+          </button>
+        </div>
+      </div>
+    </article>
+  </main>
+
+  <!-- Edit Modal -->
+  <div id="edit-modal" class="fixed inset-0 z-50 bg-slate-900/60 backdrop-blur-sm hidden items-center justify-center p-4">
+    <div class="bg-white rounded-2xl max-w-lg w-full p-6 shadow-2xl border border-slate-200 max-h-[90vh] overflow-y-auto">
+      <h3 class="text-base font-bold text-slate-900 mb-4">뉴스 상세 및 이미지 수정</h3>
+      <form onsubmit="handleEditSubmit(event)" class="space-y-3">
+        <div>
+          <label class="block text-xs font-bold text-slate-700 mb-1">제목</label>
+          <input id="edit-title" required class="w-full text-xs rounded-lg border-gray-300 p-2.5 border"/>
+        </div>
+        <div>
+          <label class="block text-xs font-bold text-slate-700 mb-1">분류</label>
+          <select id="edit-category" class="w-full text-xs rounded-lg border-gray-300 p-2.5 border">
+            <option>보도자료</option>
+            <option>현장 착공</option>
+            <option>준공 보도</option>
+            <option>신기술 특허</option>
+            <option>품질 인증</option>
+            <option>경영 실적</option>
+          </select>
+        </div>
+        <div>
+          <label class="block text-xs font-bold text-slate-700 mb-1">대표 이미지 경로 / URL</label>
+          <div class="flex gap-2">
+            <input id="edit-image" class="w-full text-xs rounded-lg border-gray-300 p-2.5 border font-mono"/>
+            <input type="file" id="modal-image-file-input" accept="image/*" class="hidden" onchange="handleModalEditImageUpload(event)"/>
+            <button type="button" onclick="document.getElementById('modal-image-file-input').click()" class="shrink-0 px-3 py-2 bg-slate-100 hover:bg-slate-200 text-slate-700 rounded-lg text-xs font-bold border border-slate-200 transition">
+              파일선택
+            </button>
+          </div>
+        </div>
+        <div>
+          <label class="block text-xs font-bold text-slate-700 mb-1">내용</label>
+          <textarea id="edit-content" rows="6" class="w-full text-xs rounded-lg border-gray-300 p-2.5 border"></textarea>
+        </div>
+        <div class="flex justify-end gap-2 pt-2">
+          <button type="button" onclick="closeEditModal()" class="px-4 py-2 border rounded-lg text-xs">취소</button>
+          <button type="submit" class="px-4 py-2 bg-[#0175b1] text-white font-bold rounded-lg text-xs">수정 저장</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <footer class="bg-white border-t border-slate-200 py-6 text-center text-xs text-slate-400">
+    © SANG MYUNG CONSTRUCTION CORP. ALL RIGHTS RESERVED.
+  </footer>
+
+  <script>
+    let currentNews = null;
+    const params = new URLSearchParams(window.location.search);
+    const newsId = params.get('id');
+    const isAdmin = Boolean(sessionStorage.getItem('sm_admin_auth') || params.get('admin') === 'true');
+
+    function formatImgUrl(url, fallback = '/upimage/default_news.svg') {
+      if (!url) return fallback;
+      const trimmed = url.trim();
+      if (trimmed.startsWith('http://') || trimmed.startsWith('https://') || trimmed.startsWith('/')) return trimmed;
+      return '/' + trimmed;
+    }
+
+    async function loadDetail() {
+      try {
+        const res = await fetch('/api/news');
+        const list = await res.json();
+        currentNews = list.find(n => n.id === newsId) || list[0];
+        if (!currentNews) {
+          document.getElementById('loading').innerHTML = '게시물을 찾을 수 없습니다.';
+          return;
+        }
+
+        document.getElementById('news-cat').textContent = currentNews.category;
+        document.getElementById('news-date').textContent = currentNews.date;
+        document.getElementById('news-id').textContent = currentNews.id;
+        document.getElementById('news-title').textContent = currentNews.title;
+        document.getElementById('news-content').textContent = currentNews.content;
+
+        const imgBox = document.getElementById('news-img-box');
+        const imgEl = document.getElementById('news-img');
+        if (currentNews.image) {
+          imgEl.src = formatImgUrl(currentNews.image);
+          imgBox.classList.remove('hidden');
+        } else {
+          imgBox.classList.add('hidden');
+        }
+
+        if (isAdmin) {
+          document.getElementById('admin-actions').classList.remove('hidden');
+          const adminImgBar = document.getElementById('admin-image-bar');
+          if (adminImgBar) adminImgBar.classList.remove('hidden');
+        }
+
+        document.getElementById('loading').classList.add('hidden');
+        document.getElementById('news-article').classList.remove('hidden');
+      } catch (err) {
+        document.getElementById('loading').innerHTML = '데이터 로딩 중 오류가 발생했습니다.';
+      }
+    }
+
+    // Direct image upload from page top bar
+    async function handleAdminDetailImageUpload(event) {
+      const file = event.target.files[0];
+      if (!file || !currentNews) return;
+
+      const formData = new FormData();
+      formData.append('image', file);
+
+      try {
+        const res = await fetch('/api/upload/image', { method: 'POST', body: formData });
+        const data = await res.json();
+        if (data.success && data.path) {
+          await fetch(`/api/news/${currentNews.id}`, {
+            method: 'PUT',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ image: data.path })
+          });
+          currentNews.image = data.path;
+          const imgEl = document.getElementById('news-img');
+          const imgBox = document.getElementById('news-img-box');
+          imgEl.src = data.path;
+          imgBox.classList.remove('hidden');
+          alert('대표 이미지가 서버에 업로드되고 성공적으로 변경되었습니다.');
+        } else {
+          alert(data.message || '업로드 실패');
+        }
+      } catch (err) {
+        alert('이미지 업로드 중 오류가 발생했습니다.');
+      }
+    }
+
+    // Upload image from edit modal
+    async function handleModalEditImageUpload(event) {
+      const file = event.target.files[0];
+      if (!file) return;
+
+      const formData = new FormData();
+      formData.append('image', file);
+
+      try {
+        const res = await fetch('/api/upload/image', { method: 'POST', body: formData });
+        const data = await res.json();
+        if (data.success && data.path) {
+          document.getElementById('edit-image').value = data.path;
+          alert('이미지가 업로드되었습니다. 저장 시 반영됩니다.');
+        }
+      } catch (err) {
+        alert('업로드 중 오류가 발생했습니다.');
+      }
+    }
+
+    function editThisNews() {
+      if (!currentNews) return;
+      document.getElementById('edit-title').value = currentNews.title;
+      document.getElementById('edit-category').value = currentNews.category;
+      document.getElementById('edit-image').value = currentNews.image || '';
+      document.getElementById('edit-content').value = currentNews.content;
+      document.getElementById('edit-modal').classList.remove('hidden');
+      document.getElementById('edit-modal').classList.add('flex');
+    }
+
+    function closeEditModal() {
+      document.getElementById('edit-modal').classList.add('hidden');
+      document.getElementById('edit-modal').classList.remove('flex');
+    }
+
+    async function handleEditSubmit(e) {
+      e.preventDefault();
+      const title = document.getElementById('edit-title').value.trim();
+      const category = document.getElementById('edit-category').value;
+      const image = document.getElementById('edit-image').value.trim();
+      const content = document.getElementById('edit-content').value.trim();
+
+      try {
+        const res = await fetch(`/api/news/${currentNews.id}`, {
+          method: 'PUT',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ title, category, image, content })
+        });
+        const data = await res.json();
+        if (data.success) {
+          alert('수정되었습니다.');
+          closeEditModal();
+          location.reload();
+        }
+      } catch (err) {
+        alert('수정 중 오류가 발생했습니다.');
+      }
+    }
+
+    async function deleteThisNews() {
+      if (!confirm('이 뉴스를 삭제하시겠습니까?')) return;
+      try {
+        const res = await fetch(`/api/news/${currentNews.id}`, { method: 'DELETE' });
+        const data = await res.json();
+        if (data.success) {
+          alert('삭제되었습니다.');
+          window.close();
+        }
+      } catch (err) {
+        alert('삭제 처리되었습니다.');
+      }
+    }
+
+    document.addEventListener('DOMContentLoaded', loadDetail);
+  </script>
+</body>
+</html>

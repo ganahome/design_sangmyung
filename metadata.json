@@ -1,0 +1,8 @@
+{
+  "name": "상명건설 - SANG MYUNG CORP.",
+  "description": "26년 역사의 종합건설기업 상명건설 공식 웹사이트 및 통합 백오피스 관리자 콘솔",
+  "capabilities": [
+    "MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"
+  ],
+  "permissions": []
+}

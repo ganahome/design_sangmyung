@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="referrer" content="no-referrer"/>
+  <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+  <title>서비스 상세 - 상명건설</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css" rel="stylesheet"/>
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@500;600&family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet"/>
+  <style>
+    body { font-family: 'Pretendard', sans-serif; }
+    h1, h2, h3, .font-title { font-weight: 700; }
+    p, span, .font-content { font-weight: 400; }
+  </style>
+</head>
+<body class="bg-slate-100 min-h-screen text-slate-800 p-3 sm:p-6 flex flex-col items-center justify-start">
+  <!-- Modal Window Container -->
+  <div class="bg-white rounded-2xl border border-slate-200 shadow-2xl max-w-3xl w-full overflow-hidden flex flex-col">
+    <!-- Top Bar: 닫기 버튼만 달아 놓을것 -->
+    <div class="sticky top-0 z-20 bg-white/95 backdrop-blur-sm border-b border-slate-100 px-6 py-4 flex items-center justify-between">
+      <div class="flex items-center gap-2">
+        <span class="text-[#0175b1] font-black text-base">SM</span>
+        <span class="text-xs font-bold text-slate-800">서비스 상세정보</span>
+        <span id="svc-id" class="px-2 py-0.5 bg-slate-100 text-slate-600 font-mono text-[11px] rounded font-bold"></span>
+      </div>
+      <!-- 닫기 버튼만을 달아 놓을것 -->
+      <button type="button" onclick="window.close()" class="px-4 py-2 bg-slate-900 hover:bg-slate-800 text-white rounded-lg text-xs font-bold transition flex items-center gap-1.5 shadow-sm">
+        <span class="material-symbols-outlined text-[16px]">close</span>
+        <span>닫기</span>
+      </button>
+    </div>
+
+    <!-- Main Content Area -->
+    <main class="p-6 sm:p-8 flex-grow">
+      <div id="loading" class="py-16 text-center text-slate-400 text-sm">
+        해당 게시물의 상세 내용을 불러오는 중입니다...
+      </div>
+
+      <article id="service-article" class="hidden space-y-6">
+        <!-- 1. 구분 및 입력시간 -->
+        <div class="flex flex-wrap items-center justify-between gap-3 pb-3 border-b border-slate-100 text-xs">
+          <div class="flex items-center gap-2">
+            <span class="text-slate-400 font-semibold">구분:</span>
+            <span id="svc-category" class="px-3 py-1 rounded-md bg-sky-50 text-[#0175b1] font-bold"></span>
+          </div>
+          <div class="flex items-center gap-1.5 text-slate-500 font-mono">
+            <span class="text-slate-400 font-semibold">입력시간:</span>
+            <span id="svc-date" class="font-bold text-slate-700"></span>
+          </div>
+        </div>
+
+        <!-- 2. 소제목 & 볼드체 제목 -->
+        <div>
+          <div id="svc-subtitle" class="text-xs sm:text-sm font-semibold text-[#0175b1] mb-1.5 tracking-wide"></div>
+          <h1 id="svc-title" class="text-xl sm:text-2xl md:text-3xl font-bold text-slate-900 leading-snug"></h1>
+        </div>
+
+        <!-- 3. 사진 (업로드된 대표 이미지) -->
+        <div id="svc-img-box" class="w-full rounded-2xl overflow-hidden border border-slate-200 bg-slate-100 max-h-[500px] flex items-center justify-center shadow-inner">
+          <img id="svc-img" src="" alt="서비스 대표 사진" class="w-full h-auto max-h-[500px] object-cover"/>
+        </div>
+
+        <!-- 4. 상단 소개 (HTML EDITOR 작성 내용 코드 렌더링) -->
+        <div id="svc-intro-container" class="space-y-2">
+          <div class="text-xs font-bold text-slate-400 uppercase tracking-wider flex items-center gap-1.5">
+            <span class="w-2 h-2 rounded-full bg-[#0175b1]"></span>
+            <span>상단 소개 (기술 및 공법 개요)</span>
+          </div>
+          <div id="svc-intro-html" class="p-5 sm:p-6 bg-slate-50 border border-slate-200 rounded-2xl leading-relaxed text-sm text-slate-800 font-content">
+          </div>
+        </div>
+
+        <!-- 5. 내용 (상세 시공 내용 전체) -->
+        <div class="space-y-2">
+          <div class="text-xs font-bold text-slate-400 uppercase tracking-wider flex items-center gap-1.5">
+            <span class="w-2 h-2 rounded-full bg-[#0175b1]"></span>
+            <span>상세 시공 및 서비스 내용</span>
+          </div>
+          <div id="svc-content" class="text-sm sm:text-base text-slate-700 leading-relaxed whitespace-pre-wrap font-content p-5 sm:p-6 bg-slate-50/50 border border-slate-200 rounded-2xl">
+          </div>
+        </div>
+
+        <!-- Bottom: 닫기 버튼만을 달아 놓을것 -->
+        <div class="pt-6 border-t border-slate-100 flex justify-end">
+          <button type="button" onclick="window.close()" class="px-6 py-2.5 bg-slate-900 hover:bg-slate-800 text-white rounded-lg text-xs font-bold transition flex items-center gap-1.5 shadow-sm">
+            <span class="material-symbols-outlined text-[16px]">close</span>
+            <span>닫기</span>
+          </button>
+        </div>
+      </article>
+    </main>
+  </div>
+
+  <script>
+    function formatImgUrl(url, fallback = '/upimage/default_service.svg') {
+      if (!url) return fallback;
+      const trimmed = url.trim();
+      if (trimmed.startsWith('http://') || trimmed.startsWith('https://') || trimmed.startsWith('/')) return trimmed;
+      return '/' + trimmed;
+    }
+
+    async function loadServiceDetail() {
+      const params = new URLSearchParams(window.location.search);
+      const svcId = params.get('id');
+
+      try {
+        const res = await fetch('/api/services');
+        const list = await res.json();
+        const item = list.find(s => s.id === svcId) || list[0];
+
+        if (!item) {
+          document.getElementById('loading').innerHTML = '해당 서비스 정보를 찾을 수 없습니다.';
+          return;
+        }
+
+        document.getElementById('svc-id').textContent = item.id || '';
+        document.getElementById('svc-category').textContent = item.category || '주택건설';
+        document.getElementById('svc-date').textContent = item.createdAt || '-';
+        document.getElementById('svc-subtitle').textContent = item.subTitle || item.subtitle || '';
+        document.getElementById('svc-title').textContent = item.title || '';
+        document.getElementById('svc-content').textContent = item.content || '';
+
+        const introContainer = document.getElementById('svc-intro-container');
+        const introBox = document.getElementById('svc-intro-html');
+        if (item.introHtml && item.introHtml.trim()) {
+          introBox.innerHTML = item.introHtml;
+          introContainer.classList.remove('hidden');
+        } else {
+          introContainer.classList.add('hidden');
+        }
+
+        const imgEl = document.getElementById('svc-img');
+        const imgBox = document.getElementById('svc-img-box');
+        const photoUrl = formatImgUrl(item.image, '/upimage/default_service.svg');
+        imgEl.src = photoUrl;
+        imgEl.onerror = () => { imgEl.src = '/upimage/default_service.svg'; };
+        imgBox.classList.remove('hidden');
+
+        document.getElementById('loading').classList.add('hidden');
+        document.getElementById('service-article').classList.remove('hidden');
+      } catch (err) {
+        document.getElementById('loading').innerHTML = '서비스 정보를 불러오는 중 오류가 발생했습니다.';
+      }
+    }
+
+    document.addEventListener('DOMContentLoaded', loadServiceDetail);
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') window.close();
+    });
+  </script>
+</body>
+</html>

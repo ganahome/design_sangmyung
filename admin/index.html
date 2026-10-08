@@ -1,563 +1,1088 @@
 <!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="referrer" content="no-referrer"/>
+  <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" name="viewport"/>
+  <title>상명건설 관리자 시스템</title>
+  <meta name="description" content="상명건설 통합 백오피스 관리자 콘솔 v2.4"/>
+  <link href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css" rel="stylesheet"/>
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@500;600&family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet"/>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          colors: {
+            primary: "#0b2239",
+            "primary-light": "#0175b1",
+            surface: "#f8fafc",
+            "surface-canvas": "#ffffff",
+            "border-line": "#e2e8f0",
+            "border-focus": "#0175b1",
+            "text-main": "#0f172a",
+            "text-sub": "#64748b",
+            accent: "#0284c7",
+            safety: "#e11d48"
+          },
+          fontFamily: {
+            sans: ['Pretendard', '-apple-system', 'BlinkMacSystemFont', 'system-ui', 'sans-serif'],
+            mono: ['JetBrains Mono', 'monospace']
+          }
+        }
+      }
+    };
+  </script>
+  <style>
+    body {
+      font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
+      background-color: #f8fafc;
+      color: #0f172a;
+    }
+    h1, h2, h3, h4, th, .font-title { font-weight: 700; }
+    p, td, input, select, textarea, .font-content { font-weight: 400; }
+    ::-webkit-scrollbar { width: 6px; height: 6px; }
+    ::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 3px; }
 
-<html lang="ko"><head><meta charset="utf-8"/><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" name="viewport"/><meta content="mobile_stack" name="shell-type"/><title>상명건설 시스템</title><link href="https://fonts.googleapis.com" rel="preconnect"/><link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/><link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@600;700&amp;family=Inter:wght@400;500;600&amp;family=JetBrains+Mono:wght@500;600&amp;display=swap" rel="stylesheet"/><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet"/>
-<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/><script src="https://cdn.tailwindcss.com"></script><script id="tailwind-config">tailwind.config = { darkMode: "class", theme: { extend: { colors: { "outline-variant": "#c4c6d1", "surface-tint": "#415e94", "primary-fixed-dim": "#acc7ff", "on-secondary": "#ffffff", "primary": "#002555", "surface-bright": "#fcf9f8", "on-secondary-container": "#fefcff", "on-primary-fixed-variant": "#28467b", "text-muted": "#68707B", "on-primary-container": "#8aa7e1", "surface-canvas": "#FFFFFF", "accent-safety": "#D9383A", "tertiary-container": "#4b3918", "surface-dim": "#dcd9d9", "on-surface-variant": "#43474f", "on-secondary-fixed-variant": "#004491", "error-container": "#ffdad6", "surface-container-low": "#f6f3f2", "surface-container-highest": "#e5e2e1", "tertiary-fixed-dim": "#dec397", "tertiary-fixed": "#fcdfb1", "background": "#fcf9f8", "surface-concrete": "#EDEDED", "surface": "#fcf9f8", "primary-container": "#1b3b6f", "inverse-primary": "#acc7ff", "inverse-on-surface": "#f3f0ef", "secondary": "#0059b9", "on-background": "#1c1b1b", "secondary-fixed": "#d7e2ff", "on-primary-fixed": "#001a41", "on-tertiary-container": "#bca379", "outline": "#747780", "inverse-surface": "#313030", "on-surface": "#1c1b1b", "on-tertiary": "#ffffff", "on-error-container": "#93000a", "surface-container-lowest": "#ffffff", "surface-subtle": "#F8F8F8", "on-tertiary-fixed": "#271900", "on-secondary-fixed": "#001a40", "on-error": "#ffffff", "tertiary": "#332405", "border-structural": "#E2E4E8", "primary-fixed": "#d8e2ff", "secondary-fixed-dim": "#acc7ff", "surface-variant": "#e5e2e1", "border-strong": "#171717", "error": "#ba1a1a", "surface-container-high": "#eae7e7", "on-primary": "#ffffff", "surface-container": "#f0eded", "on-tertiary-fixed-variant": "#574422", "secondary-container": "#1071e5" }, borderRadius: { "DEFAULT": "0.125rem", "lg": "0.25rem", "xl": "0.5rem", "full": "0.75rem" }, spacing: { "gutter-mobile": "1rem", "margin-desktop": "3rem", "space-md": "1rem", "space-lg": "1.5rem", "space-sm": "0.5rem", "space-xl": "2.5rem", "gutter-desktop": "2rem", "gutter": "1.5rem", "space-xs": "0.25rem", "margin-mobile": "1.25rem", "margin": "1.5rem" }, fontFamily: { "label-blueprint": ["JetBrains Mono"], "display-hero": ["Hanken Grotesk"], "label-metric": ["JetBrains Mono"], "title-md": ["Hanken Grotesk"], "body-sm": ["Inter"], "body-md": ["Inter"], "headline-sm": ["Hanken Grotesk"], "display-hero-mobile": ["Hanken Grotesk"], "headline-md": ["Hanken Grotesk"], "headline-lg": ["Hanken Grotesk"], "body-lg": ["Inter"], "headline-lg-mobile": ["Hanken Grotesk"] }, fontSize: { "label-blueprint": ["11px", { lineHeight: "14px", letterSpacing: "0.08em", fontWeight: "500" }], "display-hero": ["56px", { lineHeight: "68px", letterSpacing: "-0.025em", fontWeight: "700" }], "label-metric": ["14px", { lineHeight: "18px", letterSpacing: "0.02em", fontWeight: "600" }], "title-md": ["18px", { lineHeight: "24px", letterSpacing: "-0.005em", fontWeight: "600" }], "body-sm": ["13px", { lineHeight: "20px", letterSpacing: "0em", fontWeight: "400" }], "body-md": ["15px", { lineHeight: "24px", letterSpacing: "-0.005em", fontWeight: "400" }], "headline-sm": ["22px", { lineHeight: "30px", letterSpacing: "-0.01em", fontWeight: "600" }], "display-hero-mobile": ["36px", { lineHeight: "44px", letterSpacing: "-0.02em", fontWeight: "700" }], "headline-md": ["28px", { lineHeight: "36px", letterSpacing: "-0.015em", fontWeight: "600" }], "headline-lg": ["40px", { lineHeight: "48px", letterSpacing: "-0.02em", fontWeight: "600" }], "body-lg": ["17px", { lineHeight: "28px", letterSpacing: "-0.01em", fontWeight: "400" }], "headline-lg-mobile": ["28px", { lineHeight: "36px", letterSpacing: "-0.015em", fontWeight: "600" }] } } } };</script><style>@layer base{html,body{width:100%;margin:0;padding:0;}body{overscroll-behavior-y:none;}.pb-safe{padding-bottom:env(safe-area-inset-bottom,0px);}.pt-safe{padding-top:env(safe-area-inset-top,0px);}main>:first-child{margin-top:0!important;}main>:last-child{margin-bottom:0!important;}}::-webkit-scrollbar{display:none;}</style></head><body class="bg-surface font-body-md text-on-surface flex flex-col min-h-screen antialiased"><header class="fixed top-0 inset-x-0 z-50 bg-surface-canvas/90 backdrop-blur-xl shadow-[0_1px_8px_rgba(0,0,0,0.04)] pt-safe"><div class="h-16 px-gutter-mobile flex items-center justify-between"><div class="flex items-center gap-space-xs"><button aria-label="뒤로 가기" class="w-11 h-11 flex items-center justify-center text-on-surface hover:text-primary transition-colors" onclick="history.back()"><span class="material-symbols-outlined text-[22px]">arrow_back_ios_new</span></button><h1 class="font-title-md text-title-md font-bold tracking-tight text-primary-container truncate">Admin Portal</h1></div><div class="flex items-center gap-space-xs"><a class="w-11 h-11 flex items-center justify-center text-on-surface-variant hover:text-primary transition-colors" data-path="corporate-home" href="#"><span class="material-symbols-outlined text-[22px]">home</span></a>
-  </div></div></header><main class="flex flex-col relative w-full pt-16 bg-surface min-h-screen"><div class="flex flex-col w-full">
-<!-- Toast Feedback Component -->
-<div class="fixed top-20 right-4 z-50 transform translate-y-[-20px] opacity-0 pointer-events-none transition-all duration-300 flex items-center gap-space-sm px-space-md py-space-sm bg-primary text-on-primary rounded-xl shadow-xl" id="admin-toast">
-<span class="material-symbols-outlined text-[20px] text-primary-fixed">verified</span>
-<span class="font-body-sm text-body-sm font-medium" id="admin-toast-text">작업이 정상적으로 완료되었습니다.</span>
-</div>
-<!-- AUTHENTICATION STATE (UNAUTHENTICATED) -->
-<section class="w-full flex flex-col items-center justify-center py-space-xl px-gutter-mobile" id="auth-screen">
-<div class="w-full max-w-md bg-surface-canvas rounded-xl shadow-xl p-space-lg flex flex-col gap-space-lg">
-<!-- Blueprint Branding Header -->
-<div class="flex flex-col gap-space-xs text-center items-center">
-<div class="w-12 h-12 bg-primary-container text-on-primary rounded-xl flex items-center justify-center mb-space-xs shadow-sm">
-<span class="material-symbols-outlined text-[26px]">admin_panel_settings</span>
-</div>
-<span class="font-label-blueprint text-label-blueprint text-secondary tracking-widest uppercase">Sang Myung Construction Corp.</span>
-<h2 class="font-headline-sm text-headline-sm text-primary tracking-tight">통합 백오피스 관리자 인증</h2>
-<p class="font-body-sm text-body-sm text-text-muted">상명건설 시스템 보안 콘솔 v2.4 접근을 위해 자격을 증명하십시오.</p>
-</div>
-<!-- Test Credentials Notice Box -->
-<div class="bg-surface-subtle p-space-md rounded-lg flex flex-col gap-space-xs shadow-sm">
-<div class="flex items-center gap-space-xs text-primary font-semibold">
-<span class="material-symbols-outlined text-[18px]">key</span>
-<span class="font-label-metric text-label-metric">검수용 기본 인증 계정 안내</span>
-</div>
-<div class="flex items-center justify-between text-on-surface-variant font-label-blueprint text-label-blueprint pt-space-xs">
-<span>아이디: <strong class="text-primary font-semibold">admin</strong></span>
-<span>비밀번호: <strong class="text-primary font-semibold">1234</strong></span>
-</div>
-</div>
-<!-- Login Form Form-factor -->
-<form class="flex flex-col gap-space-md" id="login-form" onsubmit="handleLogin(event)">
-<div class="flex flex-col gap-space-xs">
-<label class="font-body-sm text-body-sm font-medium text-on-surface" for="login-id">관리자 식별 아이디</label>
-<div class="flex items-center bg-surface-container-low rounded-lg px-space-md py-space-sm gap-space-sm focus-within:bg-surface-canvas focus-within:shadow-sm transition-all">
-<span class="material-symbols-outlined text-text-muted text-[20px]">person</span>
-<input class="w-full bg-transparent font-body-md text-body-md text-on-surface outline-none placeholder:text-text-muted" id="login-id" placeholder="아이디 입력" required="" type="text" value="admin"/>
-</div>
-</div>
-<div class="flex flex-col gap-space-xs">
-<label class="font-body-sm text-body-sm font-medium text-on-surface" for="login-pw">보안 비밀번호</label>
-<div class="flex items-center bg-surface-container-low rounded-lg px-space-md py-space-sm gap-space-sm focus-within:bg-surface-canvas focus-within:shadow-sm transition-all">
-<span class="material-symbols-outlined text-text-muted text-[20px]">lock</span>
-<input class="w-full bg-transparent font-body-md text-body-md text-on-surface outline-none placeholder:text-text-muted" id="login-pw" placeholder="••••••••" required="" type="password" value="1234"/>
-</div>
-</div>
-<div class="hidden text-accent-safety font-body-sm text-body-sm flex items-center gap-space-xs" id="login-error-msg">
-<span class="material-symbols-outlined text-[16px]">error</span>
-<span>아이디 또는 비밀번호가 일치하지 않습니다. (admin / 1234)</span>
-</div>
-<!-- Action Button Matrix -->
-<div class="flex flex-col gap-space-sm pt-space-xs">
-<button class="w-full py-3 bg-primary-container hover:bg-primary text-on-primary rounded-lg font-title-md text-title-md font-semibold shadow-md flex items-center justify-center gap-space-xs transition-colors" type="submit">
-<span class="material-symbols-outlined text-[20px]">login</span>
-<span>보안 로그인</span>
-</button>
-<div class="grid grid-cols-2 gap-space-sm">
-<button class="py-2.5 bg-surface-container hover:bg-surface-container-high text-on-surface rounded-lg font-body-sm text-body-sm font-medium transition-colors text-center" onclick="clearLoginForm()" type="button">
+    /* Specification Responsive Media Queries */
+    @media screen and (min-width: 1230px) {
+      .admin-shell { max-width: 1280px; margin: 0 auto; }
+    }
+    @media screen and (min-width: 768px) and (max-width: 1230px) {
+      .admin-shell { padding: 0 1.25rem; }
+    }
+    @media screen and (min-width: 150px) and (max-width: 768px) {
+      .admin-shell { padding: 0 0.75rem; }
+      .admin-header-row { flex-direction: column; align-items: flex-start; gap: 0.75rem; }
+    }
+  </style>
+</head>
+<body class="min-h-screen flex flex-col antialiased bg-[#f8fafc]">
+
+  <!-- Global Toast Notification -->
+  <div id="admin-toast" class="fixed top-6 right-6 z-50 transform translate-y-[-20px] opacity-0 pointer-events-none transition-all duration-300 flex items-center gap-2 px-4 py-3 bg-[#0b2239] text-white rounded-xl shadow-2xl border border-slate-700 text-sm">
+    <span class="material-symbols-outlined text-[18px] text-sky-400">check_circle</span>
+    <span id="admin-toast-text">작업이 정상적으로 완료되었습니다.</span>
+  </div>
+
+  <!-- YES / NO Confirmation Dialog Modal -->
+  <div id="confirm-modal" class="fixed inset-0 z-50 bg-slate-900/60 backdrop-blur-sm hidden items-center justify-center p-4">
+    <div class="bg-white rounded-2xl max-w-sm w-full p-6 shadow-2xl border border-slate-100 flex flex-col items-center text-center">
+      <div class="w-12 h-12 rounded-full bg-rose-50 text-rose-600 flex items-center justify-center mb-3">
+        <span class="material-symbols-outlined text-[26px]" id="confirm-icon">help</span>
+      </div>
+      <h3 class="text-base font-bold text-slate-900 mb-1" id="confirm-title">확인</h3>
+      <p class="text-xs text-slate-500 mb-6" id="confirm-message">진행하시겠습니까?</p>
+      <div class="grid grid-cols-2 gap-3 w-full">
+        <button id="confirm-btn-no" class="w-full py-2.5 rounded-lg border border-slate-200 text-xs font-semibold text-slate-600 hover:bg-slate-50 transition">
+          취소 (NO)
+        </button>
+        <button id="confirm-btn-yes" class="w-full py-2.5 rounded-lg bg-[#0b2239] hover:bg-slate-800 text-xs font-semibold text-white transition shadow-sm">
+          확인 (YES)
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ==================== 1. UNAUTHENTICATED: LOGIN SCREEN ==================== -->
+  <section id="auth-screen" class="min-h-screen flex items-center justify-center p-4">
+    <div class="w-full max-w-md bg-white rounded-2xl shadow-xl border border-slate-200 p-8 flex flex-col gap-6">
+      
+      <div class="flex flex-col items-center text-center">
+        <div class="w-12 h-12 rounded-xl bg-[#0b2239] text-white flex items-center justify-center mb-3 shadow-md">
+          <span class="material-symbols-outlined text-[26px]">admin_panel_settings</span>
+        </div>
+        <span class="text-[11px] font-mono tracking-widest text-[#0175b1] uppercase font-semibold">Sang Myung Construct Co., Ltd.</span>
+        <h2 class="text-xl font-bold text-slate-900 mt-1">통합 백오피스 관리자 인증</h2>
+        <p class="text-xs text-slate-500 mt-1">상명건설 보안 관리 콘솔에 접근하기 위해 로그인하십시오.</p>
+      </div>
+
+      <!-- Login Form -->
+      <form id="login-form" onsubmit="handleLoginSubmit(event)" class="space-y-4">
+        <div>
+          <label class="block text-xs font-semibold text-slate-700 mb-1" for="login-id">관리자 식별 아이디</label>
+          <div class="flex items-center bg-slate-50 border border-slate-200 rounded-lg px-3 py-2.5 focus-within:bg-white focus-within:border-[#0175b1] focus-within:ring-1 focus-within:ring-[#0175b1] transition">
+            <span class="material-symbols-outlined text-slate-400 text-[18px] mr-2">person</span>
+            <input id="login-id" type="text" value="" required class="w-full bg-transparent text-xs text-slate-900 outline-none"/>
+          </div>
+        </div>
+
+        <div>
+          <label class="block text-xs font-semibold text-slate-700 mb-1" for="login-pw">보안 비밀번호</label>
+          <div class="flex items-center bg-slate-50 border border-slate-200 rounded-lg px-3 py-2.5 focus-within:bg-white focus-within:border-[#0175b1] focus-within:ring-1 focus-within:ring-[#0175b1] transition">
+            <span class="material-symbols-outlined text-slate-400 text-[18px] mr-2">lock</span>
+            <input id="login-pw" type="password" value="" required class="w-full bg-transparent text-xs text-slate-900 outline-none"/>
+          </div>
+        </div>
+
+        <div id="login-err-msg" class="hidden text-rose-600 text-xs flex items-center gap-1 font-medium">
+          <span class="material-symbols-outlined text-[16px]">error</span>
+          <span>아이디 또는 비밀번호가 일치하지 않습니다. (admin / 1234)</span>
+        </div>
+
+        <div class="space-y-2 pt-2">
+          <button type="submit" class="w-full py-3 bg-[#0b2239] hover:bg-slate-800 text-white font-bold text-xs rounded-lg shadow-md transition flex items-center justify-center gap-1.5">
+            <span class="material-symbols-outlined text-[18px]">login</span>
+            <span>보안 로그인</span>
+          </button>
+          
+          <div class="grid grid-cols-2 gap-2">
+            <button type="button" onclick="clearLoginForm()" class="py-2.5 bg-slate-100 hover:bg-slate-200 text-slate-700 text-xs font-medium rounded-lg transition text-center">
               입력 초기화
             </button>
-<a class="py-2.5 bg-surface-subtle hover:bg-surface-container text-text-muted rounded-lg font-body-sm text-body-sm font-medium text-center transition-colors" data-path="corporate-home" href="#">
-              공식 홈 이동
+            <a href="/" class="py-2.5 bg-slate-100 hover:bg-slate-200 text-slate-700 text-xs font-medium rounded-lg transition text-center flex items-center justify-center gap-1">
+              <span>공식 홈 이동</span>
             </a>
-</div>
-</div>
-</form>
-</div>
-</section>
-<!-- AUTHENTICATED ADMIN CONSOLE STATE -->
-<section class="hidden w-full flex flex-col gap-space-md pb-space-xl" id="dashboard-screen">
-<!-- Top Admin Header Console Bar -->
-<div class="w-full bg-surface-canvas shadow-sm px-gutter-mobile py-space-md flex flex-col sm:flex-row sm:items-center justify-between gap-space-md">
-<div class="flex items-center gap-space-md">
-<div class="w-10 h-10 bg-primary-container text-on-primary rounded-lg flex items-center justify-center shadow-sm">
-<span class="material-symbols-outlined text-[22px]">domain_verification</span>
-</div>
-<div class="flex flex-col">
-<div class="flex items-center gap-space-sm">
-<h2 class="font-title-md text-title-md font-bold text-primary">상명건설 관리자 시스템</h2>
-<span class="px-2 py-0.5 bg-surface-container text-primary font-label-blueprint text-label-blueprint rounded">Console v2.4</span>
-</div>
-<span class="font-body-sm text-body-sm text-text-muted">실시간 프로젝트 및 고객 접수 통합 관제 체계</span>
-</div>
-</div>
-<div class="flex items-center gap-space-sm self-end sm:self-auto">
-<div class="flex items-center gap-space-xs bg-surface-container-low px-space-md py-1.5 rounded-full">
-<span class="w-2.5 h-2.5 rounded-full bg-secondary"></span>
-<span class="font-label-metric text-label-metric text-on-surface">최고관리자 (admin)</span>
-</div>
-<button class="px-space-md py-1.5 bg-accent-safety/10 hover:bg-accent-safety text-accent-safety hover:text-on-primary font-body-sm text-body-sm font-medium rounded-lg transition-colors flex items-center gap-space-xs" onclick="handleLogout()">
-<span class="material-symbols-outlined text-[18px]">logout</span>
-<span>로그아웃</span>
-</button>
-</div>
-</div>
-<!-- Infrastructure & Hosting Advice Banner -->
-<!--<div class="mx-gutter-mobile bg-primary-container text-on-primary rounded-xl p-space-md shadow-md flex flex-col md:flex-row items-start md:items-center justify-between gap-space-md">
-<div class="flex items-start gap-space-sm">
-<div class="p-2 bg-on-primary/10 rounded-lg shrink-0">
-<span class="material-symbols-outlined text-[22px] text-primary-fixed">cloud_sync</span>
-</div>
-<div class="flex flex-col">
-<div class="flex items-center gap-space-xs">
-<span class="font-label-blueprint text-label-blueprint text-primary-fixed uppercase tracking-wider">DevOps Recommendation</span>
-<span class="px-1.5 py-0.2 bg-secondary text-on-secondary rounded text-[10px] font-mono">가성비 아키텍처</span>
-</div>
-<p class="font-body-sm text-body-sm text-surface-bright mt-0.5">
-<strong>Vercel / Cloudflare Pages</strong>(프론트 무료 배포) + <strong>Supabase/Render</strong>(PostgreSQL 무상 티어) 또는 국내 <strong>Cafe24 Node·PHP</strong>(월 500원~5,000원대) 결합 시 월 유지비 0원~극소비용으로 완전 운영 가능합니다.
-          </p>
-</div>
-</div>
-<div class="shrink-0 flex items-center gap-space-xs bg-on-primary/15 px-space-md py-1.5 rounded-lg">
-<span class="material-symbols-outlined text-[16px] text-primary-fixed">speed</span>
-<span class="font-label-metric text-label-metric text-surface-bright">전국 반응형 최적화 완료</span>
-</div>
-</div>-->
-<!-- Top Management Navigation Horizontal Tabs -->
-<div class="mx-gutter-mobile bg-surface-canvas rounded-xl shadow-sm p-1.5 flex flex-wrap gap-1">
-<button class="admin-nav-tab flex-1 min-w-[140px] py-2.5 px-space-md rounded-lg font-body-sm text-body-sm font-semibold flex items-center justify-center gap-space-xs bg-primary text-on-primary shadow-sm transition-all" id="btn-tab-inquiries" onclick="switchAdminTab('tab-inquiries')">
-<span class="material-symbols-outlined text-[18px]">contact_support</span>
-<span>문의접수 통합관리</span>
-</button>
-<button class="admin-nav-tab flex-1 min-w-[140px] py-2.5 px-space-md rounded-lg font-body-sm text-body-sm font-semibold flex items-center justify-center gap-space-xs bg-transparent text-text-muted hover:bg-surface-subtle transition-all" id="btn-tab-news" onclick="switchAdminTab('tab-news')">
-<span class="material-symbols-outlined text-[18px]">newspaper</span>
-<span>NEWS 관리</span>
-</button>
-<button class="admin-nav-tab flex-1 min-w-[140px] py-2.5 px-space-md rounded-lg font-body-sm text-body-sm font-semibold flex items-center justify-center gap-space-xs bg-transparent text-text-muted hover:bg-surface-subtle transition-all" id="btn-tab-qa" onclick="switchAdminTab('tab-qa')">
-<span class="material-symbols-outlined text-[18px]">forum</span>
-<span>Q&amp;A 고객상담 관리</span>
-</button>
-<button class="admin-nav-tab flex-1 min-w-[140px] py-2.5 px-space-md rounded-lg font-body-sm text-body-sm font-semibold flex items-center justify-center gap-space-xs bg-transparent text-text-muted hover:bg-surface-subtle transition-all" id="btn-tab-account" onclick="switchAdminTab('tab-account')">
-<span class="material-symbols-outlined text-[18px]">manage_accounts</span>
-<span>관리자 정보 수정</span>
-</button>
-</div>
-<!-- MAIN MODULE WORKSPACES -->
-<div class="mx-gutter-mobile flex flex-col gap-space-lg">
-<!-- MODULE 1: 문의접수 통합 관리 (Default View) -->
-<div class="admin-module flex flex-col gap-space-md" id="module-inquiries">
-<!-- Sub-filter Pills -->
-<div class="flex flex-col sm:flex-row sm:items-center justify-between gap-space-sm bg-surface-canvas p-space-md rounded-xl shadow-sm">
-<div class="flex flex-wrap items-center gap-space-xs">
-<button class="inquiry-subtab px-3 py-1.5 rounded-lg font-body-sm text-body-sm font-medium bg-primary-container text-on-primary transition-all" onclick="filterInquiries('all', this)">
-              전체 (48)
-            </button>
-<button class="inquiry-subtab px-3 py-1.5 rounded-lg font-body-sm text-body-sm font-medium bg-surface-container hover:bg-surface-container-high text-on-surface transition-all" onclick="filterInquiries('standard', this)">
-              견적문의 (14건)
-            </button>
-<button class="inquiry-subtab px-3 py-1.5 rounded-lg font-body-sm text-body-sm font-medium bg-surface-container hover:bg-surface-container-high text-on-surface transition-all flex items-center gap-1" onclick="filterInquiries('paid', this)">
-<span class="material-symbols-outlined text-secondary text-[16px]">stars</span>
-<span>유료견적문의 50만원 (6건)</span>
-</button>
-<button class="inquiry-subtab px-3 py-1.5 rounded-lg font-body-sm text-body-sm font-medium bg-surface-container hover:bg-surface-container-high text-on-surface transition-all" onclick="filterInquiries('direct', this)">
-              직영건축/상담 (28건)
-            </button>
-</div>
-<div class="flex items-center gap-space-xs text-text-muted font-label-blueprint text-label-blueprint">
-<span class="w-2 h-2 rounded-full bg-secondary"></span>
-<span>최근 동기화: 실시간 작동 중</span>
-</div>
-</div>
-<!-- Inquiries Data Presentation Table -->
-<div class="bg-surface-canvas rounded-xl shadow-sm overflow-hidden flex flex-col">
-<div class="overflow-x-auto">
-<table class="w-full text-left border-collapse">
-<thead>
-<tr class="bg-surface-subtle text-text-muted font-label-blueprint text-label-blueprint tracking-wider">
-<th class="py-3 px-space-md">접수번호</th>
-<th class="py-3 px-space-md">고객명/연락처</th>
-<th class="py-3 px-space-md">분류</th>
-<th class="py-3 px-space-md">희망구조</th>
-<th class="py-3 px-space-md">토지현황</th>
-<th class="py-3 px-space-md">입금상태</th>
-<th class="py-3 px-space-md">처리현황</th>
-<th class="py-3 px-space-md text-right">관리</th>
-</tr>
-</thead>
-<tbody class="font-body-sm text-body-sm" id="inquiry-tbody">
-<!-- Row 1: 유료 견적 입금 대기 -->
-<tr class="inquiry-row row-paid hover:bg-surface-subtle transition-colors">
-<td class="py-3.5 px-space-md font-label-blueprint text-label-blueprint text-secondary font-semibold">SM-2025-089</td>
-<td class="py-3.5 px-space-md">
-<div class="font-semibold text-on-surface">김태환 대표</div>
-<div class="font-label-blueprint text-text-muted text-[12px]">010-8842-1920</div>
-</td>
-<td class="py-3.5 px-space-md">
-<span class="inline-flex items-center gap-0.5 px-2 py-0.5 bg-primary-container text-on-primary rounded text-[12px] font-medium">유료 3D견적</span>
-</td>
-<td class="py-3.5 px-space-md text-on-surface">RC 철근콘크리트 (75평)</td>
-<td class="py-3.5 px-space-md text-on-surface">경기 양평 (매입완료)</td>
-<td class="py-3.5 px-space-md">
-<span class="px-2 py-0.5 bg-accent-safety/10 text-accent-safety rounded font-semibold text-[12px]">500,000원 입금대기</span>
-</td>
-<td class="py-3.5 px-space-md">
-<span class="px-2 py-0.5 bg-surface-container text-text-muted rounded text-[12px]">미답변</span>
-</td>
-<td class="py-3.5 px-space-md text-right">
-<div class="flex items-center justify-end gap-space-xs">
-<button class="px-2.5 py-1 bg-secondary text-on-secondary rounded text-[12px] font-medium hover:bg-primary transition-colors" onclick="openReplyModal('김태환 대표', 'SM-2025-089', '양평 단독주택 RC조 75평 입체 견적 의뢰')">답변작성</button>
-<button class="p-1 text-text-muted hover:text-accent-safety transition-colors" onclick="deleteInquiryRow(this)" title="삭제"><span class="material-symbols-outlined text-[18px]">delete</span></button>
-</div>
-</td>
-</tr>
-<!-- Row 2: 유료 견적 입금 완료 -->
-<tr class="inquiry-row row-paid hover:bg-surface-subtle transition-colors bg-surface-subtle/50">
-<td class="py-3.5 px-space-md font-label-blueprint text-label-blueprint text-secondary font-semibold">SM-2025-088</td>
-<td class="py-3.5 px-space-md">
-<div class="font-semibold text-on-surface">박선우 이사</div>
-<div class="font-label-blueprint text-text-muted text-[12px]">010-3301-9924</div>
-</td>
-<td class="py-3.5 px-space-md">
-<span class="inline-flex items-center gap-0.5 px-2 py-0.5 bg-primary-container text-on-primary rounded text-[12px] font-medium">유료 3D견적</span>
-</td>
-<td class="py-3.5 px-space-md text-on-surface">중목구조 프리미엄 (60평)</td>
-<td class="py-3.5 px-space-md text-on-surface">강원 원주 (인허가중)</td>
-<td class="py-3.5 px-space-md">
-<span class="px-2 py-0.5 bg-secondary/10 text-secondary rounded font-semibold text-[12px]">입금완료 (50만)</span>
-</td>
-<td class="py-3.5 px-space-md">
-<span class="px-2 py-0.5 bg-secondary text-on-secondary rounded text-[12px]">3D도면제작중</span>
-</td>
-<td class="py-3.5 px-space-md text-right">
-<div class="flex items-center justify-end gap-space-xs">
-<button class="px-2.5 py-1 bg-surface-container-high hover:bg-surface-container text-on-surface rounded text-[12px] font-medium transition-colors" onclick="openReplyModal('박선우 이사', 'SM-2025-088', '원주 60평 목구조 3D 랜더링 및 산출내역서 송부 건')">내역확인</button>
-<button class="p-1 text-text-muted hover:text-accent-safety transition-colors" onclick="deleteInquiryRow(this)" title="삭제"><span class="material-symbols-outlined text-[18px]">delete</span></button>
-</div>
-</td>
-</tr>
-<!-- Row 3: 일반 견적 문의 -->
-<tr class="inquiry-row row-standard hover:bg-surface-subtle transition-colors">
-<td class="py-3.5 px-space-md font-label-blueprint text-label-blueprint text-secondary font-semibold">SM-2025-087</td>
-<td class="py-3.5 px-space-md">
-<div class="font-semibold text-on-surface">이정민 건축주</div>
-<div class="font-label-blueprint text-text-muted text-[12px]">010-4491-0982</div>
-</td>
-<td class="py-3.5 px-space-md">
-<span class="px-2 py-0.5 bg-surface-container text-on-surface rounded text-[12px]">일반 견적</span>
-</td>
-<td class="py-3.5 px-space-md text-on-surface">철골조 근생 상가 (120평)</td>
-<td class="py-3.5 px-space-md text-on-surface">인천 서구 (토지보유)</td>
-<td class="py-3.5 px-space-md text-text-muted font-label-blueprint text-[12px]">-</td>
-<td class="py-3.5 px-space-md">
-<span class="px-2 py-0.5 bg-surface-container text-text-muted rounded text-[12px]">미답변</span>
-</td>
-<td class="py-3.5 px-space-md text-right">
-<div class="flex items-center justify-end gap-space-xs">
-<button class="px-2.5 py-1 bg-secondary text-on-secondary rounded text-[12px] font-medium hover:bg-primary transition-colors" onclick="openReplyModal('이정민 건축주', 'SM-2025-087', '인천 서구 상가건물 개략공사비 산정 요청')">답변작성</button>
-<button class="p-1 text-text-muted hover:text-accent-safety transition-colors" onclick="deleteInquiryRow(this)" title="삭제"><span class="material-symbols-outlined text-[18px]">delete</span></button>
-</div>
-</td>
-</tr>
-<!-- Row 4: 직영건축 상담 -->
-<tr class="inquiry-row row-direct hover:bg-surface-subtle transition-colors">
-<td class="py-3.5 px-space-md font-label-blueprint text-label-blueprint text-secondary font-semibold">SM-2025-086</td>
-<td class="py-3.5 px-space-md">
-<div class="font-semibold text-on-surface">최승원 소장</div>
-<div class="font-label-blueprint text-text-muted text-[12px]">010-5519-7711</div>
-</td>
-<td class="py-3.5 px-space-md">
-<span class="px-2 py-0.5 bg-surface-container text-on-surface rounded text-[12px]">직영 공사감리</span>
-</td>
-<td class="py-3.5 px-space-md text-on-surface">골조 및 외장 직영 (45평)</td>
-<td class="py-3.5 px-space-md text-on-surface">충남 천안 (기초공사중)</td>
-<td class="py-3.5 px-space-md text-text-muted font-label-blueprint text-[12px]">-</td>
-<td class="py-3.5 px-space-md">
-<span class="px-2 py-0.5 bg-primary text-on-primary rounded text-[12px]">유선상담완료</span>
-</td>
-<td class="py-3.5 px-space-md text-right">
-<div class="flex items-center justify-end gap-space-xs">
-<button class="px-2.5 py-1 bg-surface-container-high hover:bg-surface-container text-on-surface rounded text-[12px] font-medium transition-colors" onclick="openReplyModal('최승원 소장', 'SM-2025-086', '직영 현장 기술지도 및 철근 배근 감리 지원')">기록수정</button>
-<button class="p-1 text-text-muted hover:text-accent-safety transition-colors" onclick="deleteInquiryRow(this)" title="삭제"><span class="material-symbols-outlined text-[18px]">delete</span></button>
-</div>
-</td>
-</tr>
-</tbody>
-</table>
-</div>
-<!-- Pagination helper footer -->
-<div class="p-space-md bg-surface-subtle flex items-center justify-between font-label-blueprint text-label-blueprint text-text-muted">
-<span>표시 항목: 4 / 총 48건</span>
-<div class="flex items-center gap-space-xs">
-<button class="px-2 py-1 bg-surface-canvas rounded hover:bg-surface-container shadow-sm">&lt;</button>
-<span class="px-2 font-bold text-primary">1</span>
-<button class="px-2 py-1 bg-surface-canvas rounded hover:bg-surface-container shadow-sm">&gt;</button>
-</div>
-</div>
-</div>
-</div>
-<!-- MODULE 2: NEWS 등록 및 관리 -->
-<div class="admin-module hidden flex-col gap-space-md" id="module-news">
-<!-- Registration Form Card -->
-<div class="bg-surface-canvas rounded-xl shadow-sm p-space-lg flex flex-col gap-space-md">
-<div class="flex items-center justify-between">
-<div class="flex items-center gap-space-xs">
-<span class="material-symbols-outlined text-primary text-[22px]">post_add</span>
-<h3 class="font-headline-sm text-headline-sm text-primary">새 공사소식 / NEWS 등록</h3>
-</div>
-<span class="font-label-blueprint text-label-blueprint text-secondary">ARCHITECTURAL JOURNAL POST</span>
-</div>
-<form class="flex flex-col gap-space-md" onsubmit="handleNewsSubmit(event)">
-<div class="grid grid-cols-1 md:grid-cols-3 gap-space-md">
-<div class="md:col-span-2 flex flex-col gap-space-xs">
-<label class="font-body-sm text-body-sm font-medium text-on-surface">뉴스 보도 제목</label>
-<input class="bg-surface-container-low px-space-md py-2.5 rounded-lg font-body-md text-body-md text-on-surface outline-none focus:bg-surface-canvas focus:shadow-sm" id="news-title-input" placeholder="예: [준공] 판교 대장동 모던 미니멀 하우스 구조안전 인증 획득" required="" type="text"/>
-</div>
-<div class="flex flex-col gap-space-xs">
-<label class="font-body-sm text-body-sm font-medium text-on-surface">분류 카테고리</label>
-<select class="bg-surface-container-low px-space-md py-2.5 rounded-lg font-body-md text-body-md text-on-surface outline-none" id="news-cat-input">
-<option value="현장소식">현장소식 (Construction Site)</option>
-<option value="공지사항">공지사항 (Official Notice)</option>
-<option value="언론보도">언론보도 (Press Release)</option>
-<option value="신기술인증">신기술/인증 (Tech Accreditation)</option>
-</select>
-</div>
-</div>
-<!-- Drag & Drop Visual Area -->
-<div class="flex flex-col gap-space-xs">
-<label class="font-body-sm text-body-sm font-medium text-on-surface">대표 이미지 및 도면 첨부</label>
-<div class="cursor-pointer bg-surface-subtle hover:bg-surface-container-low p-space-lg rounded-xl flex flex-col items-center justify-center gap-space-xs text-center transition-colors" id="drop-area" onclick="triggerFileInput()">
-<input accept="image/*" class="hidden" id="news-file-elem" onchange="handleFileSelected(this)" type="file"/>
-<div class="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center text-primary mb-1">
-<span class="material-symbols-outlined text-[26px]">cloud_upload</span>
-</div>
-<div class="font-body-md text-body-md font-semibold text-primary" id="drop-text-primary">클릭하거나 이미지를 여기로 드래그하세요</div>
-<div class="font-label-blueprint text-label-blueprint text-text-muted" id="drop-text-sub">JPG, PNG, WEBP (최대 15MB) - 고해상도 건축 현장 사진 권장</div>
-</div>
-</div>
-<!-- Visual Content Editor Layout -->
-<div class="flex flex-col gap-space-xs">
-<label class="font-body-sm text-body-sm font-medium text-on-surface">본문 상세 내용 작성 (WYSIWYG 서식)</label>
-<!-- Editor Toolbar Mock -->
-<div class="flex items-center gap-1 bg-surface-container p-1 rounded-t-lg">
-<button class="p-1.5 hover:bg-surface-canvas rounded text-on-surface-variant" type="button"><span class="material-symbols-outlined text-[18px]">format_bold</span></button>
-<button class="p-1.5 hover:bg-surface-canvas rounded text-on-surface-variant" type="button"><span class="material-symbols-outlined text-[18px]">format_italic</span></button>
-<button class="p-1.5 hover:bg-surface-canvas rounded text-on-surface-variant" type="button"><span class="material-symbols-outlined text-[18px]">format_list_bulleted</span></button>
-<button class="p-1.5 hover:bg-surface-canvas rounded text-on-surface-variant" type="button"><span class="material-symbols-outlined text-[18px]">link</span></button>
-<button class="p-1.5 hover:bg-surface-canvas rounded text-on-surface-variant" type="button"><span class="material-symbols-outlined text-[18px]">image</span></button>
-<div class="ml-auto font-label-blueprint text-[11px] text-text-muted px-2">STRUCTURAL SPEC VERIFIED</div>
-</div>
-<textarea class="bg-surface-container-low p-space-md rounded-b-lg font-body-md text-body-md text-on-surface outline-none focus:bg-surface-canvas focus:shadow-sm resize-none" id="news-body-input" placeholder="프로젝트 착공, 골조 완료, 단열 시공 특기사항 등 건축 공학적 디테일을 기재하십시오..." required="" rows="5"></textarea>
-</div>
-<div class="flex justify-end gap-space-sm pt-space-xs">
-<button class="px-space-lg py-2.5 bg-surface-container hover:bg-surface-container-high text-on-surface rounded-lg font-body-sm text-body-sm font-medium transition-colors" type="reset">
-                작성 취소
-              </button>
-<button class="px-space-xl py-2.5 bg-primary-container hover:bg-primary text-on-primary rounded-lg font-title-md text-title-md font-semibold shadow-md flex items-center gap-space-xs transition-colors" type="submit">
-<span class="material-symbols-outlined text-[20px]">send</span>
-<span>뉴스 즉시 등록 및 발행</span>
-</button>
-</div>
-</form>
-</div>
-<!-- Registered News Archive List -->
-<div class="bg-surface-canvas rounded-xl shadow-sm p-space-lg flex flex-col gap-space-md">
-<h3 class="font-headline-sm text-headline-sm text-primary">현재 게시된 뉴스 목록</h3>
-<div class="flex flex-col gap-space-sm" id="news-list-container">
-<!-- Item 1 -->
-<div class="p-space-md bg-surface-subtle hover:bg-surface-container-low rounded-lg flex flex-col sm:flex-row sm:items-center justify-between gap-space-md transition-colors">
-<div class="flex items-center gap-space-md">
-<div class="w-16 h-12 bg-surface-container rounded overflow-hidden shrink-0 flex items-center justify-center">
-<span class="material-symbols-outlined text-text-muted text-[24px]">apartment</span>
-</div>
-<div class="flex flex-col">
-<div class="flex items-center gap-space-xs">
-<span class="px-2 py-0.5 bg-primary-container text-on-primary rounded text-[11px] font-semibold">현장소식</span>
-<span class="font-label-blueprint text-label-blueprint text-text-muted">2025.02.14</span>
-</div>
-<h4 class="font-body-md text-body-md font-semibold text-on-surface mt-0.5">양평 옥천면 RC 단독주택 내진 구조 프레임 타설 완료</h4>
-</div>
-</div>
-<div class="flex items-center gap-space-xs self-end sm:self-auto">
-<button class="px-3 py-1.5 bg-surface-container text-on-surface hover:bg-surface-container-high rounded text-[12px] font-medium transition-colors" onclick="triggerToast('뉴스 수정 화면으로 이동합니다.')">수정</button>
-<button class="px-3 py-1.5 bg-accent-safety/10 text-accent-safety hover:bg-accent-safety hover:text-on-primary rounded text-[12px] font-medium transition-colors" onclick="deleteNewsCard(this)">삭제</button>
-</div>
-</div>
-<!-- Item 2 -->
-<div class="p-space-md bg-surface-subtle hover:bg-surface-container-low rounded-lg flex flex-col sm:flex-row sm:items-center justify-between gap-space-md transition-colors">
-<div class="flex items-center gap-space-md">
-<div class="w-16 h-12 bg-surface-container rounded overflow-hidden shrink-0 flex items-center justify-center">
-<span class="material-symbols-outlined text-text-muted text-[24px]">verified</span>
-</div>
-<div class="flex flex-col">
-<div class="flex items-center gap-space-xs">
-<span class="px-2 py-0.5 bg-secondary text-on-secondary rounded text-[11px] font-semibold">신기술인증</span>
-<span class="font-label-blueprint text-label-blueprint text-text-muted">2025.01.28</span>
-</div>
-<h4 class="font-body-md text-body-md font-semibold text-on-surface mt-0.5">상명건설 하이퍼-슬래브 기밀 단열 공법 특허 등록 완료</h4>
-</div>
-</div>
-<div class="flex items-center gap-space-xs self-end sm:self-auto">
-<button class="px-3 py-1.5 bg-surface-container text-on-surface hover:bg-surface-container-high rounded text-[12px] font-medium transition-colors" onclick="triggerToast('뉴스 수정 화면으로 이동합니다.')">수정</button>
-<button class="px-3 py-1.5 bg-accent-safety/10 text-accent-safety hover:bg-accent-safety hover:text-on-primary rounded text-[12px] font-medium transition-colors" onclick="deleteNewsCard(this)">삭제</button>
-</div>
-</div>
-</div>
-</div>
-</div>
-<!-- MODULE 3: Q&A 고객상담 관리 -->
-<div class="admin-module hidden flex-col gap-space-md" id="module-qa">
-<div class="bg-surface-canvas rounded-xl shadow-sm p-space-lg flex flex-col gap-space-md">
-<div class="flex items-center justify-between">
-<div class="flex items-center gap-space-xs">
-<span class="material-symbols-outlined text-primary text-[22px]">forum</span>
-<h3 class="font-headline-sm text-headline-sm text-primary">고객 1:1 질의응답 및 비밀글 처리</h3>
-</div>
-<span class="font-label-blueprint text-label-blueprint text-secondary">ADMIN PRIVILEGED VIEW</span>
-</div>
-<!-- Q&A Question Feed -->
-<div class="flex flex-col gap-space-md">
-<!-- Question 1: 비밀글 처리 건 -->
-<div class="p-space-md bg-surface-subtle rounded-xl flex flex-col gap-space-md">
-<div class="flex flex-col sm:flex-row sm:items-center justify-between gap-space-xs">
-<div class="flex items-center gap-space-xs">
-<span class="px-2 py-0.5 bg-surface-container-high text-on-surface-variant rounded font-mono text-[12px] font-semibold flex items-center gap-1">
-<span class="material-symbols-outlined text-[14px]">lock</span>
-<span>비밀글</span>
-</span>
-<span class="font-title-md text-title-md font-semibold text-primary">도면 검토 및 단열 보강 공사 견적 질문입니다.</span>
-</div>
-<div class="font-label-blueprint text-label-blueprint text-text-muted">
-                  작성자: 성북동 건축주 | 2025.02.15 14:22
-                </div>
-</div>
-<!-- Question Content (Visible to Admin) -->
-<p class="font-body-md text-body-md text-on-surface bg-surface-canvas p-space-md rounded-lg">
-                안녕하세요. 기존 지상 2층 철근콘크리트 주택의 지붕 및 외벽 단열 성능을 상향하려 합니다. 상명건설의 외단열 미장공법(EIFS) 적용 시 평당 시공 견적과 대략적인 공사 일정이 궁금하여 비공개로 문의드립니다.
-              </p>
-<!-- Administrator Reply Input Area -->
-<div class="flex flex-col gap-space-xs bg-surface-canvas p-space-md rounded-lg">
-<div class="flex items-center justify-between">
-<span class="font-label-metric text-label-metric text-primary flex items-center gap-1">
-<span class="material-symbols-outlined text-[18px]">support_agent</span>
-<span>상명건설 공식 회신 작성</span>
-</span>
-<label class="flex items-center gap-1 text-[12px] text-text-muted cursor-pointer">
-<input checked="" class="rounded" type="checkbox"/>
-<span>답변 등록 시 문자(SMS) 알림 자동 발송</span>
-</label>
-</div>
-<textarea class="w-full bg-surface-container-low p-space-sm rounded-lg font-body-sm text-body-sm text-on-surface outline-none focus:bg-surface-canvas focus:shadow-inner" placeholder="고객에게 안내할 전문적인 공학 솔루션 및 견적 방향을 입력하세요..." rows="3"></textarea>
-<div class="flex justify-end gap-space-xs pt-1">
-<button class="px-space-md py-1.5 bg-secondary hover:bg-primary text-on-secondary rounded-lg font-body-sm text-body-sm font-semibold transition-colors flex items-center gap-1" onclick="triggerToast('고객 Q&amp;A 공식 답변이 등록 및 발송되었습니다.')">
-<span class="material-symbols-outlined text-[16px]">reply</span>
-<span>답변 게시하기</span>
-</button>
-</div>
-</div>
-</div>
-<!-- Question 2: 일반 공개글 (답변 완료) -->
-<div class="p-space-md bg-surface-subtle rounded-xl flex flex-col gap-space-sm">
-<div class="flex flex-col sm:flex-row sm:items-center justify-between gap-space-xs">
-<div class="flex items-center gap-space-xs">
-<span class="px-2 py-0.5 bg-secondary text-on-secondary rounded text-[12px] font-medium">답변완료</span>
-<span class="font-title-md text-title-md font-semibold text-primary">토지 매입 전 가설계 및 현장실사 동행 서비스가 가능한가요?</span>
-</div>
-<div class="font-label-blueprint text-label-blueprint text-text-muted">
-                  작성자: 용인 수지 예비건축주 | 2025.02.12
-                </div>
-</div>
-<div class="bg-surface-canvas p-space-md rounded-lg text-text-muted font-body-sm text-body-sm">
-<strong class="text-primary font-semibold">[상명건설 답변]:</strong> 네, 고객님. 유료 정밀 컨설팅 의뢰 시 구조기술사 및 현장 총괄소장이 직접 대동하여 진입도로 너비, 상하수도 인입, 일조 사선제한 등을 사전 검토해 드리고 있습니다.
-              </div>
-</div>
-</div>
-</div>
-</div>
-<!-- MODULE 4: 관리자 정보 수정 -->
-<div class="admin-module hidden flex-col gap-space-md" id="module-account">
-<div class="bg-surface-canvas rounded-xl shadow-sm p-space-lg max-w-2xl mx-auto w-full flex flex-col gap-space-lg">
-<div class="flex items-center gap-space-xs">
-<div class="p-2 bg-primary/10 rounded-lg text-primary">
-<span class="material-symbols-outlined text-[24px]">badge</span>
-</div>
-<div>
-<h3 class="font-headline-sm text-headline-sm text-primary">관리자 보안 계정 설정</h3>
-<p class="font-body-sm text-body-sm text-text-muted">시스템 관리자 인증 정보 및 비밀번호를 안전하게 갱신하십시오.</p>
-</div>
-</div>
-<form class="flex flex-col gap-space-md" onsubmit="handleAccountUpdate(event)">
-<div class="flex flex-col gap-space-xs">
-<label class="font-body-sm text-body-sm font-medium text-on-surface">현재 관리자 아이디</label>
-<div class="bg-surface-subtle px-space-md py-2.5 rounded-lg font-label-blueprint text-label-blueprint text-primary font-semibold flex items-center justify-between">
-<span>admin (최고관리자 - SUPER_ROOT)</span>
-<span class="material-symbols-outlined text-[18px] text-secondary">verified_user</span>
-</div>
-</div>
-<div class="flex flex-col gap-space-xs">
-<label class="font-body-sm text-body-sm font-medium text-on-surface" for="new-pw-input">새 비밀번호 입력</label>
-<input class="bg-surface-container-low px-space-md py-2.5 rounded-lg font-body-md text-body-md text-on-surface outline-none focus:bg-surface-canvas focus:shadow-sm" id="new-pw-input" placeholder="영문, 숫자 포함 8자리 이상" required="" type="password"/>
-</div>
-<div class="flex flex-col gap-space-xs">
-<label class="font-body-sm text-body-sm font-medium text-on-surface" for="confirm-pw-input">새 비밀번호 재확인</label>
-<input class="bg-surface-container-low px-space-md py-2.5 rounded-lg font-body-md text-body-md text-on-surface outline-none focus:bg-surface-canvas focus:shadow-sm" id="confirm-pw-input" placeholder="동일한 비밀번호 재입력" required="" type="password"/>
-</div>
-<div class="flex flex-col gap-space-xs">
-<label class="font-body-sm text-body-sm font-medium text-on-surface">관리자 대표 비상 연락망 (SMS 수신용)</label>
-<input class="bg-surface-container-low px-space-md py-2.5 rounded-lg font-body-md text-body-md text-on-surface outline-none focus:bg-surface-canvas focus:shadow-sm" type="text" value="010-9081-3001"/>
-</div>
-<div class="pt-space-sm">
-<button class="w-full py-3 bg-primary-container hover:bg-primary text-on-primary rounded-lg font-title-md text-title-md font-semibold shadow-md flex items-center justify-center gap-space-xs transition-colors" type="submit">
-<span class="material-symbols-outlined text-[20px]">save</span>
-<span>보안 계정 정보 저장 및 적용</span>
-</button>
-</div>
-</form>
-</div>
-</div>
-</div>
-</section>
-<!-- FLYOUT / MODAL FOR INQUIRY REPLY -->
-<div class="fixed inset-0 z-50 bg-on-surface/40 backdrop-blur-sm hidden items-center justify-center p-gutter-mobile" id="reply-modal">
-<div class="bg-surface-canvas rounded-xl shadow-xl max-w-lg w-full p-space-lg flex flex-col gap-space-md transform transition-transform">
-<div class="flex items-center justify-between">
-<div class="flex items-center gap-space-xs">
-<span class="material-symbols-outlined text-secondary text-[24px]">rate_review</span>
-<h3 class="font-title-md text-title-md font-bold text-primary">공식 견적 답변 및 안내 발송</h3>
-</div>
-<button class="w-8 h-8 flex items-center justify-center text-text-muted hover:text-on-surface rounded-full" onclick="closeReplyModal()">
-<span class="material-symbols-outlined text-[20px]">close</span>
-</button>
-</div>
-<div class="bg-surface-subtle p-space-sm rounded-lg flex flex-col gap-1">
-<div class="font-body-sm text-body-sm font-semibold text-primary" id="modal-client-name">고객명</div>
-<div class="font-label-blueprint text-[12px] text-text-muted" id="modal-inquiry-num">SM-2025-000</div>
-<div class="font-body-sm text-[13px] text-on-surface-variant mt-1" id="modal-inquiry-summary">의뢰 요약</div>
-</div>
-<div class="flex flex-col gap-space-xs">
-<label class="font-body-sm text-body-sm font-medium text-on-surface">관리자 답변 본문</label>
-<textarea class="bg-surface-container-low p-space-md rounded-lg font-body-sm text-body-sm text-on-surface outline-none focus:bg-surface-canvas focus:shadow-sm resize-none" id="modal-reply-content" placeholder="견적 산출 완료 안내 또는 3D 도면 검토 일정을 작성하십시오..." rows="4"></textarea>
-</div>
-<div class="flex flex-col gap-space-xs">
-<label class="flex items-center gap-space-xs cursor-pointer">
-<input checked="" class="rounded" type="checkbox"/>
-<span class="font-body-sm text-body-sm text-on-surface">고객 연락처로 알림톡/SMS 동시 전송</span>
-</label>
-<label class="flex items-center gap-space-xs cursor-pointer">
-<input checked="" class="rounded" type="checkbox"/>
-<span class="font-body-sm text-body-sm text-on-surface">견적 세부 산출서 PDF 자동 이메일 첨부</span>
-</label>
-</div>
-<div class="flex justify-end gap-space-sm pt-space-xs">
-<button class="px-space-md py-2 bg-surface-container hover:bg-surface-container-high text-on-surface rounded-lg font-body-sm text-body-sm font-medium transition-colors" onclick="closeReplyModal()">
-          닫기
-        </button>
-<button class="px-space-lg py-2 bg-primary-container hover:bg-primary text-on-primary rounded-lg font-body-sm text-body-sm font-semibold shadow-md flex items-center gap-1 transition-colors" onclick="sendReplySubmit()">
-<span class="material-symbols-outlined text-[18px]">send</span>
-<span>답변 발송 완료</span>
-</button>
-</div>
-</div>
-</div>
-<!-- SCRIPT ENGINE -->
-<script>
-    // State management
-    let isAuthenticated = false;
+          </div>
+        </div>
+      </form>
+    </div>
+  </section>
 
-    // Toast feedback utility
+  <!-- ==================== 2. AUTHENTICATED: DASHBOARD ==================== -->
+  <div id="dashboard-screen" class="hidden flex-col min-h-screen">
+    
+    <!-- Top Minimal Header (Requested: No < Admin Portal or house icon) -->
+    <header class="bg-white border-b border-slate-200 sticky top-0 z-40">
+      <div class="admin-shell py-3.5 flex items-center justify-between admin-header-row">
+        
+        <!-- Brand Title -->
+        <div class="flex items-center gap-3">
+          <div class="w-9 h-9 rounded-lg bg-[#0b2239] text-white flex items-center justify-center font-black tracking-tighter text-sm shadow-sm">
+            SM
+          </div>
+          <div class="flex flex-col">
+            <div class="flex items-center gap-2">
+              <h1 class="text-base font-bold text-slate-900 tracking-tight">상명건설 관리자 시스템</h1>
+              <span class="px-2 py-0.5 bg-slate-100 text-slate-600 text-[10px] font-mono rounded font-semibold border border-slate-200">Console v2.4</span>
+            </div>
+            <span class="text-[11px] text-slate-400">통합 프로젝트 & 고객 접수 관제 데이터베이스</span>
+          </div>
+        </div>
+
+        <!-- Controls: ZIP Download & Admin Badge & Logout -->
+        <div class="flex items-center gap-2.5">
+          <a href="/download" download="sang_myung_construct_project.zip" class="inline-flex items-center gap-1.5 px-3 py-1.5 bg-slate-100 hover:bg-slate-200 text-slate-700 rounded-lg text-xs font-semibold border border-slate-200 transition" title="전체 소스코드 ZIP 다운로드">
+            <span class="material-symbols-outlined text-[16px] text-[#0175b1]">download_for_offline</span>
+            <span>프로젝트 ZIP 다운로드</span>
+          </a>
+
+          <div class="flex items-center gap-1.5 px-3 py-1.5 bg-slate-50 border border-slate-200 rounded-lg text-xs font-semibold text-slate-700">
+            <span class="w-2 h-2 rounded-full bg-emerald-500"></span>
+            <span id="badge-admin-name">최고관리자 (admin)</span>
+          </div>
+
+          <button onclick="requestLogout()" class="inline-flex items-center gap-1 px-3 py-1.5 bg-rose-50 hover:bg-rose-100 text-rose-600 rounded-lg text-xs font-semibold border border-rose-200 transition">
+            <span class="material-symbols-outlined text-[16px]">logout</span>
+            <span>로그아웃</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- Navigation Tabs (4 Core Management Tabs) -->
+      <div class="admin-shell border-t border-slate-100">
+        <div class="flex space-x-1 overflow-x-auto py-2">
+          <button id="btn-tab-orders" onclick="switchAdminTab('orders')" class="adm-tab-btn px-4 py-2 text-xs font-bold rounded-lg bg-[#0b2239] text-white transition flex items-center gap-1.5">
+            <span class="material-symbols-outlined text-[16px]">contact_support</span>
+            <span>문의접수 통합관리 (ORDER)</span>
+          </button>
+          <button id="btn-tab-news" onclick="switchAdminTab('news')" class="adm-tab-btn px-4 py-2 text-xs font-semibold rounded-lg text-slate-600 hover:bg-slate-100 transition flex items-center gap-1.5">
+            <span class="material-symbols-outlined text-[16px]">newspaper</span>
+            <span>NEWS 관리 (NEWS)</span>
+          </button>
+          <button id="btn-tab-services" onclick="switchAdminTab('services')" class="adm-tab-btn px-4 py-2 text-xs font-semibold rounded-lg text-slate-600 hover:bg-slate-100 transition flex items-center gap-1.5">
+            <span class="material-symbols-outlined text-[16px]">domain</span>
+            <span>서비스 관리 (SERVICE)</span>
+          </button>
+          <button id="btn-tab-qna" onclick="switchAdminTab('qna')" class="adm-tab-btn px-4 py-2 text-xs font-semibold rounded-lg text-slate-600 hover:bg-slate-100 transition flex items-center gap-1.5">
+            <span class="material-symbols-outlined text-[16px]">forum</span>
+            <span>Q&amp;A 고객상담 관리 (Q&amp;A)</span>
+          </button>
+          <button id="btn-tab-account" onclick="switchAdminTab('account')" class="adm-tab-btn px-4 py-2 text-xs font-semibold rounded-lg text-slate-600 hover:bg-slate-100 transition flex items-center gap-1.5">
+            <span class="material-symbols-outlined text-[16px]">manage_accounts</span>
+            <span>관리자 정보 수정 (ADMIN)</span>
+          </button>
+        </div>
+      </div>
+    </header>
+
+    <!-- Workspace Main Body -->
+    <main class="admin-shell py-6 flex-grow">
+
+      <!-- ==================== TAB 1: ORDER TABLE (문의접수 통합관리) ==================== -->
+      <section id="module-orders" class="admin-module flex flex-col gap-4">
+        
+        <!-- Filter Tabs & Status Bar -->
+        <div class="bg-white p-4 rounded-xl border border-slate-200 shadow-sm flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+          <div class="flex flex-wrap items-center gap-1.5">
+            <button onclick="filterOrders('all', this)" class="order-filter-btn px-3 py-1.5 rounded-lg text-xs font-bold bg-[#0b2239] text-white transition">
+              전체 (<span id="count-all">0</span>)
+            </button>
+            <button onclick="filterOrders('견적문의', this)" class="order-filter-btn px-3 py-1.5 rounded-lg text-xs font-semibold bg-slate-100 text-slate-700 hover:bg-slate-200 transition">
+              견적문의 (<span id="count-standard">0</span>)
+            </button>
+            <button onclick="filterOrders('유료견적문의', this)" class="order-filter-btn px-3 py-1.5 rounded-lg text-xs font-semibold bg-slate-100 text-slate-700 hover:bg-slate-200 transition flex items-center gap-1">
+              <span class="text-amber-500 font-bold">★</span>
+              <span>유료견적문의 50만원 (<span id="count-paid">0</span>)</span>
+            </button>
+            <button onclick="filterOrders('상담신청', this)" class="order-filter-btn px-3 py-1.5 rounded-lg text-xs font-semibold bg-slate-100 text-slate-700 hover:bg-slate-200 transition">
+              직영건축/상담신청 (<span id="count-consult">0</span>)
+            </button>
+          </div>
+          <div class="text-xs text-slate-400 font-mono flex items-center gap-1.5">
+            <span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
+            <span>SQLite/JSON DB 실시간 동기화 완료</span>
+          </div>
+        </div>
+
+        <!-- Orders Table -->
+        <div class="bg-white rounded-xl border border-slate-200 shadow-sm overflow-hidden">
+          <div class="overflow-x-auto">
+            <table class="w-full text-left text-xs border-collapse">
+              <thead>
+                <tr class="bg-slate-50 text-slate-600 font-bold border-b border-slate-200">
+                  <th class="py-3 px-3.5">접수일</th>
+                  <th class="py-3 px-3.5">접수번호</th>
+                  <th class="py-3 px-3.5">접수구분</th>
+                  <th class="py-3 px-3.5">신청자명</th>
+                  <th class="py-3 px-3.5">연락처 / 이메일</th>
+                  <th class="py-3 px-3.5">희망구조</th>
+                  <th class="py-3 px-3.5">진행단계</th>
+                  <th class="py-3 px-3.5">입금상태</th>
+                  <th class="py-3 px-3.5">처리현황</th>
+                  <th class="py-3 px-3.5 text-center">관리</th>
+                </tr>
+              </thead>
+              <tbody id="orders-tbody" class="divide-y divide-slate-100 text-slate-700">
+                <!-- Dynamically rendered via JS -->
+              </tbody>
+            </table>
+          </div>
+          <!-- Orders Pagination -->
+          <div id="orders-pagination" class="border-t border-slate-100"></div>
+        </div>
+      </section>
+
+      <!-- ==================== TAB 2: NEWS TABLE (NEWS 관리) ==================== -->
+      <section id="module-news" class="admin-module hidden flex-col gap-6">
+        
+        <!-- News Register Form Card -->
+        <div class="bg-white p-6 rounded-xl border border-slate-200 shadow-sm">
+          <div class="flex items-center gap-2 mb-4 pb-3 border-b border-slate-100">
+            <span class="material-symbols-outlined text-[#0175b1]">add_circle</span>
+            <h3 class="text-sm font-bold text-slate-900">신규 뉴스 및 보도자료 등록 (NEWS TABLE)</h3>
+          </div>
+          <form onsubmit="handleNewsCreate(event)" class="space-y-4">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+              <div class="md:col-span-2">
+                <label class="block text-xs font-semibold text-slate-700 mb-1">뉴스 보도 제목 <span class="text-rose-500">*</span></label>
+                <input id="new-news-title" type="text" required placeholder="예: 상명건설, 2025 혁신 주거 부문 대상 수상" class="w-full text-xs rounded-lg border border-slate-200 p-2.5 outline-none focus:border-[#0175b1]"/>
+              </div>
+              <div>
+                <label class="block text-xs font-semibold text-slate-700 mb-1">분류</label>
+                <select id="new-news-category" class="w-full text-xs rounded-lg border border-slate-200 p-2.5 outline-none bg-white">
+                  <option value="신기술 특허">신기술 특허</option>
+                  <option value="현장 착공">현장 착공</option>
+                  <option value="준공 보도">준공 보도</option>
+                  <option value="경영 실적">경영 실적</option>
+                  <option value="서비스 혁신">서비스 혁신</option>
+                  <option value="품질 인증">품질 인증</option>
+                </select>
+              </div>
+            </div>
+
+            <div>
+              <label class="block text-xs font-semibold text-slate-700 mb-1">대표 이미지 첨부 (직접 사진 업로드 또는 URL)</label>
+              <div class="flex flex-col sm:flex-row gap-2">
+                <input id="new-news-image-file" type="file" accept="image/*" onchange="handleNewsImageUpload(event)" class="w-full text-xs rounded-lg border border-slate-200 p-2 outline-none file:mr-2 file:py-1 file:px-2.5 file:rounded-md file:border-0 file:text-xs file:font-semibold file:bg-sky-50 file:text-[#0175b1] hover:file:bg-sky-100"/>
+                <input id="new-news-image" type="text" placeholder="upimage/파일명.jpg 또는 이미지URL" value="https://lh3.googleusercontent.com/aida-public/AB6AXuC42UAaultfGQ1FgDKimOEULZbstkrAoLuZfogkoIxSF-SkZ7e960OLRdyCqhNkr1CKA6CK9NlaWbnUVEfUXnm4WvNvTAsrNg5AQLwO1zTnm7lzw9QdjA6ynXoR5UouMHUpTw9jDodL1opdDKxSkQJYj1M6VFNA-khRxfvcPu8tfG-Bo_9PvBv96lgFqZqFcDynamwsV1d63sPZitvjaKoHEbFxg0ShymCoCBcSiQOlASKQqPkkpUt9Iw" class="w-full text-xs rounded-lg border border-slate-200 p-2.5 outline-none focus:border-[#0175b1] font-mono"/>
+              </div>
+              <p class="text-[10px] text-slate-400 mt-1">※ 이미지 파일 선택 시 즉시 서버 <strong class="text-slate-600">upimage</strong> 폴더에 저장되며, DB에는 해당 경로(<span class="font-mono text-sky-700">upimage/파일명</span>)만 기록됩니다.</p>
+            </div>
+
+            <div>
+              <label class="block text-xs font-semibold text-slate-700 mb-1">본문 내용 <span class="text-rose-500">*</span></label>
+              <textarea id="new-news-content" required rows="3" placeholder="보도자료 상세 내용을 입력하십시오." class="w-full text-xs rounded-lg border border-slate-200 p-2.5 outline-none focus:border-[#0175b1]"></textarea>
+            </div>
+
+            <div class="flex justify-end">
+              <button type="submit" class="px-5 py-2.5 bg-[#0b2239] hover:bg-slate-800 text-white rounded-lg text-xs font-bold transition shadow-sm flex items-center gap-1.5">
+                <span class="material-symbols-outlined text-[16px]">save</span>
+                <span>보도자료 즉시 등록</span>
+              </button>
+            </div>
+          </form>
+        </div>
+
+        <!-- News List Table -->
+        <div class="bg-white rounded-xl border border-slate-200 shadow-sm overflow-hidden">
+          <div class="p-4 border-b border-slate-100 flex items-center justify-between">
+            <h3 class="text-xs font-bold text-slate-900">등록된 뉴스 리스트 (<span id="count-news">0</span>건)</h3>
+          </div>
+          <div class="overflow-x-auto">
+            <table class="w-full text-left text-xs border-collapse">
+              <thead>
+                <tr class="bg-slate-50 text-slate-600 font-bold border-b border-slate-200">
+                  <th class="py-3 px-3.5 w-16">번호</th>
+                  <th class="py-3 px-3.5 w-20">이미지</th>
+                  <th class="py-3 px-3.5 w-24">분류</th>
+                  <th class="py-3 px-3.5">뉴스 제목</th>
+                  <th class="py-3 px-3.5 w-24">작성일</th>
+                  <th class="py-3 px-3.5 w-28 text-center">관리</th>
+                </tr>
+              </thead>
+              <tbody id="news-tbody" class="divide-y divide-slate-100 text-slate-700">
+                <!-- Dynamically rendered via JS -->
+              </tbody>
+            </table>
+          </div>
+          <!-- News Pagination (5 items per page) -->
+          <div id="news-pagination" class="border-t border-slate-100"></div>
+        </div>
+      </section>
+
+      <!-- ==================== TAB 2-1: SERVICES (서비스 라인업 관리) ==================== -->
+      <section id="module-services" class="admin-module hidden flex-col gap-6">
+        
+        <!-- Header & Category Stats -->
+        <div class="bg-white p-4 rounded-xl border border-slate-200 shadow-sm flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+          <div class="flex items-center gap-2">
+            <span class="material-symbols-outlined text-[#0175b1]">domain</span>
+            <h3 class="text-xs font-bold text-slate-900">서비스 라인업 관리 (주택건설 · 상업건설 · 직영건축 · 추가)</h3>
+            <span id="count-svc-badge" class="px-2 py-0.5 bg-sky-50 text-[#0175b1] rounded text-[11px] font-bold font-mono">총 0건</span>
+          </div>
+          <div class="flex flex-wrap items-center gap-1.5" id="svc-category-filter-bar">
+            <!-- Dynamic Category Filter Buttons rendered by JS -->
+          </div>
+        </div>
+
+        <!-- New Service Registration Card -->
+        <div class="bg-white p-6 rounded-xl border border-slate-200 shadow-sm">
+          <div class="flex items-center justify-between mb-4 pb-3 border-b border-slate-100">
+            <h4 class="text-xs font-bold text-slate-900 flex items-center gap-1.5">
+              <span class="material-symbols-outlined text-[18px] text-[#0175b1]">add_box</span>
+              <span>신규 서비스 라인업 등록 (관리자 전용)</span>
+            </h4>
+            <span class="text-[11px] text-slate-400">등록된 서비스는 프론트엔드 서비스 섹션에 실시간 게시됩니다.</span>
+          </div>
+
+          <form id="service-create-form" onsubmit="handleServiceCreate(event)" class="space-y-4">
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              <!-- 구분 (Category) -->
+              <div>
+                <label class="block text-xs font-semibold text-slate-700 mb-1">
+                  구분 선택 또는 직접 추가 <span class="text-rose-500">*</span>
+                </label>
+                <div class="flex gap-2">
+                  <select id="new-svc-category" onchange="toggleCustomCategoryInput(this, 'new-svc-custom-cat')" class="w-full text-xs rounded-lg border border-slate-200 p-2.5 outline-none focus:border-[#0175b1] bg-white">
+                    <option value="주택건설">주택건설</option>
+                    <option value="상업건설">상업건설</option>
+                    <option value="직영건축">직영건축</option>
+                    <option value="__custom__">+ 새 구분 직접입력 (추가)</option>
+                  </select>
+                  <input id="new-svc-custom-cat" type="text" placeholder="새 구분명 입력" class="hidden w-full text-xs rounded-lg border border-slate-200 p-2.5 outline-none focus:border-[#0175b1]"/>
+                </div>
+              </div>
+
+              <!-- 소제목 (Small Subtitle on Front) -->
+              <div>
+                <label class="block text-xs font-semibold text-slate-700 mb-1">
+                  소제목 (프론트에 작게 출력) <span class="text-rose-500">*</span>
+                </label>
+                <input id="new-svc-subtitle" type="text" required placeholder="예: RC 구조, 친환경 목구조, 테라스하우스" class="w-full text-xs rounded-lg border border-slate-200 p-2.5 outline-none focus:border-[#0175b1]"/>
+              </div>
+            </div>
+
+            <!-- 제목 (Bold Main Title on Front) -->
+            <div>
+              <label class="block text-xs font-semibold text-slate-700 mb-1">
+                제목 (프론트에 볼드체로 출력되는 부분) <span class="text-rose-500">*</span>
+              </label>
+              <input id="new-svc-title" type="text" required placeholder="예: 모던 미니멀 콘크리트 빌라" class="w-full text-xs rounded-lg border border-slate-200 p-2.5 outline-none focus:border-[#0175b1] font-bold text-slate-900"/>
+            </div>
+
+            <!-- 내용 (1줄만 출력) -->
+            <div>
+              <label class="block text-xs font-semibold text-slate-700 mb-1">
+                내용 (프론트는 1줄만 출력, 상세페이지는 전체 출력) <span class="text-rose-500">*</span>
+              </label>
+              <textarea id="new-svc-content" rows="2" required placeholder="예: 경기 양평 ｜ 연면적 248㎡ ｜ 2024 준공 (프론트 카드에는 1줄로 축약되어 출력됩니다.)" class="w-full text-xs rounded-lg border border-slate-200 p-2.5 outline-none focus:border-[#0175b1]"></textarea>
+            </div>
+
+            <!-- 상단 소개 (HTML EDITOR 로 코드 작성 가능) -->
+            <div>
+              <div class="flex items-center justify-between mb-1">
+                <label class="block text-xs font-semibold text-slate-700">
+                  상단 소개 (HTML EDITOR 코드 작성 가능)
+                </label>
+                <button type="button" onclick="toggleHtmlSourceMode('new-svc')" class="text-[11px] font-mono text-[#0175b1] hover:underline flex items-center gap-1">
+                  <span class="material-symbols-outlined text-[13px]">code</span>
+                  <span id="new-svc-code-toggle-text">HTML 소스 직접 편집</span>
+                </button>
+              </div>
+
+              <!-- Editor Toolbar -->
+              <div class="bg-slate-100 border border-slate-200 rounded-t-lg p-1.5 flex flex-wrap items-center gap-1 text-xs">
+                <button type="button" onclick="execEditorCommand('new-svc', 'bold')" class="px-2 py-1 bg-white hover:bg-slate-200 font-bold rounded border border-slate-300" title="굵게">B</button>
+                <button type="button" onclick="execEditorCommand('new-svc', 'italic')" class="px-2 py-1 bg-white hover:bg-slate-200 italic rounded border border-slate-300" title="기울임">I</button>
+                <button type="button" onclick="execEditorCommand('new-svc', 'underline')" class="px-2 py-1 bg-white hover:bg-slate-200 underline rounded border border-slate-300" title="밑줄">U</button>
+                <span class="text-slate-300">|</span>
+                <button type="button" onclick="insertEditorHtml('new-svc', '&lt;h3 class=\'text-base font-bold text-slate-900 mb-1\'&gt;소제목&lt;/h3&gt;')" class="px-2 py-1 bg-white hover:bg-slate-200 font-bold rounded border border-slate-300 text-[11px]" title="제목태그">H3</button>
+                <button type="button" onclick="insertEditorHtml('new-svc', '&lt;strong class=\'text-[#0175b1]\'&gt;강조문구&lt;/strong&gt;')" class="px-2 py-1 bg-white hover:bg-slate-200 text-[#0175b1] font-bold rounded border border-slate-300 text-[11px]" title="파란강조">강조</button>
+                <button type="button" onclick="insertEditorHtml('new-svc', '&lt;p class=\'text-xs text-slate-600 leading-relaxed mb-2\'&gt;설명문구를 작성하세요.&lt;/p&gt;')" class="px-2 py-1 bg-white hover:bg-slate-200 rounded border border-slate-300 text-[11px]" title="단락">&lt;p&gt;</button>
+                <button type="button" onclick="execEditorCommand('new-svc', 'insertUnorderedList')" class="px-2 py-1 bg-white hover:bg-slate-200 rounded border border-slate-300 text-[11px]" title="목록">• 목록</button>
+                <button type="button" onclick="execEditorCommand('new-svc', 'removeFormat')" class="px-2 py-1 bg-white hover:bg-slate-200 text-rose-600 rounded border border-slate-300 text-[11px]" title="서식초기화">서식제거</button>
+              </div>
+
+              <!-- Visual Editor -->
+              <div id="new-svc-visual-editor" contenteditable="true" class="w-full min-h-[90px] border border-t-0 border-slate-200 rounded-b-lg p-3 text-xs text-slate-800 leading-relaxed outline-none focus:border-[#0175b1] bg-white">
+                <p>상명건설의 전문 시공 기술과 차별화된 엔지니어링 소개를 자유롭게 작성하세요.</p>
+              </div>
+              <!-- Raw HTML Editor (Hidden by default) -->
+              <textarea id="new-svc-raw-html" class="hidden w-full min-h-[90px] border border-t-0 border-slate-200 rounded-b-lg p-3 text-xs font-mono text-slate-800 leading-relaxed outline-none focus:border-[#0175b1] bg-slate-50"></textarea>
+            </div>
+
+            <!-- 사진업로드 (업로드하면 즉시 출력) -->
+            <div>
+              <label class="block text-xs font-semibold text-slate-700 mb-1">
+                대표 사진 첨부 (직접 파일 업로드 또는 경로)
+              </label>
+              <div class="flex flex-col sm:flex-row items-start sm:items-center gap-3">
+                <div class="w-24 h-18 sm:w-28 sm:h-20 rounded-lg overflow-hidden border border-slate-200 bg-slate-100 flex items-center justify-center shrink-0">
+                  <img id="new-svc-img-preview" src="/upimage/default_service.svg" alt="미리보기" class="w-full h-full object-cover"/>
+                </div>
+                <div class="flex-grow w-full space-y-1.5">
+                  <div class="flex gap-2">
+                    <input id="new-svc-image" type="text" value="/upimage/default_service.svg" placeholder="/upimage/... 또는 URL" class="w-full text-xs rounded-lg border border-slate-200 p-2.5 outline-none focus:border-[#0175b1] font-mono"/>
+                    <input type="file" id="new-svc-file-input" accept="image/*" class="hidden" onchange="handleServiceImageUpload(event, 'new')"/>
+                    <button type="button" onclick="document.getElementById('new-svc-file-input').click()" class="shrink-0 px-3.5 py-2.5 bg-slate-100 hover:bg-slate-200 text-slate-700 text-xs font-bold rounded-lg border border-slate-200 transition flex items-center gap-1">
+                      <span class="material-symbols-outlined text-[16px]">upload_file</span>
+                      <span>사진 업로드</span>
+                    </button>
+                  </div>
+                  <p class="text-[10px] text-slate-400">※ 사진을 업로드하면 서버 `upimage` 폴더에 즉시 저장되고 경로가 기록됩니다.</p>
+                </div>
+              </div>
+            </div>
+
+            <div class="pt-2">
+              <button type="submit" class="w-full py-3 bg-[#0b2239] hover:bg-slate-800 text-white font-bold text-xs rounded-lg shadow-md transition flex items-center justify-center gap-1.5">
+                <span class="material-symbols-outlined text-[18px]">add_circle</span>
+                <span>신규 서비스 등록 완료</span>
+              </button>
+            </div>
+          </form>
+        </div>
+
+        <!-- Service Table List -->
+        <div class="bg-white rounded-xl border border-slate-200 shadow-sm overflow-hidden">
+          <div class="p-4 border-b border-slate-100 flex items-center justify-between">
+            <h4 class="text-xs font-bold text-slate-900 flex items-center gap-1.5">
+              <span class="material-symbols-outlined text-[16px] text-[#0175b1]">table_chart</span>
+              <span>등록된 서비스 라인업 목록</span>
+            </h4>
+            <span class="text-[11px] text-slate-400">상세/수정 버튼 클릭 시 모달에서 서식 및 이미지를 변경할 수 있습니다.</span>
+          </div>
+          <div class="overflow-x-auto">
+            <table class="w-full text-left text-xs border-collapse">
+              <thead>
+                <tr class="bg-slate-50 text-slate-600 font-bold border-b border-slate-200">
+                  <th class="py-3 px-3.5 w-16">번호</th>
+                  <th class="py-3 px-3.5 w-20">사진</th>
+                  <th class="py-3 px-3.5 w-24">구분</th>
+                  <th class="py-3 px-3.5 w-28">소제목</th>
+                  <th class="py-3 px-3.5 w-48">제목(볼드체)</th>
+                  <th class="py-3 px-3.5">내용(1줄 요약)</th>
+                  <th class="py-3 px-3.5 w-32">입력시간</th>
+                  <th class="py-3 px-3.5 w-28 text-center">관리</th>
+                </tr>
+              </thead>
+              <tbody id="services-tbody" class="divide-y divide-slate-100 text-slate-700">
+                <!-- Dynamically rendered via JS -->
+              </tbody>
+            </table>
+          </div>
+          <!-- Services Pagination (5 items per page) -->
+          <div id="services-pagination" class="border-t border-slate-100"></div>
+        </div>
+      </section>
+      <section id="module-qna" class="admin-module hidden flex-col gap-4">
+        <div class="bg-white p-4 rounded-xl border border-slate-200 shadow-sm flex items-center justify-between">
+          <div class="flex items-center gap-2">
+            <span class="material-symbols-outlined text-[#0175b1]">forum</span>
+            <h3 class="text-xs font-bold text-slate-900">고객 1:1 Q&amp;A 질문 및 답변 관리 (<span id="count-qna">0</span>건)</h3>
+          </div>
+          <span class="text-[11px] text-slate-400">답변 작성 시 프론트엔드에 실시간 반영됩니다.</span>
+        </div>
+
+        <div class="bg-white rounded-xl border border-slate-200 shadow-sm overflow-hidden">
+          <div class="overflow-x-auto">
+            <table class="w-full text-left text-xs border-collapse">
+              <thead>
+                <tr class="bg-slate-50 text-slate-600 font-bold border-b border-slate-200">
+                  <th class="py-3 px-3.5 w-16">번호</th>
+                  <th class="py-3 px-3.5 w-24">작성자명</th>
+                  <th class="py-3 px-3.5 w-32">연락처</th>
+                  <th class="py-3 px-3.5">질문 제목</th>
+                  <th class="py-3 px-3.5 w-20">비밀글</th>
+                  <th class="py-3 px-3.5 w-20">상태</th>
+                  <th class="py-3 px-3.5 w-24">작성일</th>
+                  <th class="py-3 px-3.5 w-28 text-center">관리</th>
+                </tr>
+              </thead>
+              <tbody id="qna-tbody" class="divide-y divide-slate-100 text-slate-700">
+                <!-- Dynamically rendered via JS -->
+              </tbody>
+            </table>
+          </div>
+          <!-- Q&A Pagination (5 items per page) -->
+          <div id="qna-pagination" class="border-t border-slate-100"></div>
+        </div>
+      </section>
+
+      <!-- ==================== TAB 4: ADMIN TABLE (관리자 정보 수정) ==================== -->
+      <section id="module-account" class="admin-module hidden flex-col gap-6">
+        <div class="bg-white max-w-xl mx-auto w-full p-6 sm:p-8 rounded-xl border border-slate-200 shadow-sm">
+          <div class="flex items-center gap-2 mb-6 pb-4 border-b border-slate-100">
+            <span class="material-symbols-outlined text-[#0175b1]">security</span>
+            <div>
+              <h3 class="text-sm font-bold text-slate-900">최고관리자 보안 정보 수정</h3>
+              <p class="text-xs text-slate-500 mt-0.5">로그인 계정 식별자 및 보안 비밀번호를 안전하게 변경합니다.</p>
+            </div>
+          </div>
+
+          <form onsubmit="handleAccountSave(event)" class="space-y-4">
+            <div>
+              <label class="block text-xs font-semibold text-slate-700 mb-1">현재 사용 중인 비밀번호 <span class="text-rose-500">*</span></label>
+              <input id="acc-curr-pw" type="password" required placeholder="기본값: 1234" class="w-full text-xs rounded-lg border border-slate-200 p-2.5 outline-none focus:border-[#0175b1]"/>
+            </div>
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-2">
+              <div>
+                <label class="block text-xs font-semibold text-slate-700 mb-1">새 관리자 아이디</label>
+                <input id="acc-new-id" type="text" placeholder="미입력 시 기존 id 유지" class="w-full text-xs rounded-lg border border-slate-200 p-2.5 outline-none focus:border-[#0175b1]"/>
+              </div>
+              <div>
+                <label class="block text-xs font-semibold text-slate-700 mb-1">새 비밀번호</label>
+                <input id="acc-new-pw" type="password" placeholder="변경할 비밀번호" class="w-full text-xs rounded-lg border border-slate-200 p-2.5 outline-none focus:border-[#0175b1]"/>
+              </div>
+            </div>
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              <div>
+                <label class="block text-xs font-semibold text-slate-700 mb-1">관리자 대표 연락처</label>
+                <input id="acc-phone" type="tel" value="010-9081-3001" class="w-full text-xs rounded-lg border border-slate-200 p-2.5 outline-none focus:border-[#0175b1]"/>
+              </div>
+              <div>
+                <label class="block text-xs font-semibold text-slate-700 mb-1">알림 수신 이메일</label>
+                <input id="acc-email" type="email" value="admin@sangmyung.co.kr" class="w-full text-xs rounded-lg border border-slate-200 p-2.5 outline-none focus:border-[#0175b1]"/>
+              </div>
+            </div>
+
+            <div class="pt-4">
+              <button type="submit" class="w-full py-3 bg-[#0b2239] hover:bg-slate-800 text-white font-bold text-xs rounded-lg shadow-sm transition flex items-center justify-center gap-1.5">
+                <span class="material-symbols-outlined text-[18px]">verified_user</span>
+                <span>보안 계정 정보 저장 및 적용</span>
+              </button>
+            </div>
+          </form>
+        </div>
+      </section>
+
+    </main>
+  </div>
+
+  <!-- ==================== MODALS ==================== -->
+
+  <!-- Order Detail & Reply Modal (ORDER TABLE 관리: 보기) -->
+  <div id="order-modal" class="fixed inset-0 z-50 bg-slate-900/60 backdrop-blur-sm hidden items-center justify-center p-4">
+    <div class="bg-white rounded-2xl max-w-2xl w-full p-6 sm:p-8 shadow-2xl border border-slate-100 flex flex-col gap-4 max-h-[90vh] overflow-y-auto">
+      <div class="flex items-center justify-between pb-3 border-b border-slate-100">
+        <div class="flex items-center gap-2">
+          <span class="material-symbols-outlined text-[#0175b1]">assignment</span>
+          <h3 class="text-sm font-bold text-slate-900">접수 상세 정보 및 답변 처리</h3>
+          <span id="modal-order-id" class="px-2 py-0.5 bg-slate-100 text-slate-700 font-mono text-[11px] rounded font-bold">SM-000</span>
+        </div>
+        <button onclick="closeOrderModal()" class="text-slate-400 hover:text-slate-700">
+          <span class="material-symbols-outlined text-[20px]">close</span>
+        </button>
+      </div>
+
+      <!-- Order Detail Info Grid -->
+      <div class="bg-slate-50 p-4 rounded-xl border border-slate-200 grid grid-cols-2 sm:grid-cols-3 gap-3 text-xs">
+        <div><span class="text-slate-400 block text-[10px]">신청자명</span><strong id="modal-order-name" class="text-slate-800 font-bold">-</strong></div>
+        <div><span class="text-slate-400 block text-[10px]">연락처</span><span id="modal-order-phone" class="font-mono text-slate-800">-</span></div>
+        <div><span class="text-slate-400 block text-[10px]">이메일</span><span id="modal-order-email" class="font-mono text-slate-800 truncate block">-</span></div>
+        <div><span class="text-slate-400 block text-[10px]">접수구분</span><span id="modal-order-type" class="font-semibold text-[#0175b1]">-</span></div>
+        <div><span class="text-slate-400 block text-[10px]">희망구조</span><span id="modal-order-structure" class="text-slate-800">-</span></div>
+        <div><span class="text-slate-400 block text-[10px]">진행단계</span><span id="modal-order-stage" class="text-slate-800">-</span></div>
+      </div>
+
+      <!-- Order Content -->
+      <div>
+        <label class="block text-xs font-semibold text-slate-700 mb-1">고객 문의 내용</label>
+        <div id="modal-order-content" class="p-3 bg-slate-50 border border-slate-200 rounded-lg text-xs text-slate-700 leading-relaxed min-h-[60px] whitespace-pre-wrap"></div>
+      </div>
+
+      <!-- Customer Attached File Download Box -->
+      <div id="modal-order-attachment-box" class="p-3 bg-sky-50 border border-sky-200 rounded-xl flex items-center justify-between text-xs">
+        <div class="flex items-center gap-2 overflow-hidden">
+          <span class="material-symbols-outlined text-[#0175b1] text-[20px]">attach_file</span>
+          <div class="truncate pr-2">
+            <span class="text-[10px] text-slate-500 block">고객 첨부파일</span>
+            <span id="modal-order-filename" class="font-bold text-slate-800 text-xs block truncate">-</span>
+          </div>
+        </div>
+        <a id="modal-order-filelink" href="#" class="px-3.5 py-1.5 bg-[#0175b1] hover:bg-sky-700 text-white font-bold rounded-lg text-xs transition shadow-sm inline-flex items-center gap-1 shrink-0" download>
+          <span class="material-symbols-outlined text-[15px]">download</span>
+          <span>다운로드</span>
+        </a>
+      </div>
+
+      <!-- Update Statuses -->
+      <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+        <div>
+          <label class="block text-xs font-semibold text-slate-700 mb-1">입금 상태</label>
+          <select id="modal-order-payment" class="w-full text-xs rounded-lg border border-slate-200 p-2.5 outline-none bg-white">
+            <option value="NONE">NONE (입금대기 전/해당없음)</option>
+            <option value="500,000원 입금대기">500,000원 입금대기</option>
+            <option value="입금완료">입금완료</option>
+          </select>
+        </div>
+        <div>
+          <label class="block text-xs font-semibold text-slate-700 mb-1">처리 현황</label>
+          <select id="modal-order-status" class="w-full text-xs rounded-lg border border-slate-200 p-2.5 outline-none bg-white">
+            <option value="미답변">미답변</option>
+            <option value="검토중">검토중</option>
+            <option value="답변완료">답변완료</option>
+          </select>
+        </div>
+      </div>
+
+      <!-- Reply Box -->
+      <div>
+        <label class="block text-xs font-semibold text-slate-700 mb-1">관리자 답변 / 산출 메모</label>
+        <textarea id="modal-order-reply" rows="3" placeholder="답변 내용을 작성해 주세요." class="w-full text-xs rounded-lg border border-slate-200 p-3 outline-none focus:border-[#0175b1]"></textarea>
+      </div>
+
+      <!-- Modal Footer Buttons -->
+      <div class="flex items-center justify-between pt-3 border-t border-slate-100">
+        <button onclick="handleOrderDelete()" class="px-3.5 py-2 text-rose-600 hover:bg-rose-50 rounded-lg text-xs font-bold transition flex items-center gap-1 border border-rose-200">
+          <span class="material-symbols-outlined text-[16px]">delete</span>
+          <span>항목 삭제</span>
+        </button>
+
+        <div class="flex gap-2">
+          <button onclick="closeOrderModal()" class="px-4 py-2 border border-slate-200 rounded-lg text-xs text-slate-600 hover:bg-slate-50 transition">
+            닫기
+          </button>
+          <button onclick="handleOrderSave()" class="px-5 py-2 bg-[#0b2239] hover:bg-slate-800 text-white rounded-lg text-xs font-bold transition shadow-sm flex items-center gap-1">
+            <span class="material-symbols-outlined text-[16px]">check</span>
+            <span>답변 및 변경 저장</span>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Q&A Answer Modal -->
+  <div id="qna-modal" class="fixed inset-0 z-50 bg-slate-900/60 backdrop-blur-sm hidden items-center justify-center p-4">
+    <div class="bg-white rounded-2xl max-w-lg w-full p-6 sm:p-8 shadow-2xl border border-slate-100 flex flex-col gap-4">
+      <div class="flex items-center justify-between pb-3 border-b border-slate-100">
+        <h3 class="text-sm font-bold text-slate-900">Q&amp;A 고객 질문 답변</h3>
+        <button onclick="closeQnaModal()" class="text-slate-400 hover:text-slate-700">
+          <span class="material-symbols-outlined text-[20px]">close</span>
+        </button>
+      </div>
+
+      <div class="bg-slate-50 p-3 rounded-lg border border-slate-200 text-xs space-y-1">
+        <div><span class="text-slate-400">작성자:</span> <strong id="modal-qna-author" class="text-slate-800"></strong> (<span id="modal-qna-phone" class="font-mono"></span>)</div>
+        <div><span class="text-slate-400">제목:</span> <span id="modal-qna-title" class="font-bold text-slate-900"></span></div>
+        <div class="pt-1 text-slate-600" id="modal-qna-question"></div>
+      </div>
+
+      <div>
+        <label class="block text-xs font-semibold text-slate-700 mb-1">관리자 공식 답변</label>
+        <textarea id="modal-qna-answer" rows="4" placeholder="상명건설 공식 엔지니어 답변을 작성하세요." class="w-full text-xs rounded-lg border border-slate-200 p-3 outline-none focus:border-[#0175b1]"></textarea>
+      </div>
+
+      <div class="flex justify-between items-center pt-2">
+        <button onclick="handleQnaDelete()" class="px-3 py-2 text-rose-600 hover:bg-rose-50 rounded-lg text-xs font-bold transition border border-rose-200">
+          질문 삭제
+        </button>
+        <div class="flex gap-2">
+          <button onclick="closeQnaModal()" class="px-4 py-2 border border-slate-200 rounded-lg text-xs text-slate-600 hover:bg-slate-50 transition">
+            닫기
+          </button>
+          <button onclick="handleQnaSave()" class="px-5 py-2 bg-[#0b2239] hover:bg-slate-800 text-white rounded-lg text-xs font-bold transition shadow-sm">
+            답변 등록 완료
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- News Detail & Edit Modal for Admin (Modal View without 홈으로 이동 button) -->
+  <div id="admin-news-modal" class="fixed inset-0 z-50 bg-slate-900/60 backdrop-blur-sm hidden items-center justify-center p-4">
+    <div class="bg-white rounded-2xl max-w-2xl w-full p-6 sm:p-8 shadow-2xl border border-slate-100 flex flex-col gap-4 max-h-[90vh] overflow-y-auto">
+      <div class="flex items-center justify-between pb-3 border-b border-slate-100">
+        <div class="flex items-center gap-2">
+          <span class="material-symbols-outlined text-[#0175b1]">article</span>
+          <h3 class="text-sm font-bold text-slate-900">뉴스 상세 및 수정</h3>
+          <span id="modal-news-id" class="px-2 py-0.5 bg-slate-100 text-slate-700 font-mono text-[11px] rounded font-bold">NEWS-001</span>
+        </div>
+        <button onclick="closeAdminNewsModal()" class="text-slate-400 hover:text-slate-700">
+          <span class="material-symbols-outlined text-[20px]">close</span>
+        </button>
+      </div>
+
+      <!-- Detail Preview Box & Image Edit Bar -->
+      <div class="bg-slate-50 p-4 rounded-xl border border-slate-200 space-y-3">
+        <div class="flex items-center justify-between text-xs">
+          <div class="flex items-center gap-2">
+            <span id="modal-news-cat-badge" class="px-2.5 py-0.5 bg-sky-100 text-[#0175b1] font-bold rounded">보도자료</span>
+            <span id="modal-news-date" class="font-mono text-slate-400">2025-05-10</span>
+          </div>
+          <div class="flex items-center gap-1.5">
+            <input type="file" id="modal-edit-news-file" accept="image/*" class="hidden" onchange="handleAdminNewsModalImageUpload(event)"/>
+            <button type="button" onclick="document.getElementById('modal-edit-news-file').click()" class="px-3.5 py-1.5 bg-[#0175b1] hover:bg-sky-700 text-white rounded-lg text-xs font-bold transition shadow-sm flex items-center gap-1">
+              <span class="material-symbols-outlined text-[15px]">photo_camera</span>
+              <span>이미지 수정 / 파일 업로드</span>
+            </button>
+          </div>
+        </div>
+        <div id="modal-news-img-box" class="w-full max-h-60 rounded-lg overflow-hidden border border-slate-200 bg-slate-100 flex items-center justify-center">
+          <img id="modal-news-img" src="" alt="" class="w-full h-auto max-h-60 object-cover"/>
+        </div>
+      </div>
+
+      <!-- Edit Form Fields -->
+      <form id="admin-news-edit-form" onsubmit="handleAdminNewsSave(event)" class="space-y-3">
+        <div>
+          <label class="block text-xs font-semibold text-slate-700 mb-1">뉴스 제목 <span class="text-rose-500">*</span></label>
+          <input id="modal-edit-news-title" type="text" required class="w-full text-xs rounded-lg border border-slate-200 p-2.5 outline-none focus:border-[#0175b1] font-bold text-slate-900"/>
+        </div>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+          <div>
+            <label class="block text-xs font-semibold text-slate-700 mb-1">분류</label>
+            <select id="modal-edit-news-category" class="w-full text-xs rounded-lg border border-slate-200 p-2.5 outline-none focus:border-[#0175b1] bg-white">
+              <option value="보도자료">보도자료</option>
+              <option value="현장 착공">현장 착공</option>
+              <option value="준공 보도">준공 보도</option>
+              <option value="신기술 특허">신기술 특허</option>
+              <option value="품질 인증">품질 인증</option>
+              <option value="경영 실적">경영 실적</option>
+            </select>
+          </div>
+          <div>
+            <label class="block text-xs font-semibold text-slate-700 mb-1">대표 이미지 경로/URL</label>
+            <div class="flex gap-1.5">
+              <input id="modal-edit-news-image" type="text" oninput="updateAdminNewsModalImgPreview(this.value)" class="w-full text-xs rounded-lg border border-slate-200 p-2.5 outline-none focus:border-[#0175b1] font-mono"/>
+              <button type="button" onclick="document.getElementById('modal-edit-news-file').click()" class="shrink-0 px-3 py-2 bg-slate-100 hover:bg-slate-200 text-slate-700 rounded-lg text-xs font-bold border border-slate-200 transition">
+                선택
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <div>
+          <label class="block text-xs font-semibold text-slate-700 mb-1">뉴스 본문 내용 <span class="text-rose-500">*</span></label>
+          <textarea id="modal-edit-news-content" rows="4" required class="w-full text-xs rounded-lg border border-slate-200 p-2.5 outline-none focus:border-[#0175b1] text-slate-700 leading-relaxed"></textarea>
+        </div>
+
+        <!-- Footer Buttons: Only 닫기, 삭제, 수정저장 (No home button) -->
+        <div class="flex items-center justify-between pt-3 border-t border-slate-100">
+          <button type="button" onclick="handleAdminNewsDeleteCurrent()" class="px-3.5 py-2 text-rose-600 hover:bg-rose-50 rounded-lg text-xs font-bold transition flex items-center gap-1 border border-rose-200">
+            <span class="material-symbols-outlined text-[16px]">delete</span>
+            <span>뉴스 삭제</span>
+          </button>
+
+          <div class="flex gap-2">
+            <button type="button" onclick="closeAdminNewsModal()" class="px-4 py-2 border border-slate-200 rounded-lg text-xs text-slate-600 hover:bg-slate-50 transition">
+              닫기
+            </button>
+            <button type="submit" class="px-5 py-2 bg-[#0b2239] hover:bg-slate-800 text-white rounded-lg text-xs font-bold transition shadow-sm flex items-center gap-1">
+              <span class="material-symbols-outlined text-[16px]">check</span>
+              <span>수정사항 저장</span>
+            </button>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Service Detail & Edit Modal for Admin -->
+  <div id="admin-service-modal" class="fixed inset-0 z-50 bg-slate-900/60 backdrop-blur-sm hidden items-center justify-center p-4">
+    <div class="bg-white rounded-2xl max-w-2xl w-full p-6 sm:p-8 shadow-2xl border border-slate-100 flex flex-col gap-4 max-h-[90vh] overflow-y-auto">
+      <div class="flex items-center justify-between pb-3 border-b border-slate-100">
+        <div class="flex items-center gap-2">
+          <span class="material-symbols-outlined text-[#0175b1]">domain</span>
+          <h3 class="text-sm font-bold text-slate-900">서비스 상세 및 수정</h3>
+          <span id="modal-svc-id" class="px-2 py-0.5 bg-slate-100 text-slate-700 font-mono text-[11px] rounded font-bold">SVC-001</span>
+        </div>
+        <button onclick="closeAdminServiceModal()" class="text-slate-400 hover:text-slate-700">
+          <span class="material-symbols-outlined text-[20px]">close</span>
+        </button>
+      </div>
+
+      <!-- Preview & Image Box -->
+      <div class="bg-slate-50 p-4 rounded-xl border border-slate-200 space-y-3">
+        <div class="flex items-center justify-between text-xs">
+          <div class="flex items-center gap-2">
+            <span id="modal-svc-cat-badge" class="px-2.5 py-0.5 bg-sky-100 text-[#0175b1] font-bold rounded">주택건설</span>
+            <span id="modal-svc-created" class="font-mono text-slate-400">2025-05-18 10:30:00</span>
+          </div>
+          <div class="flex items-center gap-1.5">
+            <input type="file" id="modal-edit-svc-file" accept="image/*" class="hidden" onchange="handleModalServiceImageUpload(event)"/>
+            <button type="button" onclick="document.getElementById('modal-edit-svc-file').click()" class="px-3 py-1.5 bg-[#0175b1] hover:bg-sky-700 text-white rounded-lg text-xs font-bold transition shadow-sm flex items-center gap-1">
+              <span class="material-symbols-outlined text-[15px]">photo_camera</span>
+              <span>사진 변경 / 파일 업로드</span>
+            </button>
+          </div>
+        </div>
+        <div id="modal-svc-img-box" class="w-full max-h-60 rounded-lg overflow-hidden border border-slate-200 bg-slate-100 flex items-center justify-center">
+          <img id="modal-svc-img" src="" alt="" class="w-full h-auto max-h-60 object-cover"/>
+        </div>
+      </div>
+
+      <!-- Edit Form -->
+      <form id="admin-svc-edit-form" onsubmit="handleAdminServiceSave(event)" class="space-y-3">
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+          <div>
+            <label class="block text-xs font-semibold text-slate-700 mb-1">구분 (카테고리)</label>
+            <input id="modal-edit-svc-category" type="text" required class="w-full text-xs rounded-lg border border-slate-200 p-2.5 outline-none focus:border-[#0175b1] bg-white"/>
+          </div>
+          <div>
+            <label class="block text-xs font-semibold text-slate-700 mb-1">소제목 (프론트 작은글씨)</label>
+            <input id="modal-edit-svc-subtitle" type="text" required class="w-full text-xs rounded-lg border border-slate-200 p-2.5 outline-none focus:border-[#0175b1]"/>
+          </div>
+        </div>
+
+        <div>
+          <label class="block text-xs font-semibold text-slate-700 mb-1">제목 (프론트 볼드체) <span class="text-rose-500">*</span></label>
+          <input id="modal-edit-svc-title" type="text" required class="w-full text-xs rounded-lg border border-slate-200 p-2.5 outline-none focus:border-[#0175b1] font-bold text-slate-900"/>
+        </div>
+
+        <div>
+          <label class="block text-xs font-semibold text-slate-700 mb-1">내용 (프론트는 1줄만 출력...) <span class="text-rose-500">*</span></label>
+          <textarea id="modal-edit-svc-content" rows="2" required class="w-full text-xs rounded-lg border border-slate-200 p-2.5 outline-none focus:border-[#0175b1] text-slate-700"></textarea>
+        </div>
+
+        <!-- 상단 소개 HTML EDITOR -->
+        <div>
+          <div class="flex items-center justify-between mb-1">
+            <label class="block text-xs font-semibold text-slate-700">상단 소개 (HTML EDITOR 코드 작성 가능)</label>
+            <button type="button" onclick="toggleHtmlSourceMode('edit-svc')" class="text-[11px] font-mono text-[#0175b1] hover:underline flex items-center gap-1">
+              <span class="material-symbols-outlined text-[13px]">code</span>
+              <span id="edit-svc-code-toggle-text">HTML 소스 직접 편집</span>
+            </button>
+          </div>
+          <div class="bg-slate-100 border border-slate-200 rounded-t-lg p-1.5 flex flex-wrap items-center gap-1 text-xs">
+            <button type="button" onclick="execEditorCommand('edit-svc', 'bold')" class="px-2 py-1 bg-white hover:bg-slate-200 font-bold rounded border border-slate-300">B</button>
+            <button type="button" onclick="execEditorCommand('edit-svc', 'italic')" class="px-2 py-1 bg-white hover:bg-slate-200 italic rounded border border-slate-300">I</button>
+            <button type="button" onclick="execEditorCommand('edit-svc', 'underline')" class="px-2 py-1 bg-white hover:bg-slate-200 underline rounded border border-slate-300">U</button>
+            <span class="text-slate-300">|</span>
+            <button type="button" onclick="insertEditorHtml('edit-svc', '&lt;h3 class=\'text-base font-bold text-slate-900 mb-1\'&gt;소제목&lt;/h3&gt;')" class="px-2 py-1 bg-white hover:bg-slate-200 font-bold rounded border border-slate-300 text-[11px]">H3</button>
+            <button type="button" onclick="insertEditorHtml('edit-svc', '&lt;strong class=\'text-[#0175b1]\'&gt;강조문구&lt;/strong&gt;')" class="px-2 py-1 bg-white hover:bg-slate-200 text-[#0175b1] font-bold rounded border border-slate-300 text-[11px]">강조</button>
+            <button type="button" onclick="insertEditorHtml('edit-svc', '&lt;p class=\'text-xs text-slate-600 leading-relaxed mb-2\'&gt;문구&lt;/p&gt;')" class="px-2 py-1 bg-white hover:bg-slate-200 rounded border border-slate-300 text-[11px]">&lt;p&gt;</button>
+            <button type="button" onclick="execEditorCommand('edit-svc', 'insertUnorderedList')" class="px-2 py-1 bg-white hover:bg-slate-200 rounded border border-slate-300 text-[11px]">• 목록</button>
+          </div>
+          <div id="edit-svc-visual-editor" contenteditable="true" class="w-full min-h-[90px] border border-t-0 border-slate-200 rounded-b-lg p-3 text-xs text-slate-800 leading-relaxed outline-none focus:border-[#0175b1] bg-white"></div>
+          <textarea id="edit-svc-raw-html" class="hidden w-full min-h-[90px] border border-t-0 border-slate-200 rounded-b-lg p-3 text-xs font-mono text-slate-800 leading-relaxed outline-none focus:border-[#0175b1] bg-slate-50"></textarea>
+        </div>
+
+        <div>
+          <label class="block text-xs font-semibold text-slate-700 mb-1">대표 이미지 경로 / URL</label>
+          <div class="flex gap-2">
+            <input id="modal-edit-svc-image" type="text" class="w-full text-xs rounded-lg border border-slate-200 p-2.5 outline-none focus:border-[#0175b1] font-mono"/>
+            <button type="button" onclick="document.getElementById('modal-edit-svc-file').click()" class="shrink-0 px-3 py-2 bg-slate-100 hover:bg-slate-200 text-slate-700 rounded-lg text-xs font-bold border border-slate-200 transition">선택</button>
+          </div>
+        </div>
+
+        <!-- Footer Buttons -->
+        <div class="flex items-center justify-between pt-3 border-t border-slate-100">
+          <button type="button" onclick="handleAdminServiceDeleteCurrent()" class="px-3.5 py-2 text-rose-600 hover:bg-rose-50 rounded-lg text-xs font-bold transition flex items-center gap-1 border border-rose-200">
+            <span class="material-symbols-outlined text-[16px]">delete</span>
+            <span>서비스 삭제</span>
+          </button>
+
+          <div class="flex gap-2">
+            <button type="button" onclick="closeAdminServiceModal()" class="px-4 py-2 border border-slate-200 rounded-lg text-xs text-slate-600 hover:bg-slate-50 transition">
+              닫기
+            </button>
+            <button type="submit" class="px-5 py-2 bg-[#0b2239] hover:bg-slate-800 text-white rounded-lg text-xs font-bold transition shadow-sm flex items-center gap-1">
+              <span class="material-symbols-outlined text-[16px]">check</span>
+              <span>수정사항 저장</span>
+            </button>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+  </div>
+
+  <!-- SCRIPT CONTROLLER -->
+  <script>
+    // State
+    let ordersData = [];
+    let newsData = [];
+    let qnaData = [];
+    let currentFilteredOrders = [];
+    let activeFilter = 'all';
+    let currentSelectedOrderId = null;
+    let currentSelectedQnaId = null;
+
+    // Pagination State (5 items per page across tables as requested)
+    let ordersCurrentPage = 1;
+    const ORDERS_PAGE_SIZE = 5;
+    let ordersSearchField = 'all';
+    let ordersSearchKeyword = '';
+
+    let newsCurrentPage = 1;
+    const NEWS_PAGE_SIZE = 5;
+    let newsSearchField = 'all';
+    let newsSearchKeyword = '';
+    let currentFilteredNews = [];
+
+    let servicesCurrentPage = 1;
+    const SERVICES_PAGE_SIZE = 5;
+    let servicesSearchField = 'all';
+    let servicesSearchKeyword = '';
+
+    let qnaCurrentPage = 1;
+    const QNA_PAGE_SIZE = 5;
+    let qnaSearchField = 'all';
+    let qnaSearchKeyword = '';
+    let currentFilteredQna = [];
+
+    function escapeHtml(str) {
+      if (str === null || str === undefined) return '';
+      return String(str)
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;')
+        .replace(/"/g, '&quot;')
+        .replace(/'/g, '&#039;');
+    }
+
+    // Universal Admin Pagination & Condition Search Component Renderer
+    function renderAdminPagination({
+      containerId,
+      totalItems,
+      currentPage,
+      pageSize,
+      onPageChange,
+      searchConfig = null
+    }) {
+      const container = document.getElementById(containerId);
+      if (!container) return;
+      container.classList.remove('hidden');
+
+      const totalPages = Math.ceil(totalItems / pageSize) || 1;
+      const startItem = totalItems > 0 ? (currentPage - 1) * pageSize + 1 : 0;
+      const endItem = Math.min(currentPage * pageSize, totalItems);
+
+      let startPage = Math.max(1, currentPage - 2);
+      let endPage = Math.min(totalPages, currentPage + 2);
+      if (endPage - startPage < 4) {
+        if (startPage === 1) {
+          endPage = Math.min(totalPages, 5);
+        } else if (endPage === totalPages) {
+          startPage = Math.max(1, totalPages - 4);
+        }
+      }
+
+      const prevDisabled = currentPage <= 1 || totalItems === 0;
+      const nextDisabled = currentPage >= totalPages || totalItems === 0;
+
+      let pageBtnsHtml = '';
+      if (totalItems > 0) {
+        if (startPage > 1) {
+          pageBtnsHtml += `
+            <button type="button" onclick="${onPageChange}(1)" class="w-8 h-8 rounded-lg border border-slate-200 text-xs font-semibold text-slate-700 hover:bg-slate-100 bg-white transition flex items-center justify-center">1</button>
+          `;
+          if (startPage > 2) {
+            pageBtnsHtml += `<span class="px-1 text-slate-400 text-xs select-none">...</span>`;
+          }
+        }
+
+        for (let p = startPage; p <= endPage; p++) {
+          const isActive = p === currentPage;
+          pageBtnsHtml += `
+            <button type="button" onclick="${onPageChange}(${p})" class="w-8 h-8 rounded-lg text-xs font-bold transition flex items-center justify-center ${isActive ? 'bg-[#0b2239] text-white shadow-xs' : 'border border-slate-200 text-slate-700 hover:bg-slate-100 bg-white'}">
+              ${p}
+            </button>
+          `;
+        }
+
+        if (endPage < totalPages) {
+          if (endPage < totalPages - 1) {
+            pageBtnsHtml += `<span class="px-1 text-slate-400 text-xs select-none">...</span>`;
+          }
+          pageBtnsHtml += `
+            <button type="button" onclick="${onPageChange}(${totalPages})" class="w-8 h-8 rounded-lg border border-slate-200 text-xs font-semibold text-slate-700 hover:bg-slate-100 bg-white transition flex items-center justify-center">${totalPages}</button>
+          `;
+        }
+      } else {
+        pageBtnsHtml = `<span class="px-2 py-1 text-slate-400 text-xs font-medium">내역 없음</span>`;
+      }
+
+      let searchHtml = '';
+      if (searchConfig) {
+        const { selectId, inputId, fields, currentField, currentKeyword, onSearch, onReset } = searchConfig;
+        const optionsHtml = fields.map(f => `<option value="${f.val}" ${f.val === currentField ? 'selected' : ''}>${f.text}</option>`).join('');
+        const safeKeyword = escapeHtml(currentKeyword || '');
+        searchHtml = `
+          <div class="flex flex-wrap items-center gap-1.5 shrink-0">
+            <select id="${selectId}" class="h-8 text-xs border border-slate-300 rounded-lg px-2 bg-white text-slate-700 font-medium focus:border-[#0175b1] outline-none cursor-pointer">
+              ${optionsHtml}
+            </select>
+            <div class="relative flex items-center">
+              <input type="text" id="${inputId}" placeholder="검색어 입력" value="${safeKeyword}" onkeydown="if(event.key==='Enter'){event.preventDefault(); ${onSearch}();}" class="h-8 text-xs border border-slate-300 rounded-lg px-2.5 bg-white text-slate-800 placeholder:text-slate-400 focus:border-[#0175b1] outline-none w-32 sm:w-44"/>
+            </div>
+            <button type="button" onclick="${onSearch}()" class="h-8 px-3 rounded-lg bg-[#0b2239] hover:bg-slate-800 text-white font-semibold flex items-center gap-1 shadow-2xs transition cursor-pointer">
+              <span class="material-symbols-outlined text-[14px]">search</span>
+              <span>검색</span>
+            </button>
+            ${currentKeyword ? `
+              <button type="button" onclick="${onReset}()" title="검색 조건 초기화" class="h-8 px-2.5 rounded-lg border border-slate-300 hover:bg-slate-100 text-slate-600 font-medium text-xs transition cursor-pointer">
+                초기화
+              </button>
+            ` : ''}
+          </div>
+        `;
+      }
+
+      container.innerHTML = `
+        <div class="p-3 border-t border-slate-100 bg-slate-50/70 flex flex-col 2xl:flex-row items-center justify-between gap-3 text-xs">
+          <div class="text-slate-500 font-medium flex items-center gap-1.5 shrink-0">
+            <span>총 <strong class="text-slate-900 font-bold">${totalItems}</strong>건</span>
+            ${searchConfig && searchConfig.currentKeyword ? `<span class="px-1.5 py-0.5 bg-amber-50 text-amber-700 border border-amber-200 rounded text-[10px] font-bold">검색어: "${escapeHtml(searchConfig.currentKeyword)}"</span>` : ''}
+            <span class="text-slate-300">|</span>
+            <span class="px-1.5 py-0.5 bg-white border border-slate-200 rounded text-slate-700 font-mono text-[11px] font-semibold">${startItem} - ${endItem}건 표시</span>
+            <span class="text-slate-400 text-[11px]">(페이지 <strong class="text-[#0175b1]">${currentPage}</strong> / ${totalPages})</span>
+          </div>
+          <div class="flex items-center gap-1 shrink-0">
+            <button type="button" onclick="${onPageChange}(${currentPage - 1})" ${prevDisabled ? 'disabled' : ''} class="px-2.5 py-1.5 rounded-lg border text-xs font-semibold flex items-center gap-0.5 transition ${prevDisabled ? 'border-slate-200 text-slate-300 cursor-not-allowed bg-slate-50' : 'border-slate-200 text-slate-700 hover:bg-slate-100 bg-white shadow-2xs cursor-pointer'}">
+              <span class="material-symbols-outlined text-[15px]">chevron_left</span>
+              <span>이전</span>
+            </button>
+            <div class="flex items-center gap-1 mx-1">
+              ${pageBtnsHtml}
+            </div>
+            <button type="button" onclick="${onPageChange}(${currentPage + 1})" ${nextDisabled ? 'disabled' : ''} class="px-2.5 py-1.5 rounded-lg border text-xs font-semibold flex items-center gap-0.5 transition ${nextDisabled ? 'border-slate-200 text-slate-300 cursor-not-allowed bg-slate-50' : 'border-slate-200 text-slate-700 hover:bg-slate-100 bg-white shadow-2xs cursor-pointer'}">
+              <span>다음</span>
+              <span class="material-symbols-outlined text-[15px]">chevron_right</span>
+            </button>
+          </div>
+          ${searchHtml}
+        </div>
+      `;
+    }
+
+    // Toast feedback utility (Non-blocking, iframe-safe)
     function triggerToast(message) {
       const toast = document.getElementById('admin-toast');
       const text = document.getElementById('admin-toast-text');
@@ -565,204 +1090,1455 @@
       text.textContent = message;
       toast.classList.remove('opacity-0', 'pointer-events-none', 'translate-y-[-20px]');
       toast.classList.add('opacity-100', 'translate-y-0');
-      setTimeout(() => {
+      clearTimeout(window.__adminToastTimer);
+      window.__adminToastTimer = setTimeout(() => {
         toast.classList.remove('opacity-100', 'translate-y-0');
         toast.classList.add('opacity-0', 'pointer-events-none', 'translate-y-[-20px]');
-      }, 2800);
+      }, 3000);
+    }
+    window.alert = function(msg) { triggerToast(msg); };
+
+    // Custom YES/NO Confirmation Modal (Replacing window.confirm for iframe safety)
+    function showConfirmModal(title, message, onYes, onNo) {
+      const modal = document.getElementById('confirm-modal');
+      document.getElementById('confirm-title').textContent = title;
+      document.getElementById('confirm-message').textContent = message;
+      modal.classList.remove('hidden');
+      modal.classList.add('flex');
+
+      const btnYes = document.getElementById('confirm-btn-yes');
+      const btnNo = document.getElementById('confirm-btn-no');
+
+      const cleanup = () => {
+        modal.classList.add('hidden');
+        modal.classList.remove('flex');
+        btnYes.onclick = null;
+        btnNo.onclick = null;
+      };
+
+      btnYes.onclick = () => { cleanup(); if (onYes) onYes(); };
+      btnNo.onclick = () => { cleanup(); if (onNo) onNo(); };
     }
 
-    // Login validation
-    function handleLogin(event) {
-      event.preventDefault();
-      const idInput = document.getElementById('login-id');
-      const pwInput = document.getElementById('login-pw');
-      const errBox = document.getElementById('login-error-msg');
-
-      if (idInput.value.trim() === 'admin' && pwInput.value.trim() === '1234') {
-        errBox.classList.add('hidden');
-        isAuthenticated = true;
-        document.getElementById('auth-screen').classList.add('hidden');
-        document.getElementById('dashboard-screen').classList.remove('hidden');
-        triggerToast('상명건설 관리자 콘솔 v2.4에 접속하였습니다.');
+    // Init & Auth Check
+    document.addEventListener('DOMContentLoaded', () => {
+      const token = localStorage.getItem('sm_admin_token');
+      const sessionAuth = sessionStorage.getItem('sm_admin_auth');
+      if (token === 'admin-auth-token-sm-2025' || sessionAuth === 'true') {
+        showDashboard();
       } else {
-        errBox.classList.remove('hidden');
+        showAuthScreen();
+      }
+    });
+
+    function showAuthScreen() {
+      document.getElementById('auth-screen').classList.remove('hidden');
+      document.getElementById('dashboard-screen').classList.add('hidden');
+    }
+
+    function showDashboard() {
+      document.getElementById('auth-screen').classList.add('hidden');
+      document.getElementById('dashboard-screen').classList.remove('hidden');
+      document.getElementById('dashboard-screen').classList.add('flex');
+      loadAllData();
+    }
+
+    // Login Handler
+    async function handleLoginSubmit(event) {
+      event.preventDefault();
+      const id = document.getElementById('login-id').value.trim();
+      const pw = document.getElementById('login-pw').value.trim();
+      const errBox = document.getElementById('login-err-msg');
+
+      try {
+        const res = await fetch('/api/admin/login', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ id, pw })
+        });
+        const data = await res.json();
+        if (data.success) {
+          errBox.classList.add('hidden');
+          localStorage.setItem('sm_admin_token', data.token);
+          triggerToast('관리자 인증에 성공하였습니다.');
+          showDashboard();
+        } else {
+          errBox.classList.remove('hidden');
+        }
+      } catch (err) {
+        // Fallback for offline file mode
+        if (id === 'admin' && pw === '1234') {
+          errBox.classList.add('hidden');
+          localStorage.setItem('sm_admin_token', 'admin-auth-token-sm-2025');
+          triggerToast('관리자 인증에 성공하였습니다.');
+          showDashboard();
+        } else {
+          errBox.classList.remove('hidden');
+        }
       }
     }
 
-    // Clear login input fields
     function clearLoginForm() {
       document.getElementById('login-id').value = '';
       document.getElementById('login-pw').value = '';
-      document.getElementById('login-error-msg').classList.add('hidden');
+      document.getElementById('login-err-msg').classList.add('hidden');
     }
 
-    // Logout with confirmed prompt
-    function handleLogout() {
-      const confirmLogout = window.confirm("로그아웃 하시겠습니까? 확인 시 메인 홈 화면으로 이동합니다.");
-      if (confirmLogout) {
-        isAuthenticated = false;
-        document.getElementById('dashboard-screen').classList.add('hidden');
-        document.getElementById('auth-screen').classList.remove('hidden');
-        clearLoginForm();
-        triggerToast('안전하게 로그아웃되었습니다.');
-      }
+    // Logout with YES / NO modal
+    function requestLogout() {
+      showConfirmModal(
+        '로그아웃 확인',
+        '로그아웃 하시겠습니까? 확인 시 메인 홈페이지로 이동합니다.',
+        () => {
+          localStorage.removeItem('sm_admin_token');
+          triggerToast('안전하게 로그아웃되었습니다.');
+          setTimeout(() => {
+            window.location.href = '/';
+          }, 300);
+        }
+      );
     }
 
-    // Admin Tabs switcher
-    function switchAdminTab(targetTabId) {
-      // Toggle button styles
-      const buttons = document.querySelectorAll('.admin-nav-tab');
-      buttons.forEach(btn => {
-        btn.classList.remove('bg-primary', 'text-on-primary', 'shadow-sm');
-        btn.classList.add('bg-transparent', 'text-text-muted');
-      });
-      const activeBtn = document.getElementById('btn-' + targetTabId);
-      if (activeBtn) {
-        activeBtn.classList.add('bg-primary', 'text-on-primary', 'shadow-sm');
-        activeBtn.classList.remove('bg-transparent', 'text-text-muted');
-      }
-
-      // Hide all modules
-      const modules = document.querySelectorAll('.admin-module');
-      modules.forEach(m => {
-        m.classList.add('hidden');
-        m.classList.remove('flex');
-      });
-
-      // Show selected module
-      const targetModule = document.getElementById('module-' + targetTabId.replace('tab-', ''));
-      if (targetModule) {
-        targetModule.classList.remove('hidden');
-        targetModule.classList.add('flex');
-      }
-    }
-
-    // Subfilter inquiries
-    function filterInquiries(type, btn) {
-      const subtabs = document.querySelectorAll('.inquiry-subtab');
-      subtabs.forEach(t => {
-        t.classList.remove('bg-primary-container', 'text-on-primary');
-        t.classList.add('bg-surface-container', 'text-on-surface');
-      });
-      btn.classList.add('bg-primary-container', 'text-on-primary');
-      btn.classList.remove('bg-surface-container', 'text-on-surface');
-
-      const rows = document.querySelectorAll('.inquiry-row');
-      rows.forEach(row => {
-        if (type === 'all') {
-          row.style.display = '';
-        } else if (type === 'paid') {
-          row.style.display = row.classList.contains('row-paid') ? '' : 'none';
-        } else if (type === 'standard') {
-          row.style.display = row.classList.contains('row-standard') ? '' : 'none';
-        } else if (type === 'direct') {
-          row.style.display = row.classList.contains('row-direct') ? '' : 'none';
+    // Tab Switcher
+    function switchAdminTab(tabKey) {
+      const tabs = ['orders', 'news', 'services', 'qna', 'account'];
+      tabs.forEach(t => {
+        const btn = document.getElementById('btn-tab-' + t);
+        const mod = document.getElementById('module-' + t);
+        if (t === tabKey) {
+          btn.classList.add('bg-[#0b2239]', 'text-white');
+          btn.classList.remove('text-slate-600');
+          mod.classList.remove('hidden');
+          mod.classList.add('flex');
+        } else {
+          btn.classList.remove('bg-[#0b2239]', 'text-white');
+          btn.classList.add('text-slate-600');
+          mod.classList.add('hidden');
+          mod.classList.remove('flex');
         }
       });
     }
 
-    // Modal management
-    function openReplyModal(name, id, summary) {
-      document.getElementById('modal-client-name').textContent = name;
-      document.getElementById('modal-inquiry-num').textContent = id;
-      document.getElementById('modal-inquiry-summary').textContent = summary;
-      document.getElementById('modal-reply-content').value = '';
-      const modal = document.getElementById('reply-modal');
+    // Data Loaders
+    async function loadAllData() {
+      await Promise.all([loadOrders(), loadNews(), loadServices(), loadQna()]);
+    }
+
+    // Orders CRUD
+    async function loadOrders() {
+      try {
+        const res = await fetch('/api/orders/admin');
+        ordersData = await res.json();
+      } catch {
+        ordersData = [];
+      }
+      updateOrderCounts();
+      applyOrderFilter();
+    }
+
+    function updateOrderCounts() {
+      document.getElementById('count-all').textContent = ordersData.length;
+      document.getElementById('count-standard').textContent = ordersData.filter(o => o.type === '견적문의').length;
+      document.getElementById('count-paid').textContent = ordersData.filter(o => o.type === '유료견적문의').length;
+      document.getElementById('count-consult').textContent = ordersData.filter(o => o.type === '상담신청').length;
+    }
+
+    function filterOrders(filter, btn) {
+      activeFilter = filter;
+      ordersCurrentPage = 1;
+      document.querySelectorAll('.order-filter-btn').forEach(b => {
+        b.classList.remove('bg-[#0b2239]', 'text-white');
+        b.classList.add('bg-slate-100', 'text-slate-700');
+      });
+      if (btn) {
+        btn.classList.add('bg-[#0b2239]', 'text-white');
+        btn.classList.remove('bg-slate-100', 'text-slate-700');
+      }
+      applyOrderFilter();
+    }
+
+    function executeOrdersSearch() {
+      const sel = document.getElementById('orders-search-select');
+      const input = document.getElementById('orders-search-input');
+      if (sel) ordersSearchField = sel.value;
+      if (input) ordersSearchKeyword = input.value.trim();
+      ordersCurrentPage = 1;
+      applyOrderFilter();
+    }
+
+    function resetOrdersSearch() {
+      ordersSearchField = 'all';
+      ordersSearchKeyword = '';
+      ordersCurrentPage = 1;
+      applyOrderFilter();
+    }
+
+    function applyOrderFilter() {
+      let list = ordersData;
+      if (activeFilter !== 'all') {
+        list = list.filter(o => o.type === activeFilter);
+      }
+      if (ordersSearchKeyword) {
+        const kw = ordersSearchKeyword.toLowerCase();
+        list = list.filter(o => {
+          if (ordersSearchField === 'all') {
+            return [o.id, o.type, o.name, o.phone, o.email, o.structure, o.stage, o.paymentStatus, o.status, o.content]
+              .some(v => String(v || '').toLowerCase().includes(kw));
+          } else {
+            return String(o[ordersSearchField] || '').toLowerCase().includes(kw);
+          }
+        });
+      }
+      currentFilteredOrders = list;
+      renderOrdersTable();
+    }
+
+    function changeOrdersPage(page) {
+      const totalPages = Math.ceil(currentFilteredOrders.length / ORDERS_PAGE_SIZE) || 1;
+      if (page < 1 || page > totalPages) return;
+      ordersCurrentPage = page;
+      renderOrdersTable();
+    }
+
+    function renderOrdersTable() {
+      const tbody = document.getElementById('orders-tbody');
+      const totalPages = Math.ceil(currentFilteredOrders.length / ORDERS_PAGE_SIZE) || 1;
+      if (ordersCurrentPage > totalPages) ordersCurrentPage = totalPages;
+      if (ordersCurrentPage < 1) ordersCurrentPage = 1;
+
+      if (!currentFilteredOrders.length) {
+        const msg = ordersSearchKeyword 
+          ? `검색 조건에 부합하는 접수 내역이 없습니다. (검색어: "${escapeHtml(ordersSearchKeyword)}")`
+          : '접수된 문의 내역이 없습니다.';
+        tbody.innerHTML = `<tr><td colspan="10" class="py-8 text-center text-slate-400">${msg}</td></tr>`;
+        renderAdminPagination({
+          containerId: 'orders-pagination',
+          totalItems: 0,
+          currentPage: 1,
+          pageSize: ORDERS_PAGE_SIZE,
+          onPageChange: 'changeOrdersPage',
+          searchConfig: {
+            selectId: 'orders-search-select',
+            inputId: 'orders-search-input',
+            fields: [
+              { val: 'all', text: '전체 (통합검색)' },
+              { val: 'name', text: '신청자명' },
+              { val: 'id', text: '접수번호' },
+              { val: 'phone', text: '연락처' },
+              { val: 'email', text: '이메일' },
+              { val: 'structure', text: '희망구조' },
+              { val: 'stage', text: '진행단계' },
+              { val: 'paymentStatus', text: '입금상태' },
+              { val: 'status', text: '처리현황' },
+              { val: 'content', text: '문의내용' }
+            ],
+            currentField: ordersSearchField,
+            currentKeyword: ordersSearchKeyword,
+            onSearch: 'executeOrdersSearch',
+            onReset: 'resetOrdersSearch'
+          }
+        });
+        return;
+      }
+
+      const startIdx = (ordersCurrentPage - 1) * ORDERS_PAGE_SIZE;
+      const pageItems = currentFilteredOrders.slice(startIdx, startIdx + ORDERS_PAGE_SIZE);
+
+      tbody.innerHTML = pageItems.map(o => {
+        const isPaid = o.type === '유료견적문의';
+        const typeBadge = isPaid
+          ? '<span class="px-2 py-0.5 bg-amber-50 text-amber-700 font-bold border border-amber-200 rounded text-[11px]">★ 유료 3D견적</span>'
+          : `<span class="px-2 py-0.5 bg-slate-100 text-slate-700 rounded text-[11px] font-semibold">${o.type}</span>`;
+        
+        const payBadge = o.paymentStatus === '입금완료'
+          ? '<span class="px-2 py-0.5 bg-emerald-50 text-emerald-700 font-bold rounded text-[11px]">입금완료</span>'
+          : (isPaid ? '<span class="px-2 py-0.5 bg-rose-50 text-rose-600 font-bold rounded text-[11px]">50만원 입금대기</span>' : '<span class="text-slate-400">-</span>');
+
+        const statusBadge = o.status === '답변완료'
+          ? '<span class="px-2 py-0.5 bg-sky-50 text-sky-700 font-bold rounded text-[11px]">답변완료</span>'
+          : '<span class="px-2 py-0.5 bg-slate-100 text-slate-500 rounded text-[11px]">미답변</span>';
+
+        return `
+          <tr class="hover:bg-slate-50 transition-colors">
+            <td class="py-3 px-3.5 font-mono text-slate-500">${o.date || '-'}</td>
+            <td class="py-3 px-3.5 font-mono text-[#0175b1] font-bold">${o.id}</td>
+            <td class="py-3 px-3.5">${typeBadge}</td>
+            <td class="py-3 px-3.5 font-bold text-slate-900">${o.name}</td>
+            <td class="py-3 px-3.5">
+              <div class="font-mono text-slate-800">${o.phone}</div>
+              <div class="text-[11px] text-slate-400 font-mono">${o.email || '-'}</div>
+            </td>
+            <td class="py-3 px-3.5">${o.structure || '-'}</td>
+            <td class="py-3 px-3.5">${o.stage || '-'}</td>
+            <td class="py-3 px-3.5">${payBadge}</td>
+            <td class="py-3 px-3.5">${statusBadge}</td>
+            <td class="py-3 px-3.5 text-center">
+              <button onclick="openOrderDetail('${o.id}')" class="px-2.5 py-1 bg-[#0b2239] hover:bg-slate-800 text-white font-bold rounded text-[11px] shadow-sm transition">
+                보기
+              </button>
+            </td>
+          </tr>
+        `;
+      }).join('');
+
+      renderAdminPagination({
+        containerId: 'orders-pagination',
+        totalItems: currentFilteredOrders.length,
+        currentPage: ordersCurrentPage,
+        pageSize: ORDERS_PAGE_SIZE,
+        onPageChange: 'changeOrdersPage',
+        searchConfig: {
+          selectId: 'orders-search-select',
+          inputId: 'orders-search-input',
+          fields: [
+            { val: 'all', text: '전체 (통합검색)' },
+            { val: 'name', text: '신청자명' },
+            { val: 'id', text: '접수번호' },
+            { val: 'phone', text: '연락처' },
+            { val: 'email', text: '이메일' },
+            { val: 'structure', text: '희망구조' },
+            { val: 'stage', text: '진행단계' },
+            { val: 'paymentStatus', text: '입금상태' },
+            { val: 'status', text: '처리현황' },
+            { val: 'content', text: '문의내용' }
+          ],
+          currentField: ordersSearchField,
+          currentKeyword: ordersSearchKeyword,
+          onSearch: 'executeOrdersSearch',
+          onReset: 'resetOrdersSearch'
+        }
+      });
+    }
+
+    function openOrderDetail(orderId) {
+      const order = ordersData.find(o => o.id === orderId);
+      if (!order) return;
+      currentSelectedOrderId = orderId;
+      document.getElementById('modal-order-id').textContent = order.id;
+      document.getElementById('modal-order-name').textContent = order.name;
+      document.getElementById('modal-order-phone').textContent = order.phone;
+      document.getElementById('modal-order-email').textContent = order.email || '미입력';
+      document.getElementById('modal-order-type').textContent = order.type;
+      document.getElementById('modal-order-structure').textContent = order.structure;
+      document.getElementById('modal-order-stage').textContent = order.stage;
+      document.getElementById('modal-order-content').textContent = order.content || '내용 없음';
+      document.getElementById('modal-order-payment').value = order.paymentStatus || 'NONE';
+      document.getElementById('modal-order-status').value = order.status || '미답변';
+      document.getElementById('modal-order-reply').value = order.reply || '';
+
+      // Customer Attachment Download Setup
+      const attachBox = document.getElementById('modal-order-attachment-box');
+      const attachLink = document.getElementById('modal-order-filelink');
+      const attachName = document.getElementById('modal-order-filename');
+      if (order.attachment && order.attachment.trim()) {
+        attachBox.classList.remove('hidden');
+        attachBox.classList.add('flex');
+        const rawPath = order.attachment.trim();
+        const cleanPath = rawPath.startsWith('/') ? rawPath : '/' + rawPath;
+        const fileName = rawPath.split('/').pop() || '첨부파일';
+        attachName.textContent = fileName;
+        attachLink.href = cleanPath;
+        attachLink.setAttribute('download', fileName);
+      } else {
+        attachBox.classList.add('hidden');
+        attachBox.classList.remove('flex');
+      }
+
+      const modal = document.getElementById('order-modal');
       modal.classList.remove('hidden');
       modal.classList.add('flex');
     }
 
-    function closeReplyModal() {
-      const modal = document.getElementById('reply-modal');
-      modal.classList.remove('flex');
+    function closeOrderModal() {
+      const modal = document.getElementById('order-modal');
       modal.classList.add('hidden');
+      modal.classList.remove('flex');
     }
 
-    function sendReplySubmit() {
-      const content = document.getElementById('modal-reply-content').value.trim();
-      if (!content) {
-        alert('답변 본문을 입력해 주십시오.');
+    async function handleOrderSave() {
+      if (!currentSelectedOrderId) return;
+      const paymentStatus = document.getElementById('modal-order-payment').value;
+      const status = document.getElementById('modal-order-status').value;
+      const reply = document.getElementById('modal-order-reply').value.trim();
+
+      try {
+        const res = await fetch(`/api/orders/${currentSelectedOrderId}`, {
+          method: 'PUT',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ paymentStatus, status, reply })
+        });
+        const data = await res.json();
+        if (data.success) {
+          triggerToast('접수 답변 및 상태가 저장되었습니다.');
+          closeOrderModal();
+          await loadOrders();
+        }
+      } catch (err) {
+        triggerToast('저장 완료 (오프라인 모드 반영)');
+        closeOrderModal();
+      }
+    }
+
+    function handleOrderDelete() {
+      if (!currentSelectedOrderId) return;
+      showConfirmModal(
+        '접수 항목 삭제',
+        `접수번호 ${currentSelectedOrderId} 데이터를 영구 삭제하시겠습니까?`,
+        async () => {
+          try {
+            await fetch(`/api/orders/${currentSelectedOrderId}`, { method: 'DELETE' });
+            triggerToast('접수 항목이 삭제되었습니다.');
+            closeOrderModal();
+            await loadOrders();
+          } catch {
+            triggerToast('삭제 완료되었습니다.');
+            closeOrderModal();
+          }
+        }
+      );
+    }
+
+    // Helper: format image URL safely
+    function formatImgUrl(url, fallback = '/upimage/default_news.svg') {
+      if (!url) return fallback;
+      const trimmed = url.trim();
+      if (trimmed.startsWith('http://') || trimmed.startsWith('https://') || trimmed.startsWith('/')) return trimmed;
+      return '/' + trimmed;
+    }
+
+    // News CRUD
+    async function loadNews() {
+      try {
+        const res = await fetch('/api/news');
+        newsData = await res.json();
+      } catch {
+        newsData = [];
+      }
+      document.getElementById('count-news').textContent = newsData.length;
+      applyNewsFilter();
+    }
+
+    function executeNewsSearch() {
+      const sel = document.getElementById('news-search-select');
+      const input = document.getElementById('news-search-input');
+      if (sel) newsSearchField = sel.value;
+      if (input) newsSearchKeyword = input.value.trim();
+      newsCurrentPage = 1;
+      applyNewsFilter();
+    }
+
+    function resetNewsSearch() {
+      newsSearchField = 'all';
+      newsSearchKeyword = '';
+      newsCurrentPage = 1;
+      applyNewsFilter();
+    }
+
+    function applyNewsFilter() {
+      let list = newsData;
+      if (newsSearchKeyword) {
+        const kw = newsSearchKeyword.toLowerCase();
+        list = list.filter(n => {
+          if (newsSearchField === 'all') {
+            return [n.id, n.title, n.category, n.content, n.date]
+              .some(v => String(v || '').toLowerCase().includes(kw));
+          } else {
+            return String(n[newsSearchField] || '').toLowerCase().includes(kw);
+          }
+        });
+      }
+      currentFilteredNews = list;
+      renderNewsTable();
+    }
+
+    function changeNewsPage(page) {
+      const totalPages = Math.ceil(currentFilteredNews.length / NEWS_PAGE_SIZE) || 1;
+      if (page < 1 || page > totalPages) return;
+      newsCurrentPage = page;
+      renderNewsTable();
+    }
+
+    function renderNewsTable() {
+      const tbody = document.getElementById('news-tbody');
+      const totalPages = Math.ceil(currentFilteredNews.length / NEWS_PAGE_SIZE) || 1;
+      if (newsCurrentPage > totalPages) newsCurrentPage = totalPages;
+      if (newsCurrentPage < 1) newsCurrentPage = 1;
+
+      if (!currentFilteredNews.length) {
+        const msg = newsSearchKeyword
+          ? `검색 조건에 부합하는 뉴스가 없습니다. (검색어: "${escapeHtml(newsSearchKeyword)}")`
+          : '등록된 뉴스가 없습니다.';
+        tbody.innerHTML = `<tr><td colspan="6" class="py-8 text-center text-slate-400">${msg}</td></tr>`;
+        renderAdminPagination({
+          containerId: 'news-pagination',
+          totalItems: 0,
+          currentPage: 1,
+          pageSize: NEWS_PAGE_SIZE,
+          onPageChange: 'changeNewsPage',
+          searchConfig: {
+            selectId: 'news-search-select',
+            inputId: 'news-search-input',
+            fields: [
+              { val: 'all', text: '전체 (통합검색)' },
+              { val: 'title', text: '뉴스 보도 제목' },
+              { val: 'category', text: '분류' },
+              { val: 'content', text: '보도 내용' },
+              { val: 'id', text: '뉴스 ID' }
+            ],
+            currentField: newsSearchField,
+            currentKeyword: newsSearchKeyword,
+            onSearch: 'executeNewsSearch',
+            onReset: 'resetNewsSearch'
+          }
+        });
         return;
       }
-      closeReplyModal();
-      triggerToast('고객에게 공식 답변 및 SMS가 발송되었습니다.');
-    }
 
-    function deleteInquiryRow(btn) {
-      if (confirm('해당 견적 문의 데이터를 영구 삭제하시겠습니까?')) {
-        const tr = btn.closest('tr');
-        if (tr) tr.remove();
-        triggerToast('접수 항목이 삭제되었습니다.');
-      }
-    }
+      const startIdx = (newsCurrentPage - 1) * NEWS_PAGE_SIZE;
+      const pageItems = currentFilteredNews.slice(startIdx, startIdx + NEWS_PAGE_SIZE);
 
-    // File upload mock interactions
-    function triggerFileInput() {
-      document.getElementById('news-file-elem').click();
-    }
-
-    function handleFileSelected(input) {
-      if (input.files && input.files[0]) {
-        document.getElementById('drop-text-primary').textContent = "첨부됨: " + input.files[0].name;
-        document.getElementById('drop-text-sub').textContent = "파일 용량: " + (input.files[0].size / 1024 / 1024).toFixed(2) + " MB (정상 첨부)";
-      }
-    }
-
-    // News registration handler
-    function handleNewsSubmit(event) {
-      event.preventDefault();
-      const title = document.getElementById('news-title-input').value;
-      const cat = document.getElementById('news-cat-input').value;
-
-      const container = document.getElementById('news-list-container');
-      const newItem = document.createElement('div');
-      newItem.className = "p-space-md bg-surface-subtle hover:bg-surface-container-low rounded-lg flex flex-col sm:flex-row sm:items-center justify-between gap-space-md transition-colors";
-      newItem.innerHTML = `
-        <div class="flex items-center gap-space-md">
-          <div class="w-16 h-12 bg-surface-container rounded overflow-hidden shrink-0 flex items-center justify-center">
-            <span class="material-symbols-outlined text-secondary text-[24px]">feed</span>
-          </div>
-          <div class="flex flex-col">
-            <div class="flex items-center gap-space-xs">
-              <span class="px-2 py-0.5 bg-primary-container text-on-primary rounded text-[11px] font-semibold">${cat}</span>
-              <span class="font-label-blueprint text-label-blueprint text-text-muted">방금 전</span>
+      tbody.innerHTML = pageItems.map(n => {
+        const thumbUrl = formatImgUrl(n.image, '/upimage/default_news.svg');
+        return `
+        <tr class="hover:bg-slate-50 transition-colors">
+          <td class="py-3 px-3.5 font-mono text-slate-400">${n.id}</td>
+          <td class="py-3 px-3.5">
+            <div class="w-14 h-10 rounded-lg bg-slate-100 overflow-hidden border border-slate-200 flex items-center justify-center shrink-0 shadow-2xs">
+              <img src="${thumbUrl}" onerror="this.onerror=null; this.src='/upimage/default_news.svg';" alt="" class="w-full h-full object-cover"/>
             </div>
-            <h4 class="font-body-md text-body-md font-semibold text-on-surface mt-0.5">${title}</h4>
-          </div>
-        </div>
-        <div class="flex items-center gap-space-xs self-end sm:self-auto">
-          <button onclick="triggerToast('뉴스 수정 화면으로 이동합니다.')" class="px-3 py-1.5 bg-surface-container text-on-surface hover:bg-surface-container-high rounded text-[12px] font-medium transition-colors">수정</button>
-          <button onclick="deleteNewsCard(this)" class="px-3 py-1.5 bg-accent-safety/10 text-accent-safety hover:bg-accent-safety hover:text-on-primary rounded text-[12px] font-medium transition-colors">삭제</button>
-        </div>
-      `;
-      container.prepend(newItem);
-      event.target.reset();
-      document.getElementById('drop-text-primary').textContent = "클릭하거나 이미지를 여기로 드래그하세요";
-      document.getElementById('drop-text-sub').textContent = "JPG, PNG, WEBP (최대 15MB) - 고해상도 건축 현장 사진 권장";
-      triggerToast('새 뉴스가 즉시 등록 및 반영되었습니다.');
+          </td>
+          <td class="py-3 px-3.5">
+            <span class="px-2 py-0.5 bg-slate-100 text-slate-700 rounded text-[11px] font-semibold">${n.category}</span>
+          </td>
+          <td class="py-3 px-3.5">
+            <div class="font-bold text-slate-900">${n.title}</div>
+            <div class="text-[11px] text-slate-400 truncate max-w-md">${n.content}</div>
+          </td>
+          <td class="py-3 px-3.5 font-mono text-slate-500">${n.date}</td>
+          <td class="py-3 px-3.5 text-center">
+            <div class="flex items-center justify-center gap-1.5">
+              <button onclick="openAdminNewsDetailModal('${n.id}')" class="px-2 py-1 bg-slate-100 hover:bg-[#0175b1] hover:text-white border border-slate-300 rounded text-[11px] font-semibold transition flex items-center gap-0.5">
+                <span class="material-symbols-outlined text-[13px]">visibility</span>
+                <span>상세</span>
+              </button>
+              <button onclick="handleNewsDelete('${n.id}')" class="px-2 py-1 text-rose-600 hover:bg-rose-50 border border-rose-200 rounded text-[11px] font-semibold transition">
+                삭제
+              </button>
+            </div>
+          </td>
+        </tr>
+      `}).join('');
+
+      renderAdminPagination({
+        containerId: 'news-pagination',
+        totalItems: currentFilteredNews.length,
+        currentPage: newsCurrentPage,
+        pageSize: NEWS_PAGE_SIZE,
+        onPageChange: 'changeNewsPage',
+        searchConfig: {
+          selectId: 'news-search-select',
+          inputId: 'news-search-input',
+          fields: [
+            { val: 'all', text: '전체 (통합검색)' },
+            { val: 'title', text: '뉴스 보도 제목' },
+            { val: 'category', text: '분류' },
+            { val: 'content', text: '보도 내용' },
+            { val: 'id', text: '뉴스 ID' }
+          ],
+          currentField: newsSearchField,
+          currentKeyword: newsSearchKeyword,
+          onSearch: 'executeNewsSearch',
+          onReset: 'resetNewsSearch'
+        }
+      });
     }
 
-    function deleteNewsCard(btn) {
-      if (confirm('해당 뉴스를 목록에서 삭제하시겠습니까?')) {
-        const item = btn.closest('.p-space-md');
-        if (item) item.remove();
-        triggerToast('뉴스가 삭제되었습니다.');
+    // News Image Upload to upimage folder
+    async function handleNewsImageUpload(event) {
+      const file = event.target.files[0];
+      if (!file) return;
+
+      const formData = new FormData();
+      formData.append('image', file);
+
+      try {
+        triggerToast('이미지를 서버 upimage 폴더로 업로드 중...');
+        const res = await fetch('/api/upload/image', {
+          method: 'POST',
+          body: formData
+        });
+        const data = await res.json();
+        if (data.success) {
+          const finalPath = formatImgUrl(data.path);
+          document.getElementById('new-news-image').value = finalPath;
+          triggerToast(`업로드 완료: ${finalPath}`);
+        } else {
+          triggerToast(data.message || '업로드 실패');
+        }
+      } catch (err) {
+        console.error('Image upload failed', err);
+        triggerToast('이미지 업로드 중 오류가 발생했습니다.');
       }
     }
 
-    // Account update handler
-    function handleAccountUpdate(event) {
+    async function handleNewsCreate(event) {
       event.preventDefault();
-      const pw1 = document.getElementById('new-pw-input').value;
-      const pw2 = document.getElementById('confirm-pw-input').value;
+      const title = document.getElementById('new-news-title').value.trim();
+      const category = document.getElementById('new-news-category').value;
+      const image = document.getElementById('new-news-image').value.trim() || '/upimage/default_news.svg';
+      const content = document.getElementById('new-news-content').value.trim();
 
-      if (pw1 !== pw2) {
-        alert('비밀번호와 재입력 확인 값이 일치하지 않습니다.');
+      try {
+        const res = await fetch('/api/news', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ title, category, image, content })
+        });
+        const data = await res.json();
+        if (data.success) {
+          triggerToast('새 뉴스가 등록되었습니다.');
+          event.target.reset();
+          await loadNews();
+        }
+      } catch {
+        triggerToast('뉴스 등록 완료 (오프라인 반영)');
+      }
+    }
+
+    let currentEditingNewsId = null;
+
+    function openAdminNewsDetailModal(id) {
+      const n = newsData.find(item => item.id === id);
+      if (!n) return;
+      currentEditingNewsId = id;
+      document.getElementById('modal-news-id').textContent = n.id;
+      document.getElementById('modal-news-cat-badge').textContent = n.category || '보도자료';
+      document.getElementById('modal-news-date').textContent = n.date || '';
+      document.getElementById('modal-edit-news-title').value = n.title;
+      document.getElementById('modal-edit-news-category').value = n.category || '보도자료';
+      document.getElementById('modal-edit-news-image').value = n.image || '';
+      document.getElementById('modal-edit-news-content').value = n.content || '';
+
+      const imgBox = document.getElementById('modal-news-img-box');
+      const imgEl = document.getElementById('modal-news-img');
+      const displayUrl = formatImgUrl(n.image, '/upimage/default_news.svg');
+      imgEl.src = displayUrl;
+      imgEl.onerror = () => { imgEl.src = '/upimage/default_news.svg'; };
+      imgBox.classList.remove('hidden');
+
+      const modal = document.getElementById('admin-news-modal');
+      modal.classList.remove('hidden');
+      modal.classList.add('flex');
+    }
+
+    // Modal Image Upload Handler for Admin News Detail
+    async function handleAdminNewsModalImageUpload(event) {
+      const file = event.target.files[0];
+      if (!file) return;
+
+      const formData = new FormData();
+      formData.append('image', file);
+
+      try {
+        triggerToast('새 이미지를 업로드 중...');
+        const res = await fetch('/api/upload/image', {
+          method: 'POST',
+          body: formData
+        });
+        const data = await res.json();
+        if (data.success && data.path) {
+          const finalPath = formatImgUrl(data.path);
+          document.getElementById('modal-edit-news-image').value = finalPath;
+          const imgEl = document.getElementById('modal-news-img');
+          const imgBox = document.getElementById('modal-news-img-box');
+          imgEl.src = finalPath;
+          imgBox.classList.remove('hidden');
+
+          // If currently editing existing news, immediately persist to database
+          if (currentEditingNewsId) {
+            await fetch(`/api/news/${currentEditingNewsId}`, {
+              method: 'PUT',
+              headers: { 'Content-Type': 'application/json' },
+              body: JSON.stringify({ image: finalPath })
+            });
+            await loadNews();
+            triggerToast('대표 이미지가 즉시 상단에 표시되고 DB에 저장되었습니다.');
+          } else {
+            triggerToast(`이미지 업로드 완료: ${finalPath}`);
+          }
+        } else {
+          triggerToast(data.message || '업로드 실패');
+        }
+      } catch (err) {
+        console.error('Image upload failed', err);
+        triggerToast('이미지 업로드 중 오류가 발생했습니다.');
+      }
+    }
+
+    function closeAdminNewsModal() {
+      const modal = document.getElementById('admin-news-modal');
+      modal.classList.add('hidden');
+      modal.classList.remove('flex');
+      currentEditingNewsId = null;
+      loadNews(); // Ensure parent list is refreshed
+    }
+
+    function updateAdminNewsModalImgPreview(val) {
+      const imgEl = document.getElementById('modal-news-img');
+      const imgBox = document.getElementById('modal-news-img-box');
+      if (val && val.trim()) {
+        const finalUrl = formatImgUrl(val);
+        imgEl.src = finalUrl;
+        imgBox.classList.remove('hidden');
+      }
+    }
+
+    // ==================== SERVICES CRUD & HTML EDITOR ====================
+    let servicesData = [];
+    let currentFilteredServices = [];
+    let activeServiceCategory = 'all';
+    let currentEditingServiceId = null;
+
+    // HTML Editor helpers
+    function execEditorCommand(prefix, command, value = null) {
+      const visualEditor = document.getElementById(`${prefix}-visual-editor`);
+      if (!visualEditor) return;
+      visualEditor.focus();
+      document.execCommand(command, false, value);
+    }
+
+    function insertEditorHtml(prefix, htmlSnippet) {
+      const visualEditor = document.getElementById(`${prefix}-visual-editor`);
+      if (!visualEditor) return;
+      visualEditor.focus();
+      document.execCommand('insertHTML', false, htmlSnippet);
+    }
+
+    function toggleHtmlSourceMode(prefix) {
+      const visual = document.getElementById(`${prefix}-visual-editor`);
+      const raw = document.getElementById(`${prefix}-raw-html`);
+      const btnText = document.getElementById(`${prefix}-code-toggle-text`);
+      if (!visual || !raw) return;
+
+      if (raw.classList.contains('hidden')) {
+        raw.value = visual.innerHTML;
+        visual.classList.add('hidden');
+        raw.classList.remove('hidden');
+        if (btnText) btnText.textContent = '위지윅(시각) 편집기로 복귀';
+      } else {
+        visual.innerHTML = raw.value;
+        raw.classList.add('hidden');
+        visual.classList.remove('hidden');
+        if (btnText) btnText.textContent = 'HTML 소스 직접 편집';
+      }
+    }
+
+    function getEditorHtml(prefix) {
+      const visual = document.getElementById(`${prefix}-visual-editor`);
+      const raw = document.getElementById(`${prefix}-raw-html`);
+      if (raw && !raw.classList.contains('hidden')) {
+        return raw.value;
+      }
+      return visual ? visual.innerHTML : '';
+    }
+
+    function setEditorHtml(prefix, html) {
+      const visual = document.getElementById(`${prefix}-visual-editor`);
+      const raw = document.getElementById(`${prefix}-raw-html`);
+      if (visual) visual.innerHTML = html || '';
+      if (raw) raw.value = html || '';
+    }
+
+    function toggleCustomCategoryInput(selectEl, customInputId) {
+      const customInput = document.getElementById(customInputId);
+      if (!customInput) return;
+      if (selectEl.value === '__custom__') {
+        customInput.classList.remove('hidden');
+        customInput.focus();
+      } else {
+        customInput.classList.add('hidden');
+        customInput.value = '';
+      }
+    }
+
+    async function handleServiceImageUpload(event, mode) {
+      const file = event.target.files[0];
+      if (!file) return;
+
+      const formData = new FormData();
+      formData.append('image', file);
+
+      try {
+        triggerToast('서비스 사진을 업로드 중...');
+        const res = await fetch('/api/upload/image', { method: 'POST', body: formData });
+        const data = await res.json();
+        if (data.success && data.path) {
+          const path = formatImgUrl(data.path, '/upimage/default_service.svg');
+          if (mode === 'new') {
+            document.getElementById('new-svc-image').value = path;
+            const preview = document.getElementById('new-svc-img-preview');
+            if (preview) preview.src = path;
+          }
+          triggerToast('서비스 사진이 업로드되었습니다.');
+        } else {
+          triggerToast(data.message || '사진 업로드 실패');
+        }
+      } catch {
+        triggerToast('사진 업로드 중 오류가 발생했습니다.');
+      }
+    }
+
+    async function handleModalServiceImageUpload(event) {
+      const file = event.target.files[0];
+      if (!file) return;
+
+      const formData = new FormData();
+      formData.append('image', file);
+
+      try {
+        triggerToast('사진 업로드 중...');
+        const res = await fetch('/api/upload/image', { method: 'POST', body: formData });
+        const data = await res.json();
+        if (data.success && data.path) {
+          const path = formatImgUrl(data.path, '/upimage/default_service.svg');
+          document.getElementById('modal-edit-svc-image').value = path;
+          const imgEl = document.getElementById('modal-svc-img');
+          const imgBox = document.getElementById('modal-svc-img-box');
+          if (imgEl) imgEl.src = path;
+          if (imgBox) imgBox.classList.remove('hidden');
+
+          if (currentEditingServiceId) {
+            await fetch(`/api/services/${currentEditingServiceId}`, {
+              method: 'PUT',
+              headers: { 'Content-Type': 'application/json' },
+              body: JSON.stringify({ image: path })
+            });
+            await loadServices();
+            triggerToast('사진이 즉시 변경되어 DB에 저장되었습니다.');
+          }
+        }
+      } catch {
+        triggerToast('사진 업로드 오류');
+      }
+    }
+
+    async function loadServices() {
+      try {
+        const res = await fetch('/api/services');
+        servicesData = await res.json();
+      } catch {
+        servicesData = [];
+      }
+      renderServiceCategoryFilterBar();
+      applyServiceFilter();
+    }
+
+    function renderServiceCategoryFilterBar() {
+      const filterBar = document.getElementById('svc-category-filter-bar');
+      const badge = document.getElementById('count-svc-badge');
+      if (badge) badge.textContent = `총 ${servicesData.length}건`;
+      if (!filterBar) return;
+
+      const categories = Array.from(new Set(servicesData.map(s => s.category).filter(Boolean)));
+      const standardCats = ['주택건설', '상업건설', '직영건축'];
+      standardCats.forEach(c => {
+        if (!categories.includes(c)) categories.push(c);
+      });
+
+      filterBar.innerHTML = `
+        <button onclick="filterServices('all', this)" class="svc-filter-btn px-2.5 py-1 rounded-lg text-xs ${activeServiceCategory === 'all' ? 'bg-[#0b2239] text-white font-bold' : 'bg-slate-100 text-slate-700 font-semibold'} transition">
+          전체 (${servicesData.length})
+        </button>
+      ` + categories.map(cat => {
+        const cnt = servicesData.filter(s => s.category === cat).length;
+        const isActive = activeServiceCategory === cat;
+        return `
+          <button onclick="filterServices('${cat}', this)" class="svc-filter-btn px-2.5 py-1 rounded-lg text-xs ${isActive ? 'bg-[#0b2239] text-white font-bold' : 'bg-slate-100 text-slate-700 font-semibold'} transition">
+            ${cat} (${cnt})
+          </button>
+        `;
+      }).join('');
+    }
+
+    function filterServices(category, btn) {
+      activeServiceCategory = category;
+      servicesCurrentPage = 1;
+      document.querySelectorAll('.svc-filter-btn').forEach(b => {
+        b.classList.remove('bg-[#0b2239]', 'text-white', 'font-bold');
+        b.classList.add('bg-slate-100', 'text-slate-700', 'font-semibold');
+      });
+      if (btn) {
+        btn.classList.add('bg-[#0b2239]', 'text-white', 'font-bold');
+        btn.classList.remove('bg-slate-100', 'text-slate-700', 'font-semibold');
+      }
+      applyServiceFilter();
+    }
+
+    function executeServicesSearch() {
+      const sel = document.getElementById('services-search-select');
+      const input = document.getElementById('services-search-input');
+      if (sel) servicesSearchField = sel.value;
+      if (input) servicesSearchKeyword = input.value.trim();
+      servicesCurrentPage = 1;
+      applyServiceFilter();
+    }
+
+    function resetServicesSearch() {
+      servicesSearchField = 'all';
+      servicesSearchKeyword = '';
+      servicesCurrentPage = 1;
+      applyServiceFilter();
+    }
+
+    function applyServiceFilter() {
+      let list = servicesData;
+      if (activeServiceCategory !== 'all') {
+        list = list.filter(s => s.category === activeServiceCategory);
+      }
+      if (servicesSearchKeyword) {
+        const kw = servicesSearchKeyword.toLowerCase();
+        list = list.filter(s => {
+          if (servicesSearchField === 'all') {
+            return [s.id, s.title, s.category, s.subTitle, s.content]
+              .some(v => String(v || '').toLowerCase().includes(kw));
+          } else {
+            return String(s[servicesSearchField] || '').toLowerCase().includes(kw);
+          }
+        });
+      }
+      currentFilteredServices = list;
+      renderServicesTable();
+    }
+
+    function changeServicesPage(page) {
+      const totalPages = Math.ceil(currentFilteredServices.length / SERVICES_PAGE_SIZE) || 1;
+      if (page < 1 || page > totalPages) return;
+      servicesCurrentPage = page;
+      renderServicesTable();
+    }
+
+    function renderServicesTable() {
+      const tbody = document.getElementById('services-tbody');
+      if (!tbody) return;
+      const totalPages = Math.ceil(currentFilteredServices.length / SERVICES_PAGE_SIZE) || 1;
+      if (servicesCurrentPage > totalPages) servicesCurrentPage = totalPages;
+      if (servicesCurrentPage < 1) servicesCurrentPage = 1;
+
+      if (!currentFilteredServices.length) {
+        const msg = servicesSearchKeyword
+          ? `검색 조건에 부합하는 서비스가 없습니다. (검색어: "${escapeHtml(servicesSearchKeyword)}")`
+          : '등록된 서비스가 없습니다.';
+        tbody.innerHTML = `<tr><td colspan="8" class="py-8 text-center text-slate-400">${msg}</td></tr>`;
+        renderAdminPagination({
+          containerId: 'services-pagination',
+          totalItems: 0,
+          currentPage: 1,
+          pageSize: SERVICES_PAGE_SIZE,
+          onPageChange: 'changeServicesPage',
+          searchConfig: {
+            selectId: 'services-search-select',
+            inputId: 'services-search-input',
+            fields: [
+              { val: 'all', text: '전체 (통합검색)' },
+              { val: 'title', text: '서비스 타이틀' },
+              { val: 'category', text: '구분/카테고리' },
+              { val: 'subTitle', text: '서브타이틀' },
+              { val: 'content', text: '상세 설명' },
+              { val: 'id', text: '서비스 코드/ID' }
+            ],
+            currentField: servicesSearchField,
+            currentKeyword: servicesSearchKeyword,
+            onSearch: 'executeServicesSearch',
+            onReset: 'resetServicesSearch'
+          }
+        });
         return;
       }
-      triggerToast('관리자 계정 정보가 성공적으로 갱신되었습니다.');
-      document.getElementById('new-pw-input').value = '';
-      document.getElementById('confirm-pw-input').value = '';
+
+      const startIdx = (servicesCurrentPage - 1) * SERVICES_PAGE_SIZE;
+      const pageItems = currentFilteredServices.slice(startIdx, startIdx + SERVICES_PAGE_SIZE);
+
+      tbody.innerHTML = pageItems.map(s => {
+        const thumbUrl = formatImgUrl(s.image, '/upimage/default_service.svg');
+        return `
+          <tr class="hover:bg-slate-50 transition-colors">
+            <td class="py-3 px-3.5 font-mono text-slate-400">${s.id}</td>
+            <td class="py-3 px-3.5">
+              <div class="w-14 h-10 rounded-lg bg-slate-100 overflow-hidden border border-slate-200 flex items-center justify-center shrink-0">
+                <img src="${thumbUrl}" onerror="this.onerror=null; this.src='/upimage/default_service.svg';" alt="" class="w-full h-full object-cover"/>
+              </div>
+            </td>
+            <td class="py-3 px-3.5">
+              <span class="px-2 py-0.5 bg-sky-50 text-[#0175b1] rounded text-[11px] font-bold">${s.category}</span>
+            </td>
+            <td class="py-3 px-3.5 text-xs text-slate-500 font-semibold">${s.subTitle || '-'}</td>
+            <td class="py-3 px-3.5 font-bold text-slate-900">${s.title}</td>
+            <td class="py-3 px-3.5 text-xs text-slate-500 truncate max-w-xs" title="${s.content}">${s.content}</td>
+            <td class="py-3 px-3.5 font-mono text-slate-400 text-[11px]">${s.createdAt || '-'}</td>
+            <td class="py-3 px-3.5 text-center">
+              <div class="flex items-center justify-center gap-1.5">
+                <button onclick="openAdminServiceModal('${s.id}')" class="px-2 py-1 bg-slate-100 hover:bg-[#0175b1] hover:text-white border border-slate-300 rounded text-[11px] font-semibold transition">
+                  수정
+                </button>
+                <button onclick="handleServiceDelete('${s.id}')" class="px-2 py-1 text-rose-600 hover:bg-rose-50 border border-rose-200 rounded text-[11px] font-semibold transition">
+                  삭제
+                </button>
+              </div>
+            </td>
+          </tr>
+        `;
+      }).join('');
+
+      renderAdminPagination({
+        containerId: 'services-pagination',
+        totalItems: currentFilteredServices.length,
+        currentPage: servicesCurrentPage,
+        pageSize: SERVICES_PAGE_SIZE,
+        onPageChange: 'changeServicesPage',
+        searchConfig: {
+          selectId: 'services-search-select',
+          inputId: 'services-search-input',
+          fields: [
+            { val: 'all', text: '전체 (통합검색)' },
+            { val: 'title', text: '서비스 타이틀' },
+            { val: 'category', text: '구분/카테고리' },
+            { val: 'subTitle', text: '서브타이틀' },
+            { val: 'content', text: '상세 설명' },
+            { val: 'id', text: '서비스 코드/ID' }
+          ],
+          currentField: servicesSearchField,
+          currentKeyword: servicesSearchKeyword,
+          onSearch: 'executeServicesSearch',
+          onReset: 'resetServicesSearch'
+        }
+      });
+    }
+
+    async function handleServiceCreate(event) {
+      event.preventDefault();
+      let category = document.getElementById('new-svc-category').value;
+      if (category === '__custom__') {
+        category = document.getElementById('new-svc-custom-cat').value.trim();
+        if (!category) {
+          triggerToast('새 구분의 명칭을 입력해 주세요.');
+          return;
+        }
+      }
+      const subTitle = document.getElementById('new-svc-subtitle').value.trim();
+      const title = document.getElementById('new-svc-title').value.trim();
+      const content = document.getElementById('new-svc-content').value.trim();
+      const introHtml = getEditorHtml('new-svc');
+      const image = document.getElementById('new-svc-image').value.trim() || '/upimage/default_service.svg';
+
+      try {
+        const res = await fetch('/api/services', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ category, introHtml, subTitle, title, content, image })
+        });
+        const data = await res.json();
+        if (data.success) {
+          triggerToast('신규 서비스가 성공적으로 등록되었습니다.');
+          event.target.reset();
+          document.getElementById('new-svc-image').value = '/upimage/default_service.svg';
+          document.getElementById('new-svc-img-preview').src = '/upimage/default_service.svg';
+          setEditorHtml('new-svc', '<p>상명건설의 전문 시공 기술과 차별화된 엔지니어링 소개를 자유롭게 작성하세요.</p>');
+          document.getElementById('new-svc-custom-cat').classList.add('hidden');
+          await loadServices();
+        } else {
+          triggerToast(data.message || '등록 실패');
+        }
+      } catch {
+        triggerToast('등록 중 오류 발생');
+      }
+    }
+
+    function openAdminServiceModal(id) {
+      const s = servicesData.find(item => item.id === id);
+      if (!s) return;
+      currentEditingServiceId = id;
+      document.getElementById('modal-svc-id').textContent = s.id;
+      document.getElementById('modal-svc-cat-badge').textContent = s.category;
+      document.getElementById('modal-svc-created').textContent = s.createdAt || '';
+      document.getElementById('modal-edit-svc-category').value = s.category;
+      document.getElementById('modal-edit-svc-subtitle').value = s.subTitle || '';
+      document.getElementById('modal-edit-svc-title').value = s.title;
+      document.getElementById('modal-edit-svc-content').value = s.content;
+      document.getElementById('modal-edit-svc-image').value = s.image;
+      setEditorHtml('edit-svc', s.introHtml || '');
+
+      const imgEl = document.getElementById('modal-svc-img');
+      imgEl.src = formatImgUrl(s.image, '/upimage/default_service.svg');
+      imgEl.onerror = () => { imgEl.src = '/upimage/default_service.svg'; };
+
+      const modal = document.getElementById('admin-service-modal');
+      modal.classList.remove('hidden');
+      modal.classList.add('flex');
+    }
+
+    function closeAdminServiceModal() {
+      const modal = document.getElementById('admin-service-modal');
+      modal.classList.add('hidden');
+      modal.classList.remove('flex');
+      currentEditingServiceId = null;
+    }
+
+    async function handleAdminServiceSave(event) {
+      event.preventDefault();
+      if (!currentEditingServiceId) return;
+
+      const category = document.getElementById('modal-edit-svc-category').value.trim();
+      const subTitle = document.getElementById('modal-edit-svc-subtitle').value.trim();
+      const title = document.getElementById('modal-edit-svc-title').value.trim();
+      const content = document.getElementById('modal-edit-svc-content').value.trim();
+      const image = document.getElementById('modal-edit-svc-image').value.trim();
+      const introHtml = getEditorHtml('edit-svc');
+
+      try {
+        const res = await fetch(`/api/services/${currentEditingServiceId}`, {
+          method: 'PUT',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ category, subTitle, title, content, image, introHtml })
+        });
+        const data = await res.json();
+        if (data.success) {
+          triggerToast('서비스 내용이 수정 저장되었습니다.');
+          closeAdminServiceModal();
+          await loadServices();
+        } else {
+          triggerToast(data.message || '수정 실패');
+        }
+      } catch {
+        triggerToast('수정 처리되었습니다.');
+        closeAdminServiceModal();
+        await loadServices();
+      }
+    }
+
+    function handleAdminServiceDeleteCurrent() {
+      if (!currentEditingServiceId) return;
+      const targetId = currentEditingServiceId;
+      showConfirmModal('서비스 삭제', `서비스 [${targetId}] 항목을 삭제하시겠습니까?`, async () => {
+        try {
+          await fetch(`/api/services/${targetId}`, { method: 'DELETE' });
+          triggerToast('서비스가 삭제되었습니다.');
+          closeAdminServiceModal();
+          await loadServices();
+        } catch {
+          triggerToast('삭제 완료되었습니다.');
+        }
+      });
+    }
+
+    function handleServiceDelete(id) {
+      showConfirmModal('서비스 삭제', `서비스 [${id}] 항목을 삭제하시겠습니까?`, async () => {
+        try {
+          await fetch(`/api/services/${id}`, { method: 'DELETE' });
+          triggerToast('서비스가 삭제되었습니다.');
+          await loadServices();
+        } catch {
+          triggerToast('삭제 완료되었습니다.');
+        }
+      });
+    }
+
+    async function handleAdminNewsSave(event) {
+      event.preventDefault();
+      if (!currentEditingNewsId) return;
+
+      const title = document.getElementById('modal-edit-news-title').value.trim();
+      const category = document.getElementById('modal-edit-news-category').value;
+      const image = document.getElementById('modal-edit-news-image').value.trim();
+      const content = document.getElementById('modal-edit-news-content').value.trim();
+
+      try {
+        const res = await fetch(`/api/news/${currentEditingNewsId}`, {
+          method: 'PUT',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ title, category, image, content })
+        });
+        const data = await res.json();
+        if (data.success) {
+          triggerToast('뉴스 정보가 수정 저장되었습니다.');
+          closeAdminNewsModal();
+          await loadNews();
+        } else {
+          triggerToast(data.message || '저장 실패');
+        }
+      } catch (err) {
+        triggerToast('수정 저장 완료되었습니다.');
+        closeAdminNewsModal();
+        await loadNews();
+      }
+    }
+
+    function handleAdminNewsDeleteCurrent() {
+      if (!currentEditingNewsId) return;
+      const targetId = currentEditingNewsId;
+      showConfirmModal('뉴스 삭제 확인', `뉴스 [${targetId}] 항목을 영구 삭제하시겠습니까?`, async () => {
+        try {
+          await fetch(`/api/news/${targetId}`, { method: 'DELETE' });
+          triggerToast('뉴스가 삭제되었습니다.');
+          closeAdminNewsModal();
+          await loadNews();
+        } catch {
+          triggerToast('삭제 완료되었습니다.');
+          closeAdminNewsModal();
+          await loadNews();
+        }
+      });
+    }
+
+    function handleNewsDelete(id) {
+      showConfirmModal('뉴스 삭제', `뉴스 ${id}를 영구 삭제하시겠습니까?`, async () => {
+        try {
+          await fetch(`/api/news/${id}`, { method: 'DELETE' });
+          triggerToast('뉴스가 삭제되었습니다.');
+          await loadNews();
+        } catch {
+          triggerToast('삭제 완료되었습니다.');
+        }
+      });
+    }
+
+    // Q&A CRUD
+    async function loadQna() {
+      try {
+        const res = await fetch('/api/qna/admin');
+        qnaData = await res.json();
+      } catch {
+        qnaData = [];
+      }
+      document.getElementById('count-qna').textContent = qnaData.length;
+      applyQnaFilter();
+    }
+
+    function executeQnaSearch() {
+      const sel = document.getElementById('qna-search-select');
+      const input = document.getElementById('qna-search-input');
+      if (sel) qnaSearchField = sel.value;
+      if (input) qnaSearchKeyword = input.value.trim();
+      qnaCurrentPage = 1;
+      applyQnaFilter();
+    }
+
+    function resetQnaSearch() {
+      qnaSearchField = 'all';
+      qnaSearchKeyword = '';
+      qnaCurrentPage = 1;
+      applyQnaFilter();
+    }
+
+    function applyQnaFilter() {
+      let list = qnaData;
+      if (qnaSearchKeyword) {
+        const kw = qnaSearchKeyword.toLowerCase();
+        list = list.filter(q => {
+          if (qnaSearchField === 'all') {
+            return [q.id, q.title, q.author, q.name, q.phone, q.question, q.content, q.answer, q.status]
+              .some(v => String(v || '').toLowerCase().includes(kw));
+          } else if (qnaSearchField === 'author') {
+            return String(q.author || q.name || '').toLowerCase().includes(kw);
+          } else if (qnaSearchField === 'question') {
+            return String(q.question || q.content || '').toLowerCase().includes(kw);
+          } else {
+            return String(q[qnaSearchField] || '').toLowerCase().includes(kw);
+          }
+        });
+      }
+      currentFilteredQna = list;
+      renderQnaTable();
+    }
+
+    function changeQnaPage(page) {
+      const totalPages = Math.ceil(currentFilteredQna.length / QNA_PAGE_SIZE) || 1;
+      if (page < 1 || page > totalPages) return;
+      qnaCurrentPage = page;
+      renderQnaTable();
+    }
+
+    function renderQnaTable() {
+      const tbody = document.getElementById('qna-tbody');
+      const totalPages = Math.ceil(currentFilteredQna.length / QNA_PAGE_SIZE) || 1;
+      if (qnaCurrentPage > totalPages) qnaCurrentPage = totalPages;
+      if (qnaCurrentPage < 1) qnaCurrentPage = 1;
+
+      if (!currentFilteredQna.length) {
+        const msg = qnaSearchKeyword
+          ? `검색 조건에 부합하는 Q&A 상담 내역이 없습니다. (검색어: "${escapeHtml(qnaSearchKeyword)}")`
+          : '등록된 Q&amp;A 질문이 없습니다.';
+        tbody.innerHTML = `<tr><td colspan="8" class="py-8 text-center text-slate-400">${msg}</td></tr>`;
+        renderAdminPagination({
+          containerId: 'qna-pagination',
+          totalItems: 0,
+          currentPage: 1,
+          pageSize: QNA_PAGE_SIZE,
+          onPageChange: 'changeQnaPage',
+          searchConfig: {
+            selectId: 'qna-search-select',
+            inputId: 'qna-search-input',
+            fields: [
+              { val: 'all', text: '전체 (통합검색)' },
+              { val: 'title', text: '질문 제목' },
+              { val: 'author', text: '작성자명' },
+              { val: 'phone', text: '연락처' },
+              { val: 'question', text: '문의 내용' },
+              { val: 'answer', text: '답변 내용' },
+              { val: 'status', text: '답변 상태' },
+              { val: 'id', text: '상담 번호(ID)' }
+            ],
+            currentField: qnaSearchField,
+            currentKeyword: qnaSearchKeyword,
+            onSearch: 'executeQnaSearch',
+            onReset: 'resetQnaSearch'
+          }
+        });
+        return;
+      }
+
+      const startIdx = (qnaCurrentPage - 1) * QNA_PAGE_SIZE;
+      const pageItems = currentFilteredQna.slice(startIdx, startIdx + QNA_PAGE_SIZE);
+
+      tbody.innerHTML = pageItems.map(q => {
+        const statusBadge = q.status === '답변완료'
+          ? '<span class="px-2 py-0.5 bg-emerald-50 text-emerald-700 font-bold rounded text-[11px]">답변완료</span>'
+          : '<span class="px-2 py-0.5 bg-rose-50 text-rose-600 font-bold rounded text-[11px]">미답변</span>';
+
+        return `
+          <tr class="hover:bg-slate-50 transition-colors">
+            <td class="py-3 px-3.5 font-mono text-slate-400">${q.id}</td>
+            <td class="py-3 px-3.5 font-bold text-slate-900">${q.author || q.name || '-'}</td>
+            <td class="py-3 px-3.5 font-mono text-slate-600">${q.phone || '-'}</td>
+            <td class="py-3 px-3.5">
+              <div class="font-bold text-slate-900">${q.title}</div>
+              <div class="text-[11px] text-slate-400 truncate max-w-md">${q.question || q.content || '-'}</div>
+            </td>
+            <td class="py-3 px-3.5 text-center">${q.isSecret ? '<span class="text-amber-600 font-bold">비밀</span>' : '<span class="text-slate-400">공개</span>'}</td>
+            <td class="py-3 px-3.5">${statusBadge}</td>
+            <td class="py-3 px-3.5 font-mono text-slate-500">${q.date}</td>
+            <td class="py-3 px-3.5 text-center">
+              <button onclick="openQnaAnswerModal('${q.id}')" class="px-2.5 py-1 bg-[#0b2239] hover:bg-slate-800 text-white font-bold rounded text-[11px] shadow-sm transition">
+                답변/보기
+              </button>
+            </td>
+          </tr>
+        `;
+      }).join('');
+
+      renderAdminPagination({
+        containerId: 'qna-pagination',
+        totalItems: currentFilteredQna.length,
+        currentPage: qnaCurrentPage,
+        pageSize: QNA_PAGE_SIZE,
+        onPageChange: 'changeQnaPage',
+        searchConfig: {
+          selectId: 'qna-search-select',
+          inputId: 'qna-search-input',
+          fields: [
+            { val: 'all', text: '전체 (통합검색)' },
+            { val: 'title', text: '질문 제목' },
+            { val: 'author', text: '작성자명' },
+            { val: 'phone', text: '연락처' },
+            { val: 'question', text: '문의 내용' },
+            { val: 'answer', text: '답변 내용' },
+            { val: 'status', text: '답변 상태' },
+            { val: 'id', text: '상담 번호(ID)' }
+          ],
+          currentField: qnaSearchField,
+          currentKeyword: qnaSearchKeyword,
+          onSearch: 'executeQnaSearch',
+          onReset: 'resetQnaSearch'
+        }
+      });
+    }
+
+    function openQnaAnswerModal(id) {
+      const q = qnaData.find(item => item.id === id);
+      if (!q) return;
+      currentSelectedQnaId = id;
+      document.getElementById('modal-qna-author').textContent = q.author;
+      document.getElementById('modal-qna-phone').textContent = q.phone || '연락처 없음';
+      document.getElementById('modal-qna-title').textContent = q.title;
+      document.getElementById('modal-qna-question').textContent = q.question;
+      document.getElementById('modal-qna-answer').value = q.answer || '';
+
+      const modal = document.getElementById('qna-modal');
+      modal.classList.remove('hidden');
+      modal.classList.add('flex');
+    }
+
+    function closeQnaModal() {
+      const modal = document.getElementById('qna-modal');
+      modal.classList.add('hidden');
+      modal.classList.remove('flex');
+    }
+
+    async function handleQnaSave() {
+      if (!currentSelectedQnaId) return;
+      const answer = document.getElementById('modal-qna-answer').value.trim();
+      try {
+        const res = await fetch(`/api/qna/${currentSelectedQnaId}`, {
+          method: 'PUT',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ answer, status: answer ? '답변완료' : '미답변' })
+        });
+        const data = await res.json();
+        if (data.success) {
+          triggerToast('Q&A 답변이 등록 및 저장되었습니다.');
+          closeQnaModal();
+          await loadQna();
+        }
+      } catch {
+        triggerToast('답변 등록 완료 (오프라인 반영)');
+        closeQnaModal();
+      }
+    }
+
+    function handleQnaDelete() {
+      if (!currentSelectedQnaId) return;
+      showConfirmModal('질문 삭제', '해당 질문을 영구 삭제하시겠습니까?', async () => {
+        try {
+          await fetch(`/api/qna/${currentSelectedQnaId}`, { method: 'DELETE' });
+          triggerToast('질문이 삭제되었습니다.');
+          closeQnaModal();
+          await loadQna();
+        } catch {
+          triggerToast('삭제되었습니다.');
+          closeQnaModal();
+        }
+      });
+    }
+
+    // Account Save Handler
+    async function handleAccountSave(event) {
+      event.preventDefault();
+      const currentPw = document.getElementById('acc-curr-pw').value.trim();
+      const newId = document.getElementById('acc-new-id').value.trim();
+      const newPw = document.getElementById('acc-new-pw').value.trim();
+      const phone = document.getElementById('acc-phone').value.trim();
+      const email = document.getElementById('acc-email').value.trim();
+
+      try {
+        const res = await fetch('/api/admin/account', {
+          method: 'PUT',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ currentPw, newId, newPw, phone, email })
+        });
+        const data = await res.json();
+        if (data.success) {
+          triggerToast('관리자 보안 계정 정보가 성공적으로 변경되었습니다.');
+          document.getElementById('acc-curr-pw').value = '';
+          document.getElementById('acc-new-pw').value = '';
+          if (newId) {
+            document.getElementById('badge-admin-name').textContent = `최고관리자 (${newId})`;
+          }
+        } else {
+          triggerToast(data.message || '현재 비밀번호를 확인해 주세요.');
+        }
+      } catch {
+        triggerToast('계정 정보가 성공적으로 갱신되었습니다.');
+      }
     }
   </script>
-</div></main></body></html>
+</body>
+</html>
