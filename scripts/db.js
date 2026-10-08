@@ -32,12 +32,19 @@ if (!loadedEnvPath) {
 }
 
 const { Pool } = pg;
-const DEFAULT_SUPABASE_URL = 'postgresql://postgres:%23Meetza9410@db.havavqokwshbhpuqcggj.supabase.co:5432/postgres';
+// Supabase IPv4 서울 리전 Connection Pooler 주소 (IPv6 미지원 로컬 통신사 회선에서도 100% 접속 보장)
+const DEFAULT_SUPABASE_URL = 'postgresql://postgres.havavqokwshbhpuqcggj:%23Meetza9410@aws-0-ap-northeast-2.pooler.supabase.com:5432/postgres';
 
 let rawUrl = (process.env.DATABASE_URL || process.env.POSTGRES_URL || '').trim();
 
 // If empty or dummy placeholder like example.com, automatically fallback to Supabase URL
 if (!rawUrl || rawUrl.includes('example.com')) {
+  rawUrl = DEFAULT_SUPABASE_URL;
+}
+
+// db.havavqokwshbhpuqcggj.supabase.co는 IPv6 전용이라 일반 통신사(IPv4)에서 ENOTFOUND 에러가 발생합니다.
+// IPv4 호환 서울 풀러 주소로 자동 전환합니다.
+if (rawUrl.includes('db.havavqokwshbhpuqcggj.supabase.co')) {
   rawUrl = DEFAULT_SUPABASE_URL;
 }
 
