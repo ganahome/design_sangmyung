@@ -33,7 +33,7 @@ if (!loadedEnvPath) {
 
 const { Pool } = pg;
 // Supabase IPv4 서울 리전 Connection Pooler 주소 (IPv6 미지원 로컬 통신사 회선에서도 100% 접속 보장)
-const DEFAULT_SUPABASE_URL = 'postgresql://postgres.havavqokwshbhpuqcggj:%23Meetza9410@aws-0-ap-northeast-2.pooler.supabase.com:5432/postgres';
+const DEFAULT_SUPABASE_URL = 'postgresql://postgres.havavqokwshbhpuqcggj:%23Meetza9410@aws-0-ap-northeast-2.pooler.supabase.com:6543/postgres';
 
 let rawUrl = (process.env.DATABASE_URL || process.env.POSTGRES_URL || '').trim();
 
