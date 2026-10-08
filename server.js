@@ -63,18 +63,14 @@ app.use(express.urlencoded({ extended: true, limit: '20mb' }));
 app.use('/upimage', express.static(UPIMAGE_DIR));
 app.use('/upfiles', express.static(UPFILES_DIR));
 
-// Helper: sync data with SQLite
+// Helper: sync data with SQLite (선택사항)
 function syncWithSqlite() {
-  exec('python3 scripts/init_sqlite.py', (err) => {
-    if (err) console.error('SQLite sync notice:', err.message);
-  });
+  exec('python3 scripts/init_sqlite.py 2>/dev/null || python scripts/init_sqlite.py', () => {});
 }
 
-// Helper: sync zip archive
+// Helper: sync zip archive (선택사항)
 function refreshZipArchive() {
-  exec('python3 scripts/make_zip.py', (err) => {
-    if (err) console.error('Zip refresh notice:', err.message);
-  });
+  exec('python3 scripts/make_zip.py 2>/dev/null || python scripts/make_zip.py', () => {});
 }
 
 // Helper: read db.json or PostgreSQL
