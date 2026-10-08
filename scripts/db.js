@@ -4,16 +4,45 @@ import fs from 'fs';
 import path from 'path';
 import { fileURLToPath } from 'url';
 
-dotenv.config();
-
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
-const DB_PATH = path.join(__dirname, '..', 'data', 'db.json');
+const rootDir = path.join(__dirname, '..');
+const DB_PATH = path.join(rootDir, 'data', 'db.json');
+
+// 1. Try loading from multiple possible env file locations (.env, .env.txt, etc.)
+const candidateEnvFiles = [
+  path.join(rootDir, '.env'),
+  path.join(rootDir, '.env.txt'),
+  path.join(process.cwd(), '.env'),
+  path.join(process.cwd(), '.env.txt')
+];
+
+let loadedEnvPath = null;
+for (const envFile of candidateEnvFiles) {
+  if (fs.existsSync(envFile)) {
+    try {
+      dotenv.config({ path: envFile });
+      loadedEnvPath = envFile;
+      break;
+    } catch (_) {}
+  }
+}
+if (!loadedEnvPath) {
+  dotenv.config();
+}
 
 const { Pool } = pg;
-const databaseUrl = process.env.DATABASE_URL;
+const DEFAULT_SUPABASE_URL = 'postgresql://postgres:%23Meetza9410@db.havavqokwshbhpuqcggj.supabase.co:5432/postgres';
 
-export const isPostgresEnabled = Boolean(databaseUrl && databaseUrl.trim().length > 0);
+let rawUrl = (process.env.DATABASE_URL || process.env.POSTGRES_URL || '').trim();
+
+// If empty or dummy placeholder like example.com, automatically fallback to Supabase URL
+if (!rawUrl || rawUrl.includes('example.com')) {
+  rawUrl = DEFAULT_SUPABASE_URL;
+}
+
+const databaseUrl = rawUrl;
+export const isPostgresEnabled = Boolean(databaseUrl && databaseUrl.length > 0);
 
 export let pool = null;
 if (isPostgresEnabled) {
@@ -22,11 +51,24 @@ if (isPostgresEnabled) {
     ssl: databaseUrl.includes('localhost') ? false : { rejectUnauthorized: false }
   });
   pool.on('error', (err) => {
-    console.error('PostgreSQL Pool unexpected error:', err);
+    console.error('[DB] ❌ PostgreSQL Pool 에러:', err.message);
   });
-  console.log('[DB] PostgreSQL (Supabase) connection initialized.');
+  pool.query(`
+    ALTER TABLE company_services ADD COLUMN IF NOT EXISTS sub_title TEXT DEFAULT '';
+    ALTER TABLE company_services ADD COLUMN IF NOT EXISTS intro_html TEXT DEFAULT '';
+  `).catch(() => {});
+  
+  try {
+    const parsedHost = new URL(databaseUrl.replace(/^postgresql:\/\//, 'http://')).host;
+    console.log(`[DB] ✅ Supabase PostgreSQL 연결 완료! (호스트: ${parsedHost})`);
+  } catch (_) {
+    console.log('[DB] ✅ PostgreSQL (Supabase) 연결 완료!');
+  }
 } else {
-  console.log('[DB] Running in local JSON/SQLite fallback mode (DATABASE_URL not set).');
+  console.log('[DB] ℹ️ DATABASE_URL이 설정되지 않아 로컬 data/db.json 파일 모드로 실행 중입니다.');
+  if (loadedEnvPath) {
+    console.log(`[DB] (로드된 환경설정 파일: ${loadedEnvPath})`);
+  }
 }
 
 // Read all data from either Postgres or JSON fallback
@@ -37,7 +79,7 @@ export async function getDbData() {
         pool.query('SELECT id, password as pw, name, email, phone FROM admin_users LIMIT 1'),
         pool.query('SELECT id, date, type, structure, stage, name, phone, email, content, reply, attachment, password, payment_status as "paymentStatus", status FROM project_orders ORDER BY date DESC, id DESC'),
         pool.query('SELECT id, title, category, image, content, date FROM news_articles ORDER BY date DESC, id DESC'),
-        pool.query('SELECT id, title, category, image, content, date FROM company_services ORDER BY date DESC, id DESC'),
+        pool.query('SELECT id, title, category, image, content, date, COALESCE(sub_title, \'\') as "subTitle", COALESCE(intro_html, \'\') as "introHtml" FROM company_services ORDER BY date DESC, id DESC'),
         pool.query('SELECT id, title, author, phone, question, answer, password, is_secret as "isSecret", status, date FROM qna_posts ORDER BY date DESC, id DESC')
       ]);
 
@@ -94,8 +136,9 @@ export async function syncPostgresOrder(order) {
       order.reply || '', order.attachment || '', order.password || '',
       order.paymentStatus || 'NONE', order.status || '미답변'
     ]);
+    console.log('[DB] ✅ Supabase project_orders 동기화 완료:', order.id);
   } catch (e) {
-    console.error('[DB] Failed to sync order to PostgreSQL:', e.message);
+    console.error('[DB] ❌ Supabase project_orders 동기화 실패:', e.message);
   }
 }
 
@@ -103,8 +146,9 @@ export async function deletePostgresOrder(id) {
   if (!isPostgresEnabled || !pool) return;
   try {
     await pool.query('DELETE FROM project_orders WHERE id = $1', [id]);
+    console.log('[DB] ✅ Supabase project_orders 삭제 완료:', id);
   } catch (e) {
-    console.error('[DB] Failed to delete order in PostgreSQL:', e.message);
+    console.error('[DB] ❌ Supabase project_orders 삭제 실패:', e.message);
   }
 }
 
@@ -122,8 +166,9 @@ export async function syncPostgresNews(news) {
         content = EXCLUDED.content,
         date = EXCLUDED.date
     `, [news.id, news.title, news.category, news.image || '', news.content || '', news.date || todayStr]);
+    console.log('[DB] ✅ Supabase news_articles 동기화 완료:', news.id);
   } catch (e) {
-    console.error('[DB] Failed to sync news to PostgreSQL:', e.message);
+    console.error('[DB] ❌ Supabase news_articles 동기화 실패:', e.message);
   }
 }
 
@@ -131,8 +176,9 @@ export async function deletePostgresNews(id) {
   if (!isPostgresEnabled || !pool) return;
   try {
     await pool.query('DELETE FROM news_articles WHERE id = $1', [id]);
+    console.log('[DB] ✅ Supabase news_articles 삭제 완료:', id);
   } catch (e) {
-    console.error('[DB] Failed to delete news in PostgreSQL:', e.message);
+    console.error('[DB] ❌ Supabase news_articles 삭제 실패:', e.message);
   }
 }
 
@@ -141,17 +187,20 @@ export async function syncPostgresService(service) {
   const todayStr = new Date().toISOString().slice(0, 10);
   try {
     await pool.query(`
-      INSERT INTO company_services (id, title, category, image, content, date)
-      VALUES ($1, $2, $3, $4, $5, $6)
+      INSERT INTO company_services (id, title, category, image, content, date, sub_title, intro_html)
+      VALUES ($1, $2, $3, $4, $5, $6, $7, $8)
       ON CONFLICT (id) DO UPDATE SET
         title = EXCLUDED.title,
         category = EXCLUDED.category,
         image = EXCLUDED.image,
         content = EXCLUDED.content,
-        date = EXCLUDED.date
-    `, [service.id, service.title, service.category, service.image || '', service.content || '', service.date || todayStr]);
+        date = EXCLUDED.date,
+        sub_title = EXCLUDED.sub_title,
+        intro_html = EXCLUDED.intro_html
+    `, [service.id, service.title, service.category, service.image || '', service.content || '', service.date || todayStr, service.subTitle || '', service.introHtml || '']);
+    console.log('[DB] ✅ Supabase company_services 동기화 완료:', service.id);
   } catch (e) {
-    console.error('[DB] Failed to sync service to PostgreSQL:', e.message);
+    console.error('[DB] ❌ Supabase company_services 동기화 실패:', e.message);
   }
 }
 
@@ -186,8 +235,9 @@ export async function syncPostgresQna(qna) {
       qna.question, qna.answer || '', qna.password || '',
       Boolean(qna.isSecret), qna.status || '미답변', qna.date || todayStr
     ]);
+    console.log('[DB] ✅ Supabase qna_posts 동기화 완료:', qna.id);
   } catch (e) {
-    console.error('[DB] Failed to sync qna to PostgreSQL:', e.message);
+    console.error('[DB] ❌ Supabase qna_posts 동기화 실패:', e.message);
   }
 }
 
