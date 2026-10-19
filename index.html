@@ -79,7 +79,7 @@ tailwind.config = {
 <div class="relative nav-item-dropdown py-5">
   <a class="hover:text-[#0175b1] transition-colors cursor-pointer flex items-center gap-1 group" onclick="scrollToSec('company-overview')">
     <span>회사소개</span>
-    <span class="text-[10px] text-slate-400 group-hover:text-[#0175b1] transition">▼</span>
+    <span class="text-[14px] text-slate-400 group-hover:text-[#0175b1] transition">▼</span>
   </a>
   <div class="nav-dropdown-menu hidden absolute top-full left-0 w-40 bg-white border border-slate-100 shadow-xl rounded-xl py-2 z-50">
     <a class="block px-4 py-2 text-xs text-slate-600 hover:text-[#0175b1] hover:bg-sky-50 transition cursor-pointer" onclick="goCompany('ceo')">CEO인사말</a>
@@ -93,7 +93,7 @@ tailwind.config = {
 <div class="relative nav-item-dropdown py-5">
   <a class="hover:text-[#0175b1] transition-colors cursor-pointer flex items-center gap-1 group" onclick="scrollToSec('services-portfolio')">
     <span>서비스</span>
-    <span class="text-[10px] text-slate-400 group-hover:text-[#0175b1] transition">▼</span>
+    <span class="text-[14px] text-slate-400 group-hover:text-[#0175b1] transition">▼</span>
   </a>
   <div class="nav-dropdown-menu hidden absolute top-full left-0 w-40 bg-white border border-slate-100 shadow-xl rounded-xl py-2 z-50">
     <a class="block px-4 py-2 text-xs text-slate-600 hover:text-[#0175b1] hover:bg-sky-50 transition cursor-pointer" onclick="goService('res')">주택건설</a>
@@ -108,13 +108,13 @@ tailwind.config = {
 </nav>
 <!-- Right Action & Hamburger -->
 <div class="flex items-center space-x-2.5">
-<a href="/download" download="sang_myung_construct_project.zip" class="hidden sm:inline-flex items-center gap-1.5 text-xs font-bold text-slate-700 hover:text-white bg-slate-100 hover:bg-[#0175b1] px-3 py-2 rounded-lg transition border border-slate-200 shadow-sm" title="최신 프로젝트 전체 소스코드 ZIP 다운로드">
+<!-- <a href="/download" download="sang_myung_construct_project.zip" class="hidden sm:inline-flex items-center gap-1.5 text-xs font-bold text-slate-700 hover:text-white bg-slate-100 hover:bg-[#0175b1] px-3 py-2 rounded-lg transition border border-slate-200 shadow-sm" title="최신 프로젝트 전체 소스코드 ZIP 다운로드">
   <svg class="w-3.5 h-3.5 text-[#0175b1] group-hover:text-white" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" stroke-linecap="round" stroke-linejoin="round"></path></svg>
   <span>ZIP 다운로드</span>
 </a>
 <button onclick="openHostingModal()" class="hidden md:inline-flex items-center gap-1 text-xs font-semibold text-slate-600 hover:text-[#0175b1] bg-slate-50 hover:bg-slate-100 px-2.5 py-2 rounded-lg transition border border-slate-200">
   <span>호스팅 가이드</span>
-</button>
+</button>-->
 <a href="/admin" class="inline-flex items-center gap-1.5 text-xs font-bold text-slate-700 hover:text-[#0175b1] bg-slate-100 hover:bg-slate-200 px-3 py-2 rounded-lg transition border border-slate-200">
   <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" stroke-width="2" viewbox="0 0 24 24"><path d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" stroke-linecap="round" stroke-linejoin="round"></path></svg>
   <span>ADMIN</span>
@@ -191,44 +191,47 @@ tailwind.config = {
 </header>
 <main>
 <!-- Hero Section -->
-<section class="relative bg-[#0b2239] text-white py-24 md:py-32 overflow-hidden" id="hero">
+<section class="relative bg-[#] text-white py-24 md:py-32 overflow-hidden" id="hero">
 <!--<div class="absolute inset-0 bg-cover bg-center opacity-100 mix-blend-luminosity" 
 style="background-image: url('https://lh3.googleusercontent.com/aida/AEtjO1WXAJq1O6K_BTA_MHDQMtxvE3Oa1bV93M1qhkUXSFrIH4AHSbpN9NpyiWKfflREW83DOgYuAn2wIgrs9JTR6PiyCO-GPkRvOBVT73D3sdbqkOfmaZnFp-edCsmQc0oa9yOrAJNV1Rt_mwctHoLPq8wyGxjzw0-ueSdm8I1VsH4Z8BmPbCrVuJVUwmsKSNyiFxbuXpej5kbIKPkBQ--AqhKnpRaeM50ZZyKyqt0ERN9EwRuto64MPM24z4YC');"></div>-->
-<div class="absolute inset-0 bg-cover bg-center opacity-150 mix-blend-luminosity" 
-style="background-image: url('https://www.rsupport.com/wp-content/uploads/2026/05/2026%EB%85%84-%EA%B1%B4%EC%84%A4%ED%98%84%EC%9E%A5-%EB%AC%B4%EC%9D%B8%ED%99%94%C2%B7%EC%9B%90%EA%B2%A9%EC%A0%9C%EC%96%B4-%EA%B8%B0%EC%88%A0-%EB%8F%84%EC%9E%85-%EB%8F%99%ED%96%A52_%EC%95%8C%EC%84%9C%ED%8F%AC%ED%8A%B8Rsupport-1.png');"></div>
-<div class="absolute inset-0 bg-gradient-to-r from-[#0b2239] via-[#0b2239]/90 to-[#0b2239]/70"></div>
-<div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+<!--<div class="absolute inset-0 bg-cover bg-center opacity-150 mix-blend-luminosity" 
+style="background-image: url('https://www.rsupport.com/wp-content/uploads/2026/05/2026%EB%85%84-%EA%B1%B4%EC%84%A4%ED%98%84%EC%9E%A5-%EB%AC%B4%EC%9D%B8%ED%99%94%C2%B7%EC%9B%90%EA%B2%A9%EC%A0%9C%EC%96%B4-%EA%B8%B0%EC%88%A0-%EB%8F%84%EC%9E%85-%EB%8F%99%ED%96%A52_%EC%95%8C%EC%84%9C%ED%8F%AC%ED%8A%B8Rsupport-1.png');">
+</div>-->
+<div class="absolute inset-0 bg-cover bg-center opacity-90 brightness-50 mix-blend-normal"
+style="background-image: url('https://www.rsupport.com/wp-content/uploads/2026/05/2026%EB%85%84-%EA%B1%B4%EC%84%A4%ED%98%84%EC%9E%A5-%EB%AC%B4%EC%9D%B8%ED%99%94%C2%B7%EC%9B%90%EA%B2%A9%EC%A0%9C%EC%96%B4-%EA%B8%B0%EC%88%A0-%EB%8F%84%EC%9E%85-%EB%8F%99%ED%96%A52_%EC%95%8C%EC%84%9C%ED%8F%AC%ED%8A%B8Rsupport-1.png');">
+</div>
+
+<div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 ">
 <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/10 backdrop-blur-sm border border-white/20 text-xs font-semibold tracking-wider uppercase text-sky-300 mb-6">
-<span class="w-1.5 h-1.5 rounded-full bg-sky-400 animate-pulse"></span>
-          Architectural Engineering
+<span class="w-1.5 h-1.5 rounded-full bg-blue-400 animate-pulse"></span>
+         <p style="color:rgb(201, 198, 198)"> Architectural Engineering</p>
         </div>
 <h1 class="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-extrabold tracking-tight leading-tight">
-          26년의 믿을 수 있는 기업<br/>
-<span class="text-white">상명건설</span>
+          26년의 믿을 수 있는 기업 <br/><span class="text-white" ><p style="margin: 15px 0px 0px 0px;"> 상명건설</span>
 </h1>
-<p class="mt-6 text-sm sm:text-base md:text-lg text-slate-300 max-w-2xl leading-relaxed font-light">
+<p class="mt-6 text-sm sm:text-base md:text-lg text-slate-0 max-w-2xl leading-relaxed font-light">
           정직한 건축, 검증된 기술력으로 사람과 공간의 가치를 높입니다. 최고 수준의 현장 엔지니어링과 투명한 공정 관리를 약속합니다.
         </p>
 <div class="mt-8 flex flex-wrap gap-3">
-<button class="inline-flex items-center gap-2 px-6 py-3.5 bg-white text-[#0175b1] font-bold rounded-lg shadow-md hover:bg-slate-100 transition" onclick="goQuote('free')">
+<button class="inline-flex items-center gap-2 px-6 py-3.5 bg-white text-[#555555] font-bold rounded-lg shadow-md hover:bg-slate-300 transition" onclick="goQuote('free')">
             견적문의
           </button>
-<button class="inline-flex items-center gap-2 px-6 py-3.5 bg-[#091b2c] border border-slate-700 text-white font-bold rounded-lg hover:bg-slate-800 transition" onclick="goQuote('consult')">
+<button class="inline-flex items-center gap-2 px-6 py-3.5 bg-[#555555] border-1 border-gray-500 text-white font-bold rounded-lg hover:bg-slate-600 transition" onclick="goQuote('consult')">
             상담신청
           </button>
 </div>
 <div class="mt-16 pt-10 border-t border-white/10 grid grid-cols-1 sm:grid-cols-3 gap-8" >
 <div class="text-center sm:text-left">
-<div class="text-3xl sm:text-4xl font-extrabold" style="color:#54bcf0;">26년</div>
-<div class="text-xs sm:text-sm text-slate-400 mt-1">건설 업력</div>
+<div class="text-3xl sm:text-4xl font-extrabold" style="color:#bdbebe;">26년</div>
+<div class="text-xs sm:text-sm text-slate-0 mt-1">건설 업력</div>
 </div>
 <div class="text-center sm:text-left">
-<div class="text-3xl sm:text-4xl font-extrabold text-white" >420+건</div>
-<div class="text-xs sm:text-sm text-slate-400 mt-1">누적 완공</div>
+<div class="text-3xl sm:text-4xl font-extrabold" style="color:#bdbebe;">420+건</div>
+<div class="text-xs sm:text-sm text-slate-0 mt-1">누적 완공</div>
 </div>
 <div class="text-center sm:text-left">
-<div class="text-3xl sm:text-4xl font-extrabold" style="color:#54bcf0;">3832일</div>
-<div class="text-xs sm:text-sm text-slate-400 mt-1">무사고</div>
+<div class="text-3xl sm:text-4xl font-extrabold" style="color:#bdbebe;">3832일</div>
+<div class="text-xs sm:text-sm text-slate-0 mt-1">무사고</div>
 </div>
 </div>
 </div>
